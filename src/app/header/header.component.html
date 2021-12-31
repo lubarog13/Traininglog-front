@@ -3,12 +3,22 @@
     <b><h4 class="name">Сок "Ижорец"</h4></b>
     <div class="space"></div>
     <div [hidden]="isCollapsed" *ngFor="let menuItem of menuitems">
-        <a mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]">
+        <a *ngIf="menuItem.children!=null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger" (mouseenter)="trigger.openMenu()">
             <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
         </a>
+        <a *ngIf="menuItem.children==null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]">
+            <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
+        </a>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let childItem of menuItem.children">{{ childItem.displayName }}</button>
+            </mat-menu>
     </div>
     <span class="flex-spacer"></span>
-    <a *ngIf="!isCollapsed"><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl"></fa-icon></a>
+    <div  *ngIf="!isCollapsed" ><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger" (mouseenter)="trigger.openMenu()"></fa-icon></div>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+        </mat-menu>
     <button mat-icon-button *ngIf="isCollapsed" (click)="closeBar()"><fa-icon [icon]="faBars" class="fa fa-2x endEl"></fa-icon></button>
 
 </mat-toolbar>

@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   faBars=faBars
   faUserCircle = faUserCircle
   isCollapsed = false
+  isMenuOpened=false
   public static isCollapsed: boolean = false
   public showBackdrop: boolean = false;
  
@@ -40,4 +41,19 @@ export class HeaderComponent implements OnInit {
     console.log(this.showBackdrop)
   }
 
+  openMenu(trigger) {
+    if(!this.isMenuOpened){
+      trigger.openMenu()
+      this.isMenuOpened=true
+      console.log("open")
+    }
+  }
+  closeMenu(trigger) {
+    if(this.isMenuOpened) {
+      trigger.closeMenu()
+      this.isMenuOpened=false
+      console.log("close")
+    }
+  }
 }
+
