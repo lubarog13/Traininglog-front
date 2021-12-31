@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <img src="/assets/images/logo.png" class="logo"  height=60 width=40>
-    <h4 class="name">Сок "Ижорец"</h4>
+    <b><h4 class="name">Сок "Ижорец"</h4></b>
     <div class="space"></div>
     <div [hidden]="isCollapsed" *ngFor="let menuItem of menuitems">
         <a mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]">
@@ -8,6 +8,21 @@
         </a>
     </div>
     <span class="flex-spacer"></span>
-    <fa-icon [icon]="faUserCircle" class="fa fa-2x endEl"></fa-icon>
+    <a *ngIf="!isCollapsed"><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl"></fa-icon></a>
+    <button mat-icon-button *ngIf="isCollapsed" (click)="closeBar()"><fa-icon [icon]="faBars" class="fa fa-2x endEl"></fa-icon></button>
+
 </mat-toolbar>
-<div class="rect" [hidden]="isCollapsed"></div>
+<div class="rect" [hidden]="!showBackdrop" [@slide]="activePane">
+    <mat-list>
+        <div *ngFor="let menuItem of menuitems">
+        <mat-list-item>
+            <b><p matLine>{{menuItem.displayName}}</p></b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let childItem of menuItem.children">
+            <mat-card-subtitle style="padding-left: 20px;" matLine>{{childItem.displayName}}</mat-card-subtitle>
+            <mat-divider style="background: rgb(245, 245, 253);"></mat-divider>
+        </mat-list-item>
+        </div>
+    </mat-list>
+</div>

@@ -13,7 +13,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatSidenavModule} from '@angular/material/sidenav'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
+import { MatDividerModule} from '@angular/material/divider'
 import { MatIconModule } from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list'
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatSidenavModule,
     BrowserAnimationsModule,
     SidebarModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+    MatListModule
   ],
   exports: [HeaderComponent],
   providers: [],
