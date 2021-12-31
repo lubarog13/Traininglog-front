@@ -1,1 +1,104 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+ 
+
+$primary-blue-color: #245796;
+$blue-accent-color: #3F51B5;
+$orange-accent-color: #FF5E00;
+$yellow-accent-color: #9EA000;
+$green-light-color: #2FFF00;
+$green-aceent-color: #08C827;
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+
+body { 
+    padding: 0; 
+    margin: 0; 
+    font-family: Roboto, sans-serif; 
+    
+  }
+  .container {
+    margin: 20px;
+    display:flex;
+}
+
+.flex-spacer {
+    flex: 1 1 auto;
+    }
+    .center-align {
+ 
+        text-align: center;
+ 
+        padding: 20px;
+ 
+    }
+ 
+ 
+ 
+    .title {
+ 
+        text-align: center;
+ 
+        font-size: 20px;
+ 
+        padding: 15px;
+ 
+    }
+ 
+ 
+ 
+    .sub-title {
+ 
+        text-align: center;
+ 
+        font-size: 16px;
+ 
+        padding: 10px;
+ 
+    }
+ 
+ 
+ 
+    .center {
+ 
+        text-align: center;
+ 
+        display: none;
+ 
+        font-size: 13px;
+ 
+        font-weight: 400;
+ 
+        margin-top: 20px;
+ 
+    }
+ 
+ 
+ 
+    .right {
+ 
+        float: right;
+ 
+    }
+ 
+ 
+ 
+    body {
+ 
+        margin: 0;
+ 
+    }
+    mat-sidenav {
+        margin: 16px;
+        width: 200px;
+        border-right: none;
+        background: #002b5c;
+        color: white;
+        border-radius: 10px;
+        padding: 16px;
+        visibility: visible;
+        text-align: center;
+    }

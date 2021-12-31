@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <img src="/assets/images/logo.png" class="logo"  height=60 width=40>
+    <h4 class="name">Сок "Ижорец"</h4>
+    <div class="space"></div>
+    <div [hidden]="isCollapsed" *ngFor="let menuItem of menuitems">
+        <a mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]">
+            <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
+        </a>
+    </div>
+    <span class="flex-spacer"></span>
+    <fa-icon [icon]="faUserCircle" class="fa fa-2x endEl"></fa-icon>
+</mat-toolbar>
+<div class="rect" [hidden]="isCollapsed"></div>
