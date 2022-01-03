@@ -1,0 +1,31 @@
+@import '/src/styles.scss';
+
+.not_on_train {
+    color: red;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.on_train {
+    color: $green-aceent-color;
+
+}
+.dont_know {
+    color: rgb(100, 98, 98);
+    margin-left: 5px;
+}
+
+.right_column {
+    text-align: end;
+    float: right;
+}
+.mat-card-content {
+    div {
+        padding-top: 10px;
+        font-weight: bold;
+    }
+    span {
+        font-weight: normal;
+    }
+}
+

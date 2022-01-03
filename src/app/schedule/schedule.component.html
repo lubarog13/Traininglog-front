@@ -1,0 +1,42 @@
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+     <div fxFlex>
+<div fxLayout="column" fxLayout.gt-sm="row">
+    <div fxFlex="50">
+
+    </div>
+    <div fxFlex="50">
+            <h3 style="text-align: center;">Тренировки на неделе</h3>
+            <mat-grid-list #grid rowHeight="400px" >
+                <mat-grid-tile *ngFor="let workout of workouts">
+                    <mat-card>
+                        <mat-card-header>
+                        <mat-card-title>
+                            {{workout.club.name}}
+                        </mat-card-title>
+                        <div class="on_train"> {{workout.on_train}}</div>
+                        <div class="dont_know"> {{workout.dont_know}} </div>
+                        <div class="not_on_train">
+                        {{workout.not_on_train}} </div>
+                        {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <mat-card-content>
+                            <br>
+                            <div>Время: <span class="right_column"> {{workout.start_date.toLocaleDateString()}} {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}-{{workout.end_date.getUTCHours()}}:{{(workout.end_date.getMinutes()<10?'0':'') + workout.end_date.getMinutes()}}</span></div>
+                            <div>Группа: <span class="right_column"> {{workout.club.group}}</span></div>
+                            <div>Зал: <span class="right_column"> {{workout.hall.name}}, {{workout.hall.number}}</span></div>
+                            <div>Тренер: <span class="right_column"> {{ workout.coach_replace!=undefined? workout.coach_replace.user.last_name + " "
+                                 + workout.coach_replace.user.first_name.charAt(0) + ". " + workout.coach_replace.user.second_name.charAt(0)+ "."
+                                 : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 
+                                 + workout.club.coach.user.second_name.charAt(0)+ "."}}</span></div>
+                             <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>    
+                        </mat-card-content>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+    </div>
+</div>
+</div>
+</div>
