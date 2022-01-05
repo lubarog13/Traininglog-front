@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faCalendarAlt, faBookOpen, faChartPie, faUserCircle, faBars } from '@fortawesome/free-solid-svg-icons';
 import {MENUITEMS} from '../shared/nav_items';
 import { flyInOut, slide, expand } from '../animations/app.animations';
+import { MediaObserver } from '@angular/flex-layout';
 
 type PaneType = 'left' | 'right';
 
@@ -28,11 +29,10 @@ export class HeaderComponent implements OnInit {
  
   public closeOnDocumentClick: boolean = true;
 
-  constructor() { }
+  constructor(private mediaObserver: MediaObserver) { }
 
   ngOnInit(): void {
-    HeaderComponent.isCollapsed = window.innerWidth<500
-    this.isCollapsed = HeaderComponent.isCollapsed
+    this.mediaObserver.asObservable().subscribe(changes => this.isCollapsed=(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
     console.log(this.isCollapsed)
   }
 

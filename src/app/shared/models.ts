@@ -65,7 +65,8 @@ export interface Workout {
     not_on_train?: number;
     is_on?: boolean;
     start_date: Date;
-    end_date: Date
+    end_date: Date;
+    color: string
 }
 
 

@@ -24,8 +24,38 @@
         padding-top: 10px;
         font-weight: bold;
     }
-    span {
+    span, a {
         font-weight: normal;
     }
 }
 
+#schedule {
+    // background: url(https://fony-kartinki.ru/_ph/39/2/700273434.jpg);
+    background: url(https://image.freepik.com/free-vector/abstract-blue-background_1048-1511.jpg) no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+    position: sticky;
+}
+
+.container {
+    margin: 0;
+}
+
+.button-ok {
+    background: $green-aceent-color;
+    color: white;
+    width: 33.3%;
+}
+.button-no {
+    background: red;
+    color: white;
+    width: 33.3%;
+}
+
+.button-who-goes {
+    background: $blue-accent-color;
+    color: white;
+    width: 33.3%;
+}

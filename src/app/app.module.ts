@@ -23,6 +23,7 @@ import { baseURL } from './shared/baseurl';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BuildingService } from './services/building.service';
+import { MaterialElevationDirective } from './animations/material-elevation.directive';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { BuildingService } from './services/building.service';
     AppComponent,
     HeaderComponent,
     ScheduleComponent,
+    MaterialElevationDirective
   ],
   imports: [
     BrowserModule,

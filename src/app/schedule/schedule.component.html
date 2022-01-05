@@ -2,15 +2,15 @@
      fxLayout="column"
      fxLayoutGap="10px">
      <div fxFlex>
-<div fxLayout="column" fxLayout.gt-sm="row">
+<div fxLayout="column" fxLayout.gt-md="row">
     <div fxFlex="50">
 
     </div>
-    <div fxFlex="50">
-            <h3 style="text-align: center;">Тренировки на неделе</h3>
+    <div fxFlex="50" id="schedule" [ngStyle]="{'height': height + 'px'}">
+            <h2 style="text-align: center; color: white;" class="mat-elevation-z3">Тренировки на неделе</h2>
             <mat-grid-list #grid rowHeight="400px" >
                 <mat-grid-tile *ngFor="let workout of workouts">
-                    <mat-card>
+                    <mat-card appMaterialElevation [@expand]>
                         <mat-card-header>
                         <mat-card-title>
                             {{workout.club.name}}
@@ -21,18 +21,32 @@
                         {{workout.not_on_train}} </div>
                         {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}
                         </mat-card-header>
-                        <mat-divider></mat-divider>
+                        <mat-divider [ngStyle]="{'background-color': workout.color}" style="height: 3px;"></mat-divider>
                         <mat-card-content>
                             <br>
                             <div>Время: <span class="right_column"> {{workout.start_date.toLocaleDateString()}} {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}-{{workout.end_date.getUTCHours()}}:{{(workout.end_date.getMinutes()<10?'0':'') + workout.end_date.getMinutes()}}</span></div>
                             <div>Группа: <span class="right_column"> {{workout.club.group}}</span></div>
-                            <div>Зал: <span class="right_column"> {{workout.hall.name}}, {{workout.hall.number}}</span></div>
+                            <div>Зал: <a class="right_column"> {{workout.hall.name}}, {{workout.hall.number}}</a></div>
                             <div>Тренер: <span class="right_column"> {{ workout.coach_replace!=undefined? workout.coach_replace.user.last_name + " "
                                  + workout.coach_replace.user.first_name.charAt(0) + ". " + workout.coach_replace.user.second_name.charAt(0)+ "."
                                  : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 
                                  + workout.club.coach.user.second_name.charAt(0)+ "."}}</span></div>
                              <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>    
                         </mat-card-content>
+                        <mat-card-footer>
+                            <button mat-button class="button-ok">
+                                <fa-icon [icon]="faThumbsUp" style="color: white;"></fa-icon>
+                                Я иду
+                            </button>
+                            <button mat-button class="button-no">
+                                <fa-icon [icon]="faTimesCircle"></fa-icon>
+                                Я не иду
+                            </button>
+                            <button mat-button class="button-who-goes">
+                                <fa-icon [icon]="faQuestionCircle"></fa-icon>
+                                Кто идет?
+                            </button>
+                        </mat-card-footer>
                     </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>
