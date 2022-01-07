@@ -102,3 +102,9 @@ body {
         visibility: visible;
         text-align: center;
     }
+
+ .submit-button {
+     background: $primary-blue-color;
+     color: white;
+     border-radius: 5px;
+ }   

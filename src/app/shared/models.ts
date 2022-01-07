@@ -78,10 +78,22 @@ export interface SignUp {
     end_date: string;
 }
 
-export interface Presence {
+export class Presence {
     id: number;
     user: User;
     workout: Workout;
+    is_attend?: boolean;
+    reason?: string;
+    delay: boolean;
+    early_ret: boolean;
+
+    constructor(is_attend: boolean, reason: string) { this.is_attend=is_attend; this.reason=reason}
+}
+
+export interface SimplePresence {
+    id: number;
+    user: User;
+    workout: number;
     is_attend?: boolean;
     reason?: string;
     delay: boolean;

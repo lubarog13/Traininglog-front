@@ -24,6 +24,9 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BuildingService } from './services/building.service';
 import { MaterialElevationDirective } from './animations/material-elevation.directive';
+import {MatFormFieldModule} from '@angular/material/form-field'
+import { PresenceService } from './services/presence.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -46,8 +49,11 @@ import { MaterialElevationDirective } from './animations/material-elevation.dire
     BrowserAnimationsModule,
     SidebarModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatDividerModule,
+    MatFormFieldModule,
     MatListModule,
     MatMenuModule
   ],
@@ -56,6 +62,7 @@ import { MaterialElevationDirective } from './animations/material-elevation.dire
     WorkoutService,
     ProcessHTTPMsgService,
     BuildingService,
+    PresenceService,
     {provide: 'BaseURL', useValue: baseURL},
   ],
   bootstrap: [AppComponent]

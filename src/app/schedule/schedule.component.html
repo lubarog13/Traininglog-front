@@ -19,7 +19,8 @@
                         <div class="dont_know"> {{workout.dont_know}} </div>
                         <div class="not_on_train">
                         {{workout.not_on_train}} </div>
-                        {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}
+                        <div class="right_column" style="width: 100%;">
+                        {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}</div>
                         </mat-card-header>
                         <mat-divider [ngStyle]="{'background-color': workout.color}" style="height: 3px;"></mat-divider>
                         <mat-card-content>
@@ -31,18 +32,53 @@
                                  + workout.coach_replace.user.first_name.charAt(0) + ". " + workout.coach_replace.user.second_name.charAt(0)+ "."
                                  : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 
                                  + workout.club.coach.user.second_name.charAt(0)+ "."}}</span></div>
-                             <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>    
+                             <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>
+                             <div *ngIf="(whoDontKnow!=undefined || whoGoes!=undefined || whoNotGoes!=undefined) && currentWorkoutId==workout.id">
+                            <mat-divider></mat-divider>
+                             <div fxLayout="row" align="center" class="whoGoes" style="width: 100%;">
+                                 <div fxFlex="33">
+                                    <fa-icon [icon]="faThumbsUp" style="color: green; align-content: center;"></fa-icon>
+                                     <p *ngFor="let presence of whoGoes" align="left">
+                                         {{presence.user.last_name + " "+ presence.user.first_name.charAt(0) + ". " + presence.user.second_name.charAt(0) + "."}}
+                                     </p>
+                                 </div>
+                                 <div fxFlex="33">
+                                    <fa-icon [icon]="faQuestionCircle" style="color: grey;"></fa-icon>
+                                    <p *ngFor="let presence of whoDontKnow" align="left">
+                                        {{presence.user.last_name + " "+ presence.user.first_name.charAt(0) + ". " + presence.user.second_name.charAt(0) + "."}}
+                                    </p>
+                                </div>
+                                 <div fxFlex="33">
+                                    <fa-icon [icon]="faTimesCircle" style="color: red;"></fa-icon>
+                                    <p *ngFor="let presence of whoNotGoes" align="left">
+                                        {{presence.user.last_name + " "+ presence.user.first_name.charAt(0) + ". " + presence.user.second_name.charAt(0) + "."}}
+                                    </p>
+                                </div>
+                             </div>
+                             </div>
+                             <div *ngIf="workout.is_on==true" fxLayout="row" align="center" style="background: #2FFF00;" class="info">
+                                <fa-icon [icon]="faThumbsUp" style="color: black; margin-right: 10px;" ></fa-icon>
+                                 Вы идете на тренировку
+                             </div>
+                             <div *ngIf="workout.is_on==false" fxLayout="row" style="background: #d14747;color: white;" class="info">
+                                <fa-icon [icon]="faTimesCircle" style="margin-right: 10px;" ></fa-icon>
+                                Вы не идете на тренировку
+                             </div>
+                                 <form *ngIf="sendReason.has(workout.id) && sendReason.get(workout.id)==true" novalidate [formGroup]="reasonForm" #reasonform="ngForm" (ngSubmit)="onSubmit(workout.id)">
+                                    <textarea style="width: 100%; margin-top: 20px;" rows="5" matInput formControlName="reason" placeholder="Введите причину отсутствия" type="text" required></textarea>
+                                    <button type="submit" mat-button class="submit-button">Сохранить</button>
+                                 </form>
                         </mat-card-content>
                         <mat-card-footer>
-                            <button mat-button class="button-ok">
-                                <fa-icon [icon]="faThumbsUp" style="color: white;"></fa-icon>
+                            <button mat-button class="button-ok" (click)="updatePresence(workout.id, true, null)">
+                                <fa-icon [icon]="faThumbsUp" style="color: white;" ></fa-icon>
                                 Я иду
                             </button>
-                            <button mat-button class="button-no">
+                            <button mat-button class="button-no" (click)="updatePresence(workout.id, false, null)">
                                 <fa-icon [icon]="faTimesCircle"></fa-icon>
                                 Я не иду
                             </button>
-                            <button mat-button class="button-who-goes">
+                            <button mat-button class="button-who-goes"  (click)="getPresences(workout.id)">
                                 <fa-icon [icon]="faQuestionCircle"></fa-icon>
                                 Кто идет?
                             </button>

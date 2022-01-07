@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@syncfusion/ej2": "^19.4.40",
     "@syncfusion/ej2-angular-navigations": "^19.4.40",
+    "angular-material-event-calendar": "^0.1.4",
     "hammerjs": "^2.0.8",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
