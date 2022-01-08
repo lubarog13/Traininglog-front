@@ -2,12 +2,15 @@
      fxLayout="column"
      fxLayoutGap="10px">
      <div fxFlex>
-<div fxLayout="column" fxLayout.gt-md="row">
-    <div fxFlex="50">
-
+<div fxLayout="column" fxLayout.gt-md="row" id="calendar_schedule">
+    <div fxFlex.gt-md="50" align="center">
+        <mat-card appMaterialElevation [@expand] style="width: 50%; height: 60%; margin-top: 15%; margin-bottom: 15%;">
+            <mat-calendar style="color: black;" [dateFilter]="myFilter" (selectedChange)="dateClick($event)"></mat-calendar>
+          </mat-card>
     </div>
-    <div fxFlex="50" id="schedule" [ngStyle]="{'height': height + 'px'}">
-            <h2 style="text-align: center; color: white;" class="mat-elevation-z3">Тренировки на неделе</h2>
+    <div fxFlex="50" id="schedule" [ngStyle]="{'height': height + 'px', 'max-height': height + 'px'}">
+            <h2 style="text-align: center; color: white;" class="mat-elevation-z3">{{headerText}}</h2>
+            <div style="width: 100%; height: 100%; overflow: auto;" [ngStyle]="{'max-height': height + 'px'}">
             <mat-grid-list #grid rowHeight="400px" >
                 <mat-grid-tile *ngFor="let workout of workouts">
                     <mat-card appMaterialElevation [@expand]>
@@ -86,6 +89,7 @@
                     </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>
+            </div>
     </div>
 </div>
 </div>

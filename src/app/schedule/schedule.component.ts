@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { MatGridList } from '@angular/material/grid-list';
 import { BuildingService } from '../services/building.service';
 import { WorkoutService } from '../services/workout.service';
@@ -9,6 +9,7 @@ import { expand } from '../animations/app.animations';
 import { faThumbsUp, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import { PresenceService } from '../services/presence.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatCalendar } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-schedule',
@@ -37,8 +38,14 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   whoDontKnow: SimplePresence[]
   reasonForm: FormGroup
   sendReason: Map<number,boolean> = new Map<number,boolean>()
+  headerText = "Тренировки на неделе"
+  months = ["январе", "феврале", "марте", "мае", "июне", "июле", "августе", "сентябре", "октябре", "ноябре", "декабре"]
   currentWorkoutId=0
   isOpen = false
+
+  myFilter = (d: Date | null): boolean => {
+    return true
+  };
 
   colors = {
     "на технику": "#245796",
@@ -48,11 +55,13 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     "общая": "#FF0000"
   }
   workouts: Workout[]
+  monthWorkouts: Workout[]
   errmess: string
+  currentMonth = new Date()
   height: number
   presences: Map<number, boolean> = new Map<number,boolean>()
 
-  constructor(private workoutService: WorkoutService, private presenceService: PresenceService,private mediaObserver: MediaObserver, private fb: FormBuilder) 
+  constructor(private workoutService: WorkoutService, private presenceService: PresenceService,private mediaObserver: MediaObserver, private fb: FormBuilder, private renderer: Renderer2) 
   { 
     this.createForm()
   }
@@ -61,11 +70,51 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
       console.log(change)
       this.grid.cols = this.gridByBreakpoint[change[0].mqAlias]
     });
+      const monthPrevBtn = document.querySelectorAll(
+        '.mat-calendar-previous-button'
+      );
+      const monthNextBtn = document.querySelectorAll('.mat-calendar-next-button');
+  
+      if (monthPrevBtn) {
+        Array.from(monthPrevBtn).forEach((button) => {
+          this.renderer.listen(button, 'click', (event) => {
+            this.currentMonth.setMonth(this.currentMonth.getMonth() -1)
+            this.monthSelected()
+          });
+        });
+      }
+  
+      if (monthNextBtn) {
+        Array.from(monthNextBtn).forEach((button) => {
+          this.renderer.listen(button, 'click', (event) => {
+            this.currentMonth.setMonth(this.currentMonth.getMonth() +1)
+            this.monthSelected()
+          });
+        });
+      }
   }
 
   ngOnInit(): void {
     this.height = window.innerHeight - 60
     console.log(this.height)
+    this.workoutService.getMonthWorkouts(4, new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+      response => {
+        this.monthWorkouts=response.Workouts
+        for(let workout of this.monthWorkouts){
+          workout.start_date= new Date(workout.start_time)
+          workout.end_date = new Date(workout.end_time)
+          workout.color = this.colors[workout.type]
+        }
+        console.log(this.monthWorkouts)
+        this.myFilter = (d: Date | null): boolean => {
+          for(let workout of this.monthWorkouts) {
+            if(workout.start_date.getDate()==d.getDate()) return true
+          }
+          return false
+        };
+       }
+        , errmess =>this.errmess=errmess
+     )  
        this.workoutService.getWeekWorkouts(4).subscribe(response => {
          this.workouts=response.Workouts
          for(let workout of this.workouts){
@@ -126,6 +175,34 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
 
   onSubmit(workout_id: number) {
       this.updatePresence(workout_id, false, this.reasonForm.value['reason'])
+  }
+
+  monthSelected() {
+    this.headerText = "Тренировки в " + this.months[this.currentMonth.getMonth()]
+    this.workoutService.getMonthWorkouts(4, this.currentMonth.getMonth() +1, this.currentMonth.getFullYear()).subscribe(
+      response => {
+        this.monthWorkouts=response.Workouts
+        for(let workout of this.monthWorkouts){
+          workout.start_date= new Date(workout.start_time)
+          workout.end_date = new Date(workout.end_time)
+          workout.color = this.colors[workout.type]
+        }
+        console.log(this.monthWorkouts)
+        this.myFilter = (d: Date | null): boolean => {
+          for(let workout of this.monthWorkouts) {
+            if(workout.start_date.getDate()==d.getDate()) return true
+          }
+          return false
+        };
+        this.workouts = this.monthWorkouts
+       }
+        , errmess =>this.errmess=errmess
+     )  
+  }
+
+  dateClick(d: Date) {
+    this.headerText = "Тренировки "+ d.toLocaleDateString()
+    this.workouts = this.monthWorkouts.filter(workout => workout.start_date.getDate()==d.getDate())
   }
 
 }

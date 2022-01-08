@@ -27,6 +27,8 @@ import { MaterialElevationDirective } from './animations/material-elevation.dire
 import {MatFormFieldModule} from '@angular/material/form-field'
 import { PresenceService } from './services/presence.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatNativeDateModule} from '@angular/material/core'
 
 
 @NgModule({
@@ -55,7 +57,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     MatFormFieldModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [HeaderComponent],
   providers: [
