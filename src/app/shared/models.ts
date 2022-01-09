@@ -7,7 +7,7 @@ export interface Building {
 }
 
 
-export interface User {
+export class User {
     id: number;
     username: string;
     first_name: string;
@@ -15,6 +15,13 @@ export interface User {
     second_name?: string;
     date_birth: string;
     sex: string;
+    password?: string;
+    re_password?: string;
+
+    constructor(username: string, password: string){
+        this.username = username;
+        this.password = password;
+    }
 }
 
 export interface Message {

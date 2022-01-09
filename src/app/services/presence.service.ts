@@ -17,7 +17,7 @@ export class PresenceService {
     getPresencesForWorkout(id: number): Observable<SimplePresenceResponse> {
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization':  'Token e93210d1dd1160a02feefd0c60d64b817033feb7'
+          'Authorization':  'Token ' + localStorage.getItem("token")
         })
       };
        return this.http.get<SimplePresenceResponse>(baseURL + "workout/" + id + "/presences/", httpOptions)
@@ -27,7 +27,7 @@ export class PresenceService {
     updatePresence(user_id: number, workout_id: number, presence: Presence): Observable<Response> {
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization':  'Token e93210d1dd1160a02feefd0c60d64b817033feb7',
+          'Authorization':  'Token ' + localStorage.getItem("token"),
           'Content-Type': 'application/json'
         })
       };

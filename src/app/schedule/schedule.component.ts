@@ -97,7 +97,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.height = window.innerHeight - 60
     console.log(this.height)
-    this.workoutService.getMonthWorkouts(4, new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+    this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
       response => {
         this.monthWorkouts=response.Workouts
         for(let workout of this.monthWorkouts){
@@ -160,7 +160,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     } else if (is_attend==false) {
       this.sendReason.set(workout_id, false)
     }
-    this.presenceService.updatePresence(4, workout_id, new Presence(is_attend, reason)).subscribe((request) => console.log("req", request), errmess=> err=errmess)
+    this.presenceService.updatePresence(Number.parseInt( localStorage.getItem("id")), workout_id, new Presence(is_attend, reason)).subscribe((request) => console.log("req", request), errmess=> err=errmess)
     if(err!="") {
       console.log(err)
       return
@@ -179,7 +179,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
 
   monthSelected() {
     this.headerText = "Тренировки в " + this.months[this.currentMonth.getMonth()]
-    this.workoutService.getMonthWorkouts(4, this.currentMonth.getMonth() +1, this.currentMonth.getFullYear()).subscribe(
+    this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), this.currentMonth.getMonth() +1, this.currentMonth.getFullYear()).subscribe(
       response => {
         this.monthWorkouts=response.Workouts
         for(let workout of this.monthWorkouts){

@@ -1,0 +1,51 @@
+.main-div{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+mat-card-content {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.imaged {
+    background: top url("https://st.depositphotos.com/1031359/1560/v/450/depositphotos_15607049-stock-illustration-jumping-background.jpg") no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 80%; /* Современные браузеры */
+}
+
+.mat-card-xl-image {
+    width: 120px;
+    height: 120px;
+}
+
+@media (min-width: 768px) {
+    .imaged {
+        background: center url("https://st.depositphotos.com/1031359/1560/v/450/depositphotos_15607049-stock-illustration-jumping-background.jpg") no-repeat;
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+        -o-background-size: 100%; /* Opera 9.6+ */
+        background-size: 100%; /* Современные браузеры */
+    }
+    .mat-card-xl-image {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+@media (min-width: 992px) {
+    .imaged {
+        background: center url("https://st.depositphotos.com/1031359/1560/v/450/depositphotos_15607049-stock-illustration-jumping-background.jpg") no-repeat;
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+        -o-background-size: 100%; /* Opera 9.6+ */
+        background-size: 60%; /* Современные браузеры */
+    }
+    .mat-card-xl-image {
+        width: 240px;
+        height: 240px;
+    }
+}

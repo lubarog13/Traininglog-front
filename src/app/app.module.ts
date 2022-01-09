@@ -28,7 +28,11 @@ import {MatFormFieldModule} from '@angular/material/form-field'
 import { PresenceService } from './services/presence.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker'
-import {MatNativeDateModule} from '@angular/material/core'
+import {MatNativeDateModule} from '@angular/material/core';
+import { AuthorisationComponent } from './authorisation/authorisation.component'
+import {MatInputModule} from '@angular/material/input'
+import { AuthService } from './services/auth.service';
+import { SharedService } from './shared/sharedservice';
 
 
 @NgModule({
@@ -36,7 +40,8 @@ import {MatNativeDateModule} from '@angular/material/core'
     AppComponent,
     HeaderComponent,
     ScheduleComponent,
-    MaterialElevationDirective
+    MaterialElevationDirective,
+    AuthorisationComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ import {MatNativeDateModule} from '@angular/material/core'
     SidebarModule,
     HttpClientModule,
     FormsModule,
+    MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
     MatDividerModule,
@@ -67,6 +73,8 @@ import {MatNativeDateModule} from '@angular/material/core'
     ProcessHTTPMsgService,
     BuildingService,
     PresenceService,
+    AuthService,
+    SharedService,
     {provide: 'BaseURL', useValue: baseURL},
   ],
   bootstrap: [AppComponent]

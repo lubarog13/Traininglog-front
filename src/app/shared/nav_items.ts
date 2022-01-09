@@ -6,7 +6,7 @@ export const MENUITEMS: NavItem[] = [
         displayName: "Расписание",
         iconName: faCalendarAlt,
         active: "active",
-        route: "/home"
+        route: "/schedule"
     },
     {
         displayName: "Журнал",

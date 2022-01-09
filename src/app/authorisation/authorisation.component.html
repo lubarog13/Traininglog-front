@@ -1,0 +1,21 @@
+<div class="container main-div imaged"
+    fxLayout="column">
+    <mat-card >
+        <mat-card-header>
+            <mat-card-title>Войдите или зарегестрируйтесь</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form fxFlex novalidate [formGroup]="authForm" (ngSubmit)="onSubmit()">
+                <p><mat-form-field appearance="outline"><mat-label>Логин{{" " + " "}}</mat-label><input matInput (input)="changed()" formControlName="login" type="text" required></mat-form-field></p>
+                <p><mat-form-field appearance="outline"><mat-label>Пароль</mat-label><input matInput (input)="changed()" formControlName="password" type="password" required> </mat-form-field></p>
+                <br *ngIf="!errMess">
+                <p style="color: red;" *ngIf="errMess">{{errMess}}</p>
+                <button class="submit-button" mat-button type="submit" [disabled]="authForm.invalid">Войти</button><a style="margin-left: 20px;" href="registration">Регистрация</a>
+            </form>
+            <div fxFlex >
+                <img mat-card-xl-image src="https://st2.depositphotos.com/3969727/42423/v/450/depositphotos_424236558-stock-illustration-rhythmic-gymnastics-girl-with-ribbon.jpg">
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

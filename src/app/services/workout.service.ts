@@ -18,7 +18,7 @@ export class WorkoutService {
     getWeekWorkouts(id: number): Observable<WorkoutResponse> {
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization':  'Token e93210d1dd1160a02feefd0c60d64b817033feb7'
+          'Authorization':  'Token ' + localStorage.getItem("token")
         })
       };
        return this.http.get<WorkoutResponse>(baseURL + "user/" + id + "/week_workouts/", httpOptions)
@@ -28,7 +28,7 @@ export class WorkoutService {
     getMonthWorkouts(user_id: number, month: number, year: number): Observable<WorkoutResponse> {
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization':  'Token e93210d1dd1160a02feefd0c60d64b817033feb7'
+          'Authorization':  'Token ' + localStorage.getItem("token")
         })
       };
       return this.http.get<WorkoutResponse>(baseURL + "user/" + user_id + "/workouts/"+ month + "/" + year +"/", httpOptions)

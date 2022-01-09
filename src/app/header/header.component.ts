@@ -3,6 +3,7 @@ import { faCalendarAlt, faBookOpen, faChartPie, faUserCircle, faBars } from '@fo
 import {MENUITEMS} from '../shared/nav_items';
 import { flyInOut, slide, expand } from '../animations/app.animations';
 import { MediaObserver } from '@angular/flex-layout';
+import { Observable, of } from 'rxjs';
 
 type PaneType = 'left' | 'right';
 
@@ -24,6 +25,8 @@ export class HeaderComponent implements OnInit {
   faUserCircle = faUserCircle
   isCollapsed = false
   isMenuOpened=false
+  auth = of(localStorage.getItem("id"))
+  static showMenu = false
   public static isCollapsed: boolean = false
   public showBackdrop: boolean = false;
  
@@ -33,6 +36,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.mediaObserver.asObservable().subscribe(changes => this.isCollapsed=(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
+    HeaderComponent.showMenu = localStorage.getItem("id")!=undefined
+    if(!HeaderComponent.showMenu) window.location.href="auth"
     console.log(this.isCollapsed)
   }
 
@@ -54,6 +59,13 @@ export class HeaderComponent implements OnInit {
       this.isMenuOpened=false
       console.log("close")
     }
+  }
+
+  static changeMenu(showMenu: boolean) {
+    this.showMenu = showMenu
+  }
+  get staticChangeMenu() {
+    return HeaderComponent.showMenu;
   }
 }
 
