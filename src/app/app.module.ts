@@ -33,6 +33,8 @@ import { AuthorisationComponent } from './authorisation/authorisation.component'
 import {MatInputModule} from '@angular/material/input'
 import { AuthService } from './services/auth.service';
 import { SharedService } from './shared/sharedservice';
+import { RegistrationComponent } from './registration/registration.component';
+import { MatSelectModule } from '@angular/material/select'
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { SharedService } from './shared/sharedservice';
     HeaderComponent,
     ScheduleComponent,
     MaterialElevationDirective,
-    AuthorisationComponent
+    AuthorisationComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ import { SharedService } from './shared/sharedservice';
     MatListModule,
     MatMenuModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   exports: [HeaderComponent],
   providers: [

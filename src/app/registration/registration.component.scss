@@ -1,0 +1,73 @@
+.main-div{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+mat-card-content {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.full-width {
+    width: 95%
+}
+
+.half-width {
+    width: 45%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+mat-card-content {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.imaged {
+    background: center url("https://i.pinimg.com/564x/d3/3d/00/d33d00a43c8df4121028c3b8c7f34d07.jpg") no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+}
+
+.mat-card-xl-image {
+    width: 120px;
+    height: 120px;
+}
+
+@media (min-width: 768px) {
+    .imaged {
+        background: center url("https://i.pinimg.com/564x/d3/3d/00/d33d00a43c8df4121028c3b8c7f34d07.jpg") no-repeat;
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+        -o-background-size: 100%; /* Opera 9.6+ */
+        background-size: 100%; /* Современные браузеры */
+    }
+    .mat-card-xl-image {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+@media (min-width: 992px) {
+    .imaged {
+        background: center url("https://oskol-kray.ru/media/filer_public_thumbnails/filer_public/25/08/2508bf45-92b9-4291-8b73-1aa08ad7f52d/basketbol.jpeg__750x415_q90_crop-True_subsampling-2_upscale.jpeg") no-repeat;
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+        -o-background-size: 100%; /* Opera 9.6+ */
+        background-size: 100%; /* Современные браузеры */
+    }
+    .mat-card-xl-image {
+        width: 240px;
+        height: 240px;
+    }
+}
+.container {
+    margin: 0;
+    height: 95vh;
+}

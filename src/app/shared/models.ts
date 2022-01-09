@@ -17,6 +17,7 @@ export class User {
     sex: string;
     password?: string;
     re_password?: string;
+    is_coach?: boolean;
 
     constructor(username: string, password: string){
         this.username = username;

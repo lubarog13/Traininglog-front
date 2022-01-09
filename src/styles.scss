@@ -103,8 +103,12 @@ body {
         text-align: center;
     }
 
- .submit-button {
-     background: $primary-blue-color;
+    .submit-button {
+        background: $primary-blue-color;
      color: white;
      border-radius: 5px;
+    }
+
+    .mat-button.mat-primary.mat-button-disabled, .mat-button.mat-accent.mat-button-disabled, .mat-button.mat-warn.mat-button-disabled, .mat-button.mat-button-disabled.mat-button-disabled, .mat-icon-button.mat-primary.mat-button-disabled, .mat-icon-button.mat-accent.mat-button-disabled, .mat-icon-button.mat-warn.mat-button-disabled, .mat-icon-button.mat-button-disabled.mat-button-disabled, .mat-stroked-button.mat-primary.mat-button-disabled, .mat-stroked-button.mat-accent.mat-button-disabled, .mat-stroked-button.mat-warn.mat-button-disabled, .mat-stroked-button.mat-button-disabled.mat-button-disabled  {
+     color: rgb(255 255 255 / 75%);
  }   

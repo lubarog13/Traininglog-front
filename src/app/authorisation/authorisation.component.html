@@ -6,8 +6,10 @@
         </mat-card-header>
         <mat-card-content>
             <form fxFlex novalidate [formGroup]="authForm" (ngSubmit)="onSubmit()">
-                <p><mat-form-field appearance="outline"><mat-label>Логин{{" " + " "}}</mat-label><input matInput (input)="changed()" formControlName="login" type="text" required></mat-form-field></p>
-                <p><mat-form-field appearance="outline"><mat-label>Пароль</mat-label><input matInput (input)="changed()" formControlName="password" type="password" required> </mat-form-field></p>
+                <p style="width: 90%;"><mat-form-field style="width: 100%;" appearance="outline"><mat-label>Логин{{" " + " "}}</mat-label><input matInput (input)="changed()" formControlName="login" type="text" required></mat-form-field></p>
+                <p style="width: 90%;"><mat-form-field style="width: 100%;" appearance="outline"><mat-label>Пароль</mat-label><input matInput (input)="changed()" formControlName="password" [type]="hide ? 'password' : 'text'" required><button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button></mat-form-field></p>
                 <br *ngIf="!errMess">
                 <p style="color: red;" *ngIf="errMess">{{errMess}}</p>
                 <button class="submit-button" mat-button type="submit" [disabled]="authForm.invalid">Войти</button><a style="margin-left: 20px;" href="registration">Регистрация</a>

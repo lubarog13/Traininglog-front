@@ -32,4 +32,13 @@ export class AuthService {
       return this.http.get<User>(baseURL + "auth/users/me/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
+    registration(user: User): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post(baseURL + 'auth/users/', user, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
 }

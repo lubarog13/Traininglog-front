@@ -15,6 +15,7 @@ export class AuthorisationComponent implements OnInit {
   authForm: FormGroup
   errMess: string
   token: string
+  hide = true
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
