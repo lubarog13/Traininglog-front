@@ -1,8 +1,54 @@
 @import '/src/styles.scss';
+
+.mat-toolbar.mat-primary {
+    background: $primary-blue-color;
+    color: #fff;
+  }
+
+  .flex-spacer {
+    flex: 1 1 auto;
+}
+
+  .endEl {
+      margin-right: 3%;
+  }
+  .logo {
+      margin: 2%;
+  }
+  .name {
+      margin-right: 5%;
+  }
+  .firstEl {
+      margin-left: 5%;
+  }
+  .space {
+      padding-left: 5%;
+  }
+
+  mat-sidenav {
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #002b5c;
+    color: white;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
 .rect {
     height: 100%;
-    width: 10%;
+    width: 0;
     position: absolute;
     right: 0;
-    background: $primary-blue-color;
+    background: linear-gradient(90deg, rgba(207,207,207,1) 0%, rgba(227,227,227,1) 1%, rgba(242,242,242,1) 4%);
+}
+
+mat-drawer {
+    width: 80%;
+}
+
+@media (min-width: 768px) {
+    mat-drawer {
+        width: 60%;
+    }
 }

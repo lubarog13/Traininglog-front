@@ -7,5 +7,5 @@ export const routes: Routes = [
     { path: 'schedule', component: ScheduleComponent},
     { path: 'auth', component: AuthorisationComponent},
     { path: 'registration', component: RegistrationComponent},
-    { path: '', redirectTo: '/auth', pathMatch: 'full' }
+    { path: '', redirectTo: '/schedule', pathMatch: 'full' }
 ];

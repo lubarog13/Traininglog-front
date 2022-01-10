@@ -36,12 +36,10 @@
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
     background-size: 100%; /* Современные браузеры */
-    position: sticky;
+    overflow: auto;
+    max-height: 93vh;
 }
 
-.container {
-    margin: 0;
-}
 
 .button-ok {
     background: $green-aceent-color;
@@ -92,6 +90,7 @@
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
     background-size: 100%; /* Современные браузеры */
+    max-height: 93vh;
 }
 
 @media (min-width: 992px) {
@@ -99,6 +98,10 @@
         -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; 
-    background-size: 50%;
+    background-size: 100%;
     }
+}
+.container {
+    margin: 0;
+    height: 93vh;
 }

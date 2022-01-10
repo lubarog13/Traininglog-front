@@ -39,7 +39,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   reasonForm: FormGroup
   sendReason: Map<number,boolean> = new Map<number,boolean>()
   headerText = "Тренировки на неделе"
-  months = ["январе", "феврале", "марте", "мае", "июне", "июле", "августе", "сентябре", "октябре", "ноябре", "декабре"]
+  months = ["январе", "феврале", "марте", "апреле", "мае", "июне", "июле", "августе", "сентябре", "октябре", "ноябре", "декабре"]
   currentWorkoutId=0
   isOpen = false
 
@@ -69,6 +69,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     this.mediaObserver.asObservable().subscribe((change) => {
       console.log(change)
       this.grid.cols = this.gridByBreakpoint[change[0].mqAlias]
+      this.height = window.innerHeight - 70
     });
       const monthPrevBtn = document.querySelectorAll(
         '.mat-calendar-previous-button'
@@ -95,7 +96,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.height = window.innerHeight - 60
+    this.height = window.innerHeight - 500
     console.log(this.height)
     this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
       response => {

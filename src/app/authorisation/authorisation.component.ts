@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { expand } from '../animations/app.animations';
-import { HeaderComponent } from '../header/header.component';
+import { AppComponent } from '../app.component';
 import { AuthService } from '../services/auth.service';
 import { User } from '../shared/models';
 import { SharedService } from '../shared/sharedservice';
@@ -45,7 +45,7 @@ export class AuthorisationComponent implements OnInit {
           localStorage.setItem("first_name", response.first_name)
           localStorage.setItem("last_name", response.last_name)
           localStorage.setItem("id", response.id.toString())
-          HeaderComponent.changeMenu(true)
+          AppComponent.changeMenu(true)
           window.location.href="schedule"
         }, err => console.log(err))
       },

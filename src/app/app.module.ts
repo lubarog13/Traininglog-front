@@ -8,7 +8,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { HeaderComponent } from './header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatSidenavModule} from '@angular/material/sidenav'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +41,6 @@ import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component'
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ScheduleComponent,
     MaterialElevationDirective,
     AuthorisationComponent,
@@ -75,7 +73,6 @@ import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component'
     MatNativeDateModule,
     MatSelectModule
   ],
-  exports: [HeaderComponent],
   providers: [
     WorkoutService,
     ProcessHTTPMsgService,
