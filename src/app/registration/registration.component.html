@@ -1,6 +1,6 @@
 <div class="container main-div imaged"
     fxLayout="column">
-    <mat-card >
+    <mat-card [@expand]>
         <mat-card-header align="center">
             <mat-card-title style="font-size: 24px;">Регистрация</mat-card-title>
         </mat-card-header>
@@ -33,7 +33,7 @@
                   <p>
                       <mat-form-field class="half-width" appearance="outline">
                         <mat-label>Дата рождения</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="date_birth">
+                        <input matInput [matDatepicker]="picker"  [max]="maxDate" formControlName="date_birth">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-error *ngIf="formErrors.date_birth">{{formErrors.date_birth}}</mat-error>
@@ -70,6 +70,7 @@
                       </button>
                       <mat-error *ngIf="formErrors.re_password">{{formErrors.re_password}}</mat-error>
                     </mat-form-field>
+                    <p *ngIf="errMsg" style="color: red;">{{errMsg}}</p>
                     <span style="width: 100%;">
                         <button class="submit-button" style="font-size: 13px;" mat-button type="submit" [disabled]="registrationForm.invalid">Зарегестрироваться</button><a style="margin-left: 20px;" href="auth">Вход</a>
                     </span>

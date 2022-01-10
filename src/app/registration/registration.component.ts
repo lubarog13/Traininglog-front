@@ -4,17 +4,24 @@ import { AuthService } from '../services/auth.service';
 import { CustomValidators } from '../shared/custom-validators';
 import { User } from '../shared/models';
 import { formatDate } from '@angular/common';
+import { expand } from '../animations/app.animations';
+import { MatDialog } from '@angular/material/dialog';
+import { SubmitDialogComponent } from '../submit-dialog/submit-dialog.component';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  animations: [
+    expand()
+  ]
 })
 export class RegistrationComponent implements OnInit {
 
   registrationForm: FormGroup 
   hide = true
-
+  maxDate = new Date()
+  errMsg: string;
   formErrors = {
     'first_name': '',
     'last_name': '',
@@ -70,7 +77,7 @@ export class RegistrationComponent implements OnInit {
     }
   }  
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -118,7 +125,16 @@ export class RegistrationComponent implements OnInit {
     user.date_birth = formatDate(user.date_birth, "yyyy-MM-dd", "en-US")
     console.log(user)
     user.is_coach = false
-    this.authService.registration(user).subscribe(response => console.log(response), err => console.log(err))
+    this.authService.registration(user).subscribe(response => {
+      console.log(response)
+      this.errMsg = undefined
+      this.openDialog()
+    }, err => {
+      console.log(err)
+        if(err.includes("username")) {
+          this.errMsg = "Такой логин уже существует"
+        }
+    })
   }
 
   onValueChanged(data?: any) {
@@ -140,4 +156,14 @@ export class RegistrationComponent implements OnInit {
       }
     }
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(SubmitDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if(result==true) window.location.href = "auth"
+    });
+  }
+
 }

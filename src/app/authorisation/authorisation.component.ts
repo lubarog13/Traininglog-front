@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { expand } from '../animations/app.animations';
 import { HeaderComponent } from '../header/header.component';
 import { AuthService } from '../services/auth.service';
 import { User } from '../shared/models';
@@ -9,7 +10,10 @@ import { SharedService } from '../shared/sharedservice';
 @Component({
   selector: 'app-authorisation',
   templateUrl: './authorisation.component.html',
-  styleUrls: ['./authorisation.component.scss']
+  styleUrls: ['./authorisation.component.scss'],
+  animations: [
+    expand()
+  ]
 })
 export class AuthorisationComponent implements OnInit {
   authForm: FormGroup

@@ -34,7 +34,9 @@ import {MatInputModule} from '@angular/material/input'
 import { AuthService } from './services/auth.service';
 import { SharedService } from './shared/sharedservice';
 import { RegistrationComponent } from './registration/registration.component';
-import { MatSelectModule } from '@angular/material/select'
+import { MatSelectModule } from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component'
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { MatSelectModule } from '@angular/material/select'
     ScheduleComponent,
     MaterialElevationDirective,
     AuthorisationComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SubmitDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { MatSelectModule } from '@angular/material/select'
     HttpClientModule,
     FormsModule,
     MatInputModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatIconModule,
     MatDividerModule,
