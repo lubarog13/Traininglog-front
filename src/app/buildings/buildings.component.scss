@@ -1,0 +1,40 @@
+.container {
+    margin: 0;
+    height: 93vh;
+}
+    .mat-card-md-image {
+        width: 112px;
+        height: 112px;
+    }
+
+.mat-list-base .mat-list-item.mat-2-line, .mat-list-base .mat-list-option.mat-2-line {
+    height: 100px;
+}
+
+.mat-list-base .mat-list-item .mat-list-avatar, .mat-list-base .mat-list-option .mat-list-avatar {
+    width: 80px;
+    height: 80px;
+}
+
+.mat-list-base .mat-list-item.mat-2-line, .mat-list-base .mat-list-option.mat-2-line {
+    height: 100px;
+}
+
+.mat-list-base .mat-list-item.mat-2-line:hover, .mat-list-base .mat-list-option.mat-2-line:hover {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid gray;
+    z-index: 1;
+    transform: scale(1.01);
+}
+
+#buildings {
+    overflow: auto;
+    max-height: 50vh !important;
+}
+@media (min-width: 992px) {
+    #buildings {
+        max-height: 93vh;
+        overflow-x: hidden;
+    overflow-y:visible;
+    }
+}

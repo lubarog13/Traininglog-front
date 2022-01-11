@@ -35,7 +35,9 @@ import { SharedService } from './shared/sharedservice';
 import { RegistrationComponent } from './registration/registration.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
-import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component'
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
+import {GoogleMapsModule} from '@angular/google-maps';
+import { BuildingsComponent } from './buildings/buildings.component';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component'
     MaterialElevationDirective,
     AuthorisationComponent,
     RegistrationComponent,
-    SubmitDialogComponent
+    SubmitDialogComponent,
+    BuildingsComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component'
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    GoogleMapsModule,
   ],
   providers: [
     WorkoutService,

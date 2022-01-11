@@ -112,4 +112,11 @@ body {
     .mat-button.mat-primary.mat-button-disabled, .mat-button.mat-accent.mat-button-disabled, .mat-button.mat-warn.mat-button-disabled, .mat-button.mat-button-disabled.mat-button-disabled, .mat-icon-button.mat-primary.mat-button-disabled, .mat-icon-button.mat-accent.mat-button-disabled, .mat-icon-button.mat-warn.mat-button-disabled, .mat-icon-button.mat-button-disabled.mat-button-disabled, .mat-stroked-button.mat-primary.mat-button-disabled, .mat-stroked-button.mat-accent.mat-button-disabled, .mat-stroked-button.mat-warn.mat-button-disabled, .mat-stroked-button.mat-button-disabled.mat-button-disabled  {
      color: rgb(255 255 255 / 75%);
      background: rgb(128, 128, 128);
- }   
+ }
+ 
+ .highlight {
+    background-color: rgb(228, 228, 228);
+    border: 1px solid gray;
+    z-index: 1;
+    transform: scale(1.01);
+  }

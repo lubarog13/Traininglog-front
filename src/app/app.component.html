@@ -13,7 +13,7 @@
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item *ngFor="let childItem of menuItem.children">{{ childItem.displayName }}</button>
+                    <button mat-menu-item *ngFor="let childItem of menuItem.children" (click)="goToHref(childItem.route)">{{ childItem.displayName }}</button>
                     </mat-menu>
             </div>
             </div>

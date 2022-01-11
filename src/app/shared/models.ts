@@ -1,9 +1,12 @@
 export interface Building {
     id: number;
+    name?: string;
     city: string;
     address: string;
     number: number;
-    liter: string;   
+    liter: string;
+    lat?: number;
+    lng?: number;    
 }
 
 
