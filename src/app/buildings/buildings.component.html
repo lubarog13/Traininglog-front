@@ -1,0 +1,48 @@
+<div class="container"
+     fxLayout="column">
+     <div fxFlex>
+        <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
+            <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings">
+                <mat-list *ngIf="isVertical && buildings">
+                <mat-list-item *ngFor="let building of buildings" appHighlight (click)="click(building)">
+                    <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-list-avatar>
+                    <h3 matLine>{{building.name}}</h3>
+                    <p matLine> {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+                </mat-list>
+                <div fxLayout="row" *ngIf="!isVertical && buildings" style="max-height: 50vh;">
+                    <mat-card appMaterialElevation *ngFor="let building of buildings" style="height: 80%; margin: 20px;" (click)="click(building)">
+                        <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-card-image>
+                        <mat-card-content>
+                            <h3 >{{building.name}}</h3>
+                    <p > {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div> 
+            <mat-divider [vertical]="isVertical"></mat-divider>
+            <div fxFlex="50" fxFlex.gt-sm="70" *ngIf="selectedBuilding" >
+                <div style="width: 100%;"  fxLayout.gt-md="row" fxLayout="column">
+                    <div fxFlex="40" style="padding: 30px;">
+                         <h3 style="text-align: center;">{{selectedBuilding.name}}</h3>
+                        <p ><b>Город:</b> {{selectedBuilding.city}}</p>
+                        <p><b>Адрес</b> : {{selectedBuilding.address}}</p>
+                        <p><b>Дом:</b> {{selectedBuilding.number}}</p>
+                        <p><b>Литера:</b> {{selectedBuilding.liter}}</p> 
+                    </div>
+                <img src="{{ BaseURL + 'media/' + selectedBuilding.id + '_building.jpg'}}" fxFlex="60">
+                </div>
+                <div style="width: 100%;" align="end">
+                    
+                <google-map width="100%" [center]="center">
+                    <map-marker
+                        [position]="center"
+  >
+  </map-marker>
+                </google-map>
+                </div>
+            </div>
+        </div>
+         </div>
+</div>
