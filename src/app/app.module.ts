@@ -38,6 +38,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 import {GoogleMapsModule} from '@angular/google-maps';
 import { BuildingsComponent } from './buildings/buildings.component';
+import { HallsComponent } from './halls/halls.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 
 @NgModule({
@@ -48,7 +51,8 @@ import { BuildingsComponent } from './buildings/buildings.component';
     AuthorisationComponent,
     RegistrationComponent,
     SubmitDialogComponent,
-    BuildingsComponent
+    BuildingsComponent,
+    HallsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +68,11 @@ import { BuildingsComponent } from './buildings/buildings.component';
     SidebarModule,
     HttpClientModule,
     FormsModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     MatIconModule,
     MatDividerModule,
     MatFormFieldModule,

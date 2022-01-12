@@ -1,0 +1,65 @@
+<div class="container"
+     fxLayout="column">
+     <div fxFlex>
+        <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
+            <div fxFlex.gt-sm="30" fxLayout="column" id="buildings">
+                <form style="margin-left: 20%;">
+                    <mat-form-field appearance="standard">
+                            <mat-label>Поиск</mat-label>
+                            <input type="text" matInput placeholder="Введите название или номер зала" name="search" #search (input)="onChanged($event.target)">
+                            <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </form>
+                <mat-list *ngIf="searchedHalls!=undefined">
+                    <mat-list-item *ngFor="let hall of searchedHalls" (click)="click(hall)">
+                        <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" mat-list-avatar>
+                        <h3 matLine>{{hall.name+", "+hall.number }}</h3>
+                    </mat-list-item>
+                </mat-list>
+            <mat-accordion *ngIf="searchedHalls==undefined">
+                <mat-expansion-panel *ngFor="let building of data | keyvalue" >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{building.key.name}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{ building.key.city + " " + building.key.address + " д." + building.key.number + building.key.liter}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-list>
+                        <mat-list-item *ngFor="let hall of building.value" (click)="click(hall)">
+                            <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" mat-list-avatar>
+                            <h3 matLine>{{hall.name+", "+hall.number }}</h3>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <mat-divider [vertical]="isVertical" id="divider"></mat-divider>
+            </div>
+            <div div fxFlex="50" fxFlex.gt-sm="70" *ngIf="selectedHall" >
+                <div style="width: 100%;"  fxLayout.gt-md="row" fxLayout="column">
+                    <div fxFlex="40" style="padding: 30px;">
+                         <h3 style="text-align: center;">{{selectedHall.name}}</h3>
+                        <p><b>Номер:</b> {{selectedHall.number}}</p>
+                        <p><b>Максимальное кол-во занимающихся:</b> {{selectedHall.occupancy}}</p>
+                        <p><b>Адрес: </b>{{ selectedHall.building.city + " " +selectedHall.building.address + " д." + selectedHall.building.number + selectedHall.building.liter}}</p>
+                        <img src="{{ BaseURL + 'media/' + selectedHall.building.id + '_building.jpg'}}" class="building_img">
+                </div>
+                        <img src="{{ BaseURL + 'media/' + selectedHall.id + '_hall.jpg'}}" fxFlex="60" class="hall_img">
+                </div>
+                <div style="width: 100%;" align="end">
+                    
+                <google-map width="100%" [center]="center">
+                    <map-marker
+                        [position]="center"
+  >
+  </map-marker>
+                </google-map>
+                </div>
+        </div>
+        <div div fxFlex="50" fxFlex.gt-sm="70" *ngIf="selectedHall==undefined" style="align-items: center; justify-content: center; display: flex;" fxLayout="column">
+                <mat-spinner></mat-spinner><h4>Загрузка...</h4>
+        </div>
+        </div>
+     </div>
+</div>

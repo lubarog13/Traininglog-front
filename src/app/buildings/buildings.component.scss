@@ -22,7 +22,6 @@
 
 .mat-list-base .mat-list-item.mat-2-line:hover, .mat-list-base .mat-list-option.mat-2-line:hover {
     background-color: rgb(240, 240, 240);
-    border: 1px solid gray;
     z-index: 1;
     transform: scale(1.01);
 }
@@ -33,7 +32,7 @@
 }
 @media (min-width: 992px) {
     #buildings {
-        max-height: 93vh;
+        max-height: 93vh !important;
         overflow-x: hidden;
     overflow-y:visible;
     }

@@ -43,6 +43,9 @@
                 </google-map>
                 </div>
             </div>
+            <div div fxFlex="50" fxFlex.gt-sm="70" *ngIf="selectedBuilding==undefined" style="align-items: center; justify-content: center; display: flex;" fxLayout="column">
+                <mat-spinner></mat-spinner><h4>Загрузка...</h4>
+        </div>
         </div>
          </div>
 </div>
