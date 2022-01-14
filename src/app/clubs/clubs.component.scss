@@ -1,0 +1,54 @@
+@import '/src/styles.scss';
+.container {
+    margin: 0;
+    height: 93vh;
+    background: url(https://phonoteka.org/uploads/posts/2021-04/1618372516_21-phonoteka_org-p-abstraktnii-besshovnii-fon-22.jpg);
+}
+
+@media (min-width: 992px) {
+    .container {
+        background: url(https://catherineasquithgallery.com/uploads/posts/2021-02/1613302326_48-p-sinii-sportivnii-fon-70.jpg) no-repeat;
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+    background-color: #1564dd
+    }
+    .main {
+        background: transparent !important;
+        max-height: 70vh;
+        overflow: auto;
+    }
+}
+
+.main {
+    background: url(https://phonoteka.org/uploads/posts/2021-04/1618372516_21-phonoteka_org-p-abstraktnii-besshovnii-fon-22.jpg);
+}
+
+.mat-card-content div span {
+    text-align: end;
+    float: right;
+}
+
+.mat-card-content div {
+    padding-top: 15px;
+}
+.mat-tab {
+    padding-top: 30px;
+}
+.mat-card-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.check_area {
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    padding: 5px 10px;
+    background: whitesmoke;
+}
+.users-list {
+    max-height: 70px;
+    overflow: auto;
+}

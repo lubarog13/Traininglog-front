@@ -37,7 +37,7 @@ export const MENUITEMS: NavItem[] = [
             },
             {
                 displayName: "Секции",
-                route: "/info/clubs"
+                route: "/info/clubs?myclubs=false"
             },
             {
                 displayName: "О нас",

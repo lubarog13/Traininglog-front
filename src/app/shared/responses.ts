@@ -1,4 +1,4 @@
-import { SimplePresence, Workout } from "./models";
+import { SignUp, SimplePresence, User, Workout } from "./models";
 
 export interface WorkoutResponse {
   Workouts: Workout[]
@@ -6,4 +6,12 @@ export interface WorkoutResponse {
 
 export interface SimplePresenceResponse {
   Presences: SimplePresence[]
+}
+
+export interface SignUpResponse {
+  Sign_Ups: SignUp[]
+}
+
+export interface UserResponse {
+  Users: User[]
 }

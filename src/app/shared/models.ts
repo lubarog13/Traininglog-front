@@ -87,6 +87,8 @@ export interface SignUp {
     user: User;
     start_date: string;
     end_date: string;
+    start_time: Date;
+    end_time: Date;
 }
 
 export class Presence {

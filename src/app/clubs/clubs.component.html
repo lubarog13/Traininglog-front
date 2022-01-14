@@ -1,0 +1,103 @@
+
+<div class="container"
+fxLayout="column"
+*ngIf="myclubs!=undefined || sign_ups!=undefined" 
+>
+    <mat-tab-group [selectedIndex]="active.value" (selectedTabChange)="selectedChange()" (selectedIndexChange)="active.setValue($event)">
+        <mat-tab label="Все секции" >
+            <div fxLayout="row" fxLayout.lt-sm="column">
+            <form style="margin-left: 10%;">
+                <mat-form-field appearance="standard">
+                        <mat-label>Поиск</mat-label>
+                        <input type="text" matInput placeholder="Введите название, группу или тренера" name="search" #search (input)="onChanged($event.target)">
+                        <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </form>
+            <mat-chip-list 
+                style="display: contents;"
+            >
+            <mat-chip *ngFor="let filter of filters" (removed)="remove(filter)">
+                {{filter.value}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+            </mat-chip>
+            </mat-chip-list>
+            <button mat-button style="color: blue; text-decoration: underline; display: flex; align-items: center; padding-left: 20px;" (click)="showFilterEdit=!showFilterEdit">Настроить фильтры</button>
+            </div>
+            <div fxLayout="row" fxLayout.lt-sm="column" *ngIf="showFilterEdit" style="padding-left: 10%; align-items: center;">
+                <div class="check_area">
+                    <h4>Выберите тренеров:</h4>
+                    <div fxLayout="column" style=" height: 150px; overflow: auto;">
+                    <mat-checkbox *ngFor="let coach of coach_names"
+                    [checked]="coach.isSelected"
+                    [value]="coach.value"
+                    (change)="coach.isSelected=!coach.isSelected"
+                    >
+                        {{coach.value}}
+                    </mat-checkbox>
+                    </div>
+                </div>
+                <div style="margin-left: 20px;" class="check_area">
+                    <h4>Выберите здания:</h4>
+                    <div fxLayout="column" style=" height: 150px; overflow: auto;">
+                    <mat-checkbox *ngFor="let building of building_names"
+                    [checked]="building.isSelected"
+                    [value]="building.value"
+                    (change)="building.isSelected=!building.isSelected"
+                    >
+                        {{building.value}}
+                    </mat-checkbox>
+                    </div>
+                </div>
+                <button mat-stroked-button style="height: 30px; margin-left: 30px;" color="primary" (click)="setFilters()">Обновить фильтры</button>
+            </div>
+            <mat-grid-list #gridList rowHeight="250px" class="main">
+                <mat-grid-tile *ngFor="let club of filteredClubs">
+                    <mat-card style="width: 80%">
+                        <mat-card-header>
+                            <mat-card-title>{{club.name}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <mat-card-content>
+                            <div><b>Группа:</b> <span>{{club.group}}</span></div>
+                            <div><b>Тренер:</b> <span>{{club.coach.user.last_name + " " + club.coach.user.first_name + " " + club.coach.user.second_name}}</span></div>
+                            <div><b>Здание:</b> <span>{{club.building.name}}</span></div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button class="primary-button" style="width: 40%;" mat-button>Подать заявку</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab> 
+        <mat-tab label="Мои секции" >
+            <mat-grid-list #gridTooList rowHeight="330px" class="main">
+                <mat-grid-tile *ngFor="let signup of sign_ups">
+                    <mat-card style="width: 80%">
+                        <mat-card-header>
+                            <mat-card-title>{{signup.club.name}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <mat-card-content>
+                            <div><b>Группа:</b> <span>{{signup.club.group}}</span></div>
+                            <div><b>Тренер:</b> <span>{{signup.club.coach.user.last_name + " " + signup.club.coach.user.first_name + " " + signup.club.coach.user.second_name}}</span></div>
+                            <div><b>Здание:</b> <span>{{signup.club.building.name}}</span></div>
+                            <div><b>Окончание записи:</b> <span>{{signup.end_time.toLocaleDateString()}}</span></div>
+                            <div *ngIf="usersForClubs.has(signup.club.id)" class="users-list">
+                                <p><b>Занмающиеся:</b></p>
+                                <span *ngFor="let user of usersForClubs.get(signup.club.id)" style="padding-left: 5px; padding-right: 5px; color: blue; float: left;">
+                                    {{user.last_name + " " + user.first_name.charAt(0) + ". " + user.second_name.charAt(0) + "."}}
+                                </span>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button class="primary-button" style="width: 50%; font-size: 9pt;" mat-button (click)="getUsersForClub(signup.club.id)">Посмотреть занимающихся</button>
+                            <button class="primary-button" style="background: red;" mat-button (click)="deleteSignup(signup.id)">Удалить запись</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+    </mat-tab-group>
+</div>

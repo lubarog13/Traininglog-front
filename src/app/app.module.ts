@@ -40,7 +40,11 @@ import {GoogleMapsModule} from '@angular/google-maps';
 import { BuildingsComponent } from './buildings/buildings.component';
 import { HallsComponent } from './halls/halls.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ClubsComponent } from './clubs/clubs.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips'
 
 
 @NgModule({
@@ -52,7 +56,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     RegistrationComponent,
     SubmitDialogComponent,
     BuildingsComponent,
-    HallsComponent
+    HallsComponent,
+    ClubsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +87,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     MatNativeDateModule,
     MatSelectModule,
     GoogleMapsModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatChipsModule
   ],
   providers: [
     WorkoutService,
