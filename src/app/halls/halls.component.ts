@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { BuildingsComponent } from '../buildings/buildings.component';
 import { BuildingService } from '../services/building.service';
@@ -20,10 +21,15 @@ export class HallsComponent implements OnInit {
   selectedHall: Hall
   isVertical=true
   center: google.maps.LatLngLiteral
+  hall_id = 0
 
-  constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver) { }
+  constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if(params.hall_id!=undefined){
+      this.hall_id = Number.parseInt(params.hall_id)
+      }
     this.buildingService.getHalls().subscribe((responce) => {
       this.halls=responce
       this.click(this.halls[0])
@@ -35,8 +41,10 @@ export class HallsComponent implements OnInit {
       for(let building of buildings) {
         this.data.set(building, this.halls.filter(hall => hall.building.id==building.id))
       }
-    console.log(this.data)
+      if(this.hall_id!=0) this.selectedHall = this.halls.filter(hall=> hall.id==this.hall_id)[0]
+      console.log(this.selectedHall)
     },(err) => this.errMsg=err )
+  })
     this.mediaObserver.asObservable().subscribe(changes => this.isVertical=!(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
   }
 

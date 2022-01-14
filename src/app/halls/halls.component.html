@@ -2,11 +2,11 @@
      fxLayout="column">
      <div fxFlex>
         <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
-            <div fxFlex.gt-sm="30" fxLayout="column" id="buildings">
+            <div  *ngIf="halls" fxFlex.gt-sm="30" fxLayout="column" id="buildings" class="main">
                 <form style="margin-left: 20%;">
-                    <mat-form-field appearance="standard">
+                    <mat-form-field appearance="standard" style="color: white;">
                             <mat-label>Поиск</mat-label>
-                            <input type="text" matInput placeholder="Введите название или номер зала" name="search" #search (input)="onChanged($event.target)">
+                            <input  style="color: white;" type="text" matInput placeholder="Введите название или номер зала" name="search" #search (input)="onChanged($event.target)">
                             <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
                 </form>

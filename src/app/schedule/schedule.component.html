@@ -28,7 +28,7 @@
                             <br>
                             <div>Время: <span class="right_column"> {{workout.start_date.toLocaleDateString()}} {{workout.start_date.getUTCHours()}}:{{(workout.start_date.getMinutes()<10?'0':'') + workout.start_date.getMinutes()}}-{{workout.end_date.getUTCHours()}}:{{(workout.end_date.getMinutes()<10?'0':'') + workout.end_date.getMinutes()}}</span></div>
                             <div>Группа: <span class="right_column"> {{workout.club.group}}</span></div>
-                            <div>Зал: <a class="right_column"> {{workout.hall.name}}, {{workout.hall.number}}</a></div>
+                            <div>Зал: <a [routerLink]="['/info/halls']" [queryParams]="{hall_id: workout.hall.id}" class="right_column"> {{workout.hall.name}}, {{workout.hall.number}}</a></div>
                             <div>Тренер: <span class="right_column"> {{ workout.coach_replace!=undefined? workout.coach_replace.user.last_name + " "
                                  + workout.coach_replace.user.first_name.charAt(0) + ". " + workout.coach_replace.user.second_name.charAt(0)+ "."
                                  : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 

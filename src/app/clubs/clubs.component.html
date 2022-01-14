@@ -62,7 +62,7 @@ fxLayout="column"
                         <mat-card-content>
                             <div><b>Группа:</b> <span>{{club.group}}</span></div>
                             <div><b>Тренер:</b> <span>{{club.coach.user.last_name + " " + club.coach.user.first_name + " " + club.coach.user.second_name}}</span></div>
-                            <div><b>Здание:</b> <span>{{club.building.name}}</span></div>
+                            <div><b>Здание:</b> <span><a [routerLink]="['/info/buildings']" [queryParams]="{building_id: club.building.id}">{{club.building.name}}</a></span></div>
                         </mat-card-content>
                         <mat-card-actions>
                             <button class="primary-button" style="width: 40%;" mat-button>Подать заявку</button>

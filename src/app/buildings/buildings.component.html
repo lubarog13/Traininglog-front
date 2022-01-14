@@ -2,11 +2,11 @@
      fxLayout="column">
      <div fxFlex>
         <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
-            <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings">
+            <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings" class="main">
                 <mat-list *ngIf="isVertical && buildings">
                 <mat-list-item *ngFor="let building of buildings" appHighlight (click)="click(building)">
                     <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-list-avatar>
-                    <h3 matLine>{{building.name}}</h3>
+                    <h3 matLine class="bold">{{building.name}}</h3>
                     <p matLine> {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
                     <mat-divider></mat-divider>
                 </mat-list-item>

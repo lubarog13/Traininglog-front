@@ -37,3 +37,19 @@
     overflow-y:visible;
     }
 }
+
+.main {
+    background: url(https://i.pinimg.com/564x/32/8f/a6/328fa63d50c67172597d9430aa7ccce4.jpg) no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+}
+
+.mat-list-item {
+    background: rgba($color: white, $alpha: 0.5)
+}
+
+.mat-list-item .bold {
+    font-weight: bold;
+}
