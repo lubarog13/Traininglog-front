@@ -10,8 +10,8 @@
 }
 @media (min-width: 992px) {
     #buildings {
-        height: 112vh;
-        max-height: 112vh !important;
+        height: 93vh;
+        max-height: 93vh !important;
         overflow-x: hidden;
         overflow-y:visible;
     }
@@ -50,4 +50,44 @@
         background-size: 100%; /* Современные браузеры */
         background-color: rgb(129,132,123);
     height: 100%;
+}
+
+.carousel-container {
+    margin: 16px auto;
+    margin-bottom: 30px;
+}
+
+:host ::ng-deep{
+    .image-container {
+        max-width: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .igx-carousel {
+        max-width: 100%;
+        width: unset;
+    }
+
+    .igx-nav-dot {
+        background: black;
+        box-shadow: none;
+        width: 15px;
+        height: 15px;
+    }
+
+    .igx-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+        width: unset;
+        background: rgba(0, 0, 0, 0.03);
+    }
+
+    .igx-slide img {
+        object-fit: fill;
+        max-width: 90%;
+    }
 }

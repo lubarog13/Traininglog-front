@@ -45,7 +45,16 @@ import { ClubsComponent } from './clubs/clubs.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
-import { CoachesComponent } from './coaches/coaches.component'
+import { CoachesComponent } from './coaches/coaches.component';
+import { 
+	IgxPieChartModule,
+	IgxLegendModule,
+	IgxItemLegendModule,
+  IgxCategoryChartModule
+ } from "igniteui-angular-charts";
+ import { IgxCarouselModule,
+	IgxSliderModule} from "igniteui-angular";
+import { AnalysisComponent } from './analysis/analysis.component';
 
 
 @NgModule({
@@ -59,7 +68,8 @@ import { CoachesComponent } from './coaches/coaches.component'
     BuildingsComponent,
     HallsComponent,
     ClubsComponent,
-    CoachesComponent
+    CoachesComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +101,13 @@ import { CoachesComponent } from './coaches/coaches.component'
     GoogleMapsModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    IgxPieChartModule,
+	IgxLegendModule,
+	IgxItemLegendModule,
+  IgxCategoryChartModule,
+  IgxCarouselModule,
+	IgxSliderModule
   ],
   providers: [
     WorkoutService,

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Coach } from '../shared/models';
+import { Coach, MonthsAnalysis, TypesAnalysis } from '../shared/models';
 import { UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -30,5 +30,32 @@ export class UserService {
       })
     };
     return this.http.get<Coach[]>(baseURL+"coaches/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getAnalysisForTypes(): Observable<TypesAnalysis> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<TypesAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/types/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getAnalysisForMonths(): Observable<MonthsAnalysis> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<MonthsAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getNotAttendCOuntForMonths(): Observable<MonthsAnalysis> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<MonthsAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/not_attend/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 }

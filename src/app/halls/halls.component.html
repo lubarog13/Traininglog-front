@@ -43,9 +43,21 @@
                         <p><b>Номер:</b> {{selectedHall.number}}</p>
                         <p><b>Максимальное кол-во занимающихся:</b> {{selectedHall.occupancy}}</p>
                         <p><b>Адрес: </b>{{ selectedHall.building.city + " " +selectedHall.building.address + " д." + selectedHall.building.number + selectedHall.building.liter}}</p>
-                        <img src="{{ BaseURL + 'media/' + selectedHall.building.id + '_building.jpg'}}" class="building_img">
                 </div>
-                        <img src="{{ BaseURL + 'media/' + selectedHall.id + '_hall.jpg'}}" fxFlex="60" class="hall_img">
+                <div class="carousel-container" fxFlex="60">
+                    <igx-carousel #carousel>
+                        <igx-slide>
+                            <div class="image-container">
+                                <img src="{{ BaseURL + 'media/' + selectedHall.id + '_hall.jpg'}}">
+                            </div>
+                        </igx-slide>
+                        <igx-slide>
+                            <div class="image-container">
+                                <img src="{{ BaseURL + 'media/' + selectedHall.building.id + '_building.jpg'}}">
+                            </div>
+                        </igx-slide>
+                    </igx-carousel>
+                </div>                
                 </div>
                 <div style="width: 100%;" align="end">
                     

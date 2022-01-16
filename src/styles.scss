@@ -8,6 +8,23 @@ $orange-accent-color: #FF5E00;
 $yellow-accent-color: #9EA000;
 $green-light-color: #2FFF00;
 $green-aceent-color: #08C827;
+@import '~igniteui-angular/lib/core/styles/themes/index';
+@include igx-core();
+@include igx-theme(
+    $default-palette,
+    $exclude: (
+        'bullet-graph',
+        'linear-gauge',
+        'radial-gauge',
+        'category-chart',
+        'data-chart',
+        'doughnut-chart',
+        'financial-chart',
+        'funnel-chart',
+        'geo-map',
+        'pie-chart',
+        'shape-chart',
+        'sparkline'));
 
 @mixin zero-margin($pad-up-down, $pad-left-right) {
     margin: 0px auto;

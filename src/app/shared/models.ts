@@ -112,3 +112,26 @@ export interface SimplePresence {
     delay: boolean;
     early_ret: boolean;
 }
+
+export interface TypesAnalysis {
+    Cardio: number;
+    Strength: number;
+    For_tech: number;
+    For_all: number;
+    Another: number;
+}
+
+export interface MonthsAnalysis {
+    jan: number;
+    feb: number;
+    mar: number;
+    apr: number;
+    may: number;
+    jun: number;
+    jul: number;
+    aug: number;
+    sep: number;
+    oct: number;
+    nov: number;
+    dec: number;
+}
