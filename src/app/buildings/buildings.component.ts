@@ -28,7 +28,7 @@ export class BuildingsComponent implements OnInit {
     this.buildingService.getBuildings().subscribe((response) => {
       this.buildings = response
       console.log(response)
-      if(Number.parseInt(this.route.snapshot.queryParams['building_id'])!=0) this.click(this.buildings.filter(building => building.id==Number.parseInt(this.route.snapshot.queryParams['building_id']))[0])
+      if(this.route.snapshot.queryParams['building_id']!=undefined) this.click(this.buildings.filter(building => building.id==Number.parseInt(this.route.snapshot.queryParams['building_id']))[0])
       else this.click(this.buildings[0])
       console.log(this.selectedBuilding)
     }, (err) => this.errMess=err)

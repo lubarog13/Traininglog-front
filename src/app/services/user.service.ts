@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
+import { Coach } from '../shared/models';
 import { UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -20,5 +21,14 @@ export class UserService {
       })
     };
     return this.http.get<UserResponse>(baseURL + "club/" + club_id + "/users/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getCoaches(): Observable<Coach[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<Coach[]>(baseURL+"coaches/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 }

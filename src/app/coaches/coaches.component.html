@@ -1,0 +1,18 @@
+<div class="container"
+fxLayout="column"
+>
+<h1>Тренеры</h1>
+<mat-grid-list #gridList rowHeight="420px">
+    <mat-grid-tile *ngFor="let coach of coaches">
+        <mat-card style="width: 200px" appMaterialElevation>
+                <mat-card-title style="font-size: 20px;">
+                    {{coach.user.last_name +" "+ coach.user.first_name +" "+ coach.user.second_name}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{coach.post}}
+                </mat-card-subtitle>
+                <img src="{{ BaseURL + 'media/' + coach.id + '_coach.jpg'}}" width="100%">
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+</div>

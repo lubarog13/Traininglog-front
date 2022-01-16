@@ -10,14 +10,20 @@
 }
 @media (min-width: 992px) {
     #buildings {
-        height: 108vh;
-        max-height: 108vh !important;
+        height: 112vh;
+        max-height: 112vh !important;
         overflow-x: hidden;
         overflow-y:visible;
     }
     #divider {
         height: 100%;
         margin: 0;
+    }
+    .main {
+        background: url(https://i.pinimg.com/564x/fd/db/b4/fddbb4b5cfa4d4123fe053ee6d7d44e8.jpg) no-repeat fixed;
+        background-size: 30%; /* Современные браузеры */
+        background-color: rgb(129,132,123);
+        height: 100%;
     }
 }
 
@@ -41,7 +47,7 @@
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
-    background-size: 100%; /* Современные браузеры */
-    background-color: rgb(129,132,123);
+        background-size: 100%; /* Современные браузеры */
+        background-color: rgb(129,132,123);
     height: 100%;
 }

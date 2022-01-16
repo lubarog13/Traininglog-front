@@ -44,7 +44,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ClubsComponent } from './clubs/clubs.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatChipsModule} from '@angular/material/chips'
+import {MatChipsModule} from '@angular/material/chips';
+import { CoachesComponent } from './coaches/coaches.component'
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {MatChipsModule} from '@angular/material/chips'
     SubmitDialogComponent,
     BuildingsComponent,
     HallsComponent,
-    ClubsComponent
+    ClubsComponent,
+    CoachesComponent
   ],
   imports: [
     BrowserModule,
