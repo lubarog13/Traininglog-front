@@ -55,6 +55,7 @@ import {
  import { IgxCarouselModule,
 	IgxSliderModule} from "igniteui-angular";
 import { AnalysisComponent } from './analysis/analysis.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { AnalysisComponent } from './analysis/analysis.component';
     HallsComponent,
     ClubsComponent,
     CoachesComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

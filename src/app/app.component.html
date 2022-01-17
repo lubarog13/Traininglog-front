@@ -6,23 +6,26 @@
             <div class="space"></div>
             <div *ngIf="staticChangeMenu" fxLayout="row">
             <div [hidden]="isCollapsed" *ngFor="let menuItem of menuitems">
-                <a *ngIf="menuItem.children!=null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger" (mouseenter)="trigger.openMenu()">
+                <a *ngIf="menuItem.children!=null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)">
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
                 <a *ngIf="menuItem.children==null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]">
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
-                <mat-menu #menu="matMenu">
+                <mat-menu #menu="matMenu" [hasBackdrop]="false">
+                    <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
                     <button mat-menu-item *ngFor="let childItem of menuItem.children" (click)="goToHref(childItem.route)">{{ childItem.displayName }}</button>
+                </div>
                     </mat-menu>
             </div>
             </div>
             <span class="flex-spacer"></span>
-            <div *ngIf="staticChangeMenu" fxLayout="row">
-            <div  *ngIf="!isCollapsed" ><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger" (mouseenter)="trigger.openMenu()"></fa-icon></div>
-                <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
+            <div *ngIf="staticChangeMenu" fxLayout="row" >
+            <div  *ngIf="!isCollapsed" ><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl" [matMenuTriggerFor]="menu1" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)"></fa-icon></div>
+                <mat-menu #menu1="matMenu">
+                    <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
+                    <button mat-menu-item *ngFor="let item of profileitems" (click)="goToHref(item.route)"><fa-icon [icon]="item.iconName" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">{{item.displayName}}</span></button>
+                    </div>
                 </mat-menu>
             <button mat-icon-button *ngIf="isCollapsed" (click)="drawer.toggle()"><fa-icon [icon]="faBars" class="fa fa-2x endEl"></fa-icon></button>
                 </div>
@@ -41,6 +44,16 @@
             <mat-divider style="background: rgb(245, 245, 253);"></mat-divider>
         </mat-list-item>
         </div>
+        <div *ngFor="let menuItem of profileitems">
+            <mat-list-item>
+                <b><p matLine (click)="goToHref(menuItem.route)">{{menuItem.displayName}}</p></b>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let childItem of menuItem.children">
+                <mat-card-subtitle style="padding-left: 20px;" matLine (click)="goToHref(childItem.route)">{{childItem.displayName}}</mat-card-subtitle>
+                <mat-divider style="background: rgb(245, 245, 253);"></mat-divider>
+            </mat-list-item>
+            </div>
     </mat-list>
 </mat-drawer>
 </mat-drawer-container>

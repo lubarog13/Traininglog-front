@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faCalendarAlt, faBookOpen, faChartPie, faUserCircle, faBars } from '@fortawesome/free-solid-svg-icons';
-import {MENUITEMS} from './shared/nav_items';
+import {MENUITEMS, PROFILEITMS} from './shared/nav_items';
 import { flyInOut, slide, expand } from './animations/app.animations';
 import { MediaObserver } from '@angular/flex-layout';
 import { Observable, of } from 'rxjs';
@@ -20,11 +20,13 @@ type PaneType = 'left' | 'right';
 export class AppComponent {
   @Input() activePane: PaneType = 'right';
   menuitems = MENUITEMS
+  profileitems = PROFILEITMS
   title  = 'training-log'
   faBars=faBars
   faUserCircle = faUserCircle
   isCollapsed = false
   isMenuOpened=false
+  timedOutCloser
   auth = of(localStorage.getItem("id"))
   static showMenu = false
   public static isCollapsed: boolean = false
@@ -70,5 +72,27 @@ export class AppComponent {
 
   goToHref(href: string) {
     window.location.href = href
+  }
+
+  mouseEnter(trigger) {
+    if (this.timedOutCloser) {
+      clearTimeout(this.timedOutCloser);
+    }
+    this.isMenuOpened=true
+    trigger.openMenu();
+  }
+
+  mouseLeave(trigger) {
+    this.timedOutCloser = setTimeout(() => {
+      console.log(this.isMenuOpened)
+      this.mouseOnMenu(trigger)
+    }, 1000);
+  }
+
+  mouseOnMenu(trigger) {
+    if (this.isMenuOpened) {
+      this.timedOutCloser = setTimeout(() => {this.mouseOnMenu(trigger)}, 1000)
+    }
+    else trigger.closeMenu();
   }
 }
