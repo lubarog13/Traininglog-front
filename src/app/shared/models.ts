@@ -38,6 +38,22 @@ export interface Message {
     send_date: Date
 }
 
+export interface SimpleMessage {
+    id: number;
+    heding: string;
+    message?: string;
+    send_time: string;
+    sender?: number,
+    recipient?: number
+}
+
+export class UserSearch {
+    constructor(username: string) {
+        this.username=username
+    }
+    username: string
+}
+
 export interface Coach {
     id: number;
     post: string;

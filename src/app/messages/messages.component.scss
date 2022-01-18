@@ -44,3 +44,12 @@
     color: #b9b7b7;
     background-color: white;
 }
+
+#add-message {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    z-index: 1000;
+}

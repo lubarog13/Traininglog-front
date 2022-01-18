@@ -14,6 +14,7 @@ import { Message } from '../shared/models';
 export class MessagesComponent implements OnInit, AfterViewInit {
   incoming = true
   active = new FormControl(0)
+  openMessageForm = false
   messages: Message[]
   @ViewChild('gridList') gridList: MatGridList
   @ViewChild('gridTooList') gridTooList: MatGridList

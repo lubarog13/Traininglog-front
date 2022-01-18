@@ -1,0 +1,35 @@
+<div fxLayout="column">
+    <mat-card style="width: 300px; height: 420px;">
+        <mat-card-header>
+            <mat-card-title style="width: 100%;">
+                Создание сообщения
+            </mat-card-title>
+            <div style="width: 20%; display: flex; justify-content: end;"><button mat-icon-button (click)="windowClosed.emit('closed')"><mat-icon>cancel</mat-icon></button></div>
+        </mat-card-header>
+        <mat-card-content>
+            <form novalidate [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+                <p class="full-width">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Получатель</mat-label>
+                        <input matInput formControlName="username" type="text" required placeholder="email , ФИО или логин">
+                        <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+                    </mat-form-field>
+                </p>
+                <div class="full-width" style="text-align: end; color: red;" *ngIf="userErr">{{userErr}}</div>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Заголовок</mat-label>
+                        <input matInput formControlName="heding" type="text" required>
+                        <mat-error *ngIf="formErrors.heding">{{formErrors.heding}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Текст сообщения</mat-label>
+                        <textarea matInput formControlName="message" type="text" rows="5" ></textarea>
+                        <mat-error *ngIf="formErrors.message">{{formErrors.message}}</mat-error>
+                    </mat-form-field>
+                <div class="submit-block">
+                    <button type="submit" class="submit-button" mat-button [disabled]="messageForm.invalid">Отправить</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

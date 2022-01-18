@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Message } from '../shared/models';
-import { MessageResponse } from '../shared/responses';
+import { Message, SimpleMessage, UserSearch } from '../shared/models';
+import { MessageResponse, UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
@@ -32,6 +32,28 @@ export class MessagesService {
       };
 
       return this.http.get<MessageResponse>(baseURL + "user/" + localStorage.getItem("id") + "/messages/send/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+
+    createMessage(message: SimpleMessage): Observable<SimpleMessage> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post<SimpleMessage>(baseURL + "message/create/", message, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    searchUsers(username: UserSearch): Observable<UserResponse> {
+      console.log(username)
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post<UserResponse>(baseURL + "search/user/", username, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
 }

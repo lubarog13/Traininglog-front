@@ -58,6 +58,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { MessagesComponent } from './messages/messages.component';
 import { UserService } from './services/user.service';
 import { MessagesService } from './services/messages.service';
+import { AddMessageComponent } from './add-message/add-message.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { MessagesService } from './services/messages.service';
     ClubsComponent,
     CoachesComponent,
     AnalysisComponent,
-    MessagesComponent
+    MessagesComponent,
+    AddMessageComponent
   ],
   imports: [
     BrowserModule,
