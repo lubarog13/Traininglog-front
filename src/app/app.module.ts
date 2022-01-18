@@ -56,6 +56,8 @@ import {
 	IgxSliderModule} from "igniteui-angular";
 import { AnalysisComponent } from './analysis/analysis.component';
 import { MessagesComponent } from './messages/messages.component';
+import { UserService } from './services/user.service';
+import { MessagesService } from './services/messages.service';
 
 
 @NgModule({
@@ -118,6 +120,8 @@ import { MessagesComponent } from './messages/messages.component';
     PresenceService,
     AuthService,
     SharedService,
+    UserService,
+    MessagesService,
     {provide: 'BaseURL', useValue: baseURL},
   ],
   bootstrap: [AppComponent]

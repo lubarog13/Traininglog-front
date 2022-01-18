@@ -5,6 +5,7 @@ import { BuildingsComponent } from "../buildings/buildings.component";
 import { ClubsComponent } from "../clubs/clubs.component";
 import { CoachesComponent } from "../coaches/coaches.component";
 import { HallsComponent } from "../halls/halls.component";
+import { MessagesComponent } from "../messages/messages.component";
 import { RegistrationComponent } from "../registration/registration.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'info/clubs', component: ClubsComponent},
     { path: 'info/coaches', component: CoachesComponent},
     {path: 'analysis', component: AnalysisComponent},
+    {path: 'profile/messages', component: MessagesComponent},
     { path: '', redirectTo: '/schedule', pathMatch: 'full' }
 ];

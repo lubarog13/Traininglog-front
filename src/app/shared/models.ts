@@ -35,6 +35,7 @@ export interface Message {
     send_time: string;
     sender: User,
     recipient: User
+    send_date: Date
 }
 
 export interface Coach {
