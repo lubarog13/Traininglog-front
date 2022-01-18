@@ -21,7 +21,7 @@ fxLayout="column"
                             <p class="message-text">{{message.message}}</p>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button mat-icon-button><mat-icon>reply</mat-icon></button>
+                            <button mat-icon-button (click)="replyMessage(message)"><mat-icon>reply</mat-icon></button>
                             <button mat-icon-button><mat-icon>delete</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
@@ -49,7 +49,7 @@ fxLayout="column"
                             <p class="message-text">{{message.message}}</p>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button mat-icon-button [disabled]="isDisabled(message.send_date)"><mat-icon>border_color</mat-icon></button>
+                            <button mat-icon-button [disabled]="isDisabled(message.send_date)" (click)="editMessage(message)"><mat-icon>border_color</mat-icon></button>
                             <button mat-icon-button [disabled]="isDisabled(message.send_date)"><mat-icon>delete</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
@@ -58,6 +58,12 @@ fxLayout="column"
         </div>
     </mat-tab>
 </mat-tab-group>
-<app-add-message id="add-message" *ngIf="openMessageForm" (messageSent)="getMessages()" (windowClosed)="openMessageForm=false"></app-add-message>
-<button mat-fab id="add-button" (click)="openMessageForm=!openMessageForm"><mat-icon>add</mat-icon></button>
+<app-add-message id="add-message" *ngIf="openMessageForm || openEditForm || openReplyForm" 
+[isEdit]="openEditForm"
+[reply]="openReplyForm"
+[message]="editedMessage"
+(messageSent)="reload()" 
+(windowClosed)="openMessageForm=false; openEditForm=false; openReplyForm = false"
+></app-add-message>
+<button mat-fab id="add-button" (click)=" openMessageForm= openEditForm || openReplyForm ?false: !openMessageForm; openEditForm=false; openReplyForm = false"><mat-icon *ngIf="!openEditForm && !openReplyForm">add</mat-icon><mat-icon *ngIf="openEditForm || openReplyForm">edit</mat-icon></button>
 </div>

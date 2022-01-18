@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessagesService } from '../services/messages.service';
 import { Message, SimpleMessage, UserSearch } from '../shared/models';
@@ -11,6 +11,9 @@ import { Message, SimpleMessage, UserSearch } from '../shared/models';
 export class AddMessageComponent implements OnInit {
 
   messageForm: FormGroup
+  @Input() isEdit = false;
+  @Input() reply= false
+  @Input('message') messageEdit: Message
   @Output() messageSent = new EventEmitter()
   @Output() windowClosed = new EventEmitter()
   userErr: string
@@ -48,6 +51,12 @@ export class AddMessageComponent implements OnInit {
       })
       this.messageForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
+      if(this.isEdit) {
+        this.messageForm.setValue({"username": this.messageEdit.recipient.username, "heding": this.messageEdit.heding, "message": this.messageEdit.message})
+      }
+      if (this.reply) {
+        this.messageForm.setValue({"username": this.messageEdit.sender.username, "heding": this.messageEdit.heding, "message": ""})
+      }
 
     this.onValueChanged(); // (re)set validation messages now
   }
@@ -76,6 +85,7 @@ export class AddMessageComponent implements OnInit {
     var message: SimpleMessage = this.messageForm.value
     message.send_time = new Date().toISOString()
     console.log(this.messageForm.value['username'])
+    if(!this.isEdit && !this.reply){
     this.messageService.searchUsers(new UserSearch(this.messageForm.value['username'])).subscribe(response => {
         if(response.Users.length>1) {
           this.userErr = "Пользователей с таким именем больше 1"
@@ -88,6 +98,17 @@ export class AddMessageComponent implements OnInit {
     }, err => {
         this.userErr = "Пользователь с таким именем не найден"
     })
+  }
+  else if (this.isEdit){
+    message.sender = Number.parseInt(localStorage.getItem("id"))
+          message.recipient = this.messageEdit.recipient.id
+          message.id = this.messageEdit.id
+    this.messageService.editMessage(message).subscribe(response=> { this.messageSent.emit('reload')}, err => this.userErr = "Ошибка редактирования сообщения")
+  } else {
+    message.sender = Number.parseInt(localStorage.getItem("id"))
+      message.recipient = this.messageEdit.sender.id
+      this.messageService.createMessage(message).subscribe(response=> { this.messageSent.emit('reload')}, err => this.userErr = "Ошибка создания сообщения")
+  }
   }
 
 }

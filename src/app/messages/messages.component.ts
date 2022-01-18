@@ -15,6 +15,9 @@ export class MessagesComponent implements OnInit, AfterViewInit {
   incoming = true
   active = new FormControl(0)
   openMessageForm = false
+  openReplyForm = false
+  editedMessage: Message
+  openEditForm = false
   messages: Message[]
   @ViewChild('gridList') gridList: MatGridList
   @ViewChild('gridTooList') gridTooList: MatGridList
@@ -79,6 +82,27 @@ export class MessagesComponent implements OnInit, AfterViewInit {
 
   isDisabled(date: Date): boolean {
     return Math.abs(new Date().getTime() - date.getTime()) / 36e5 >24
+  }
+
+  editMessage(message: Message) {
+    this.editedMessage = message
+    this.openMessageForm = false
+    this.openReplyForm = false
+    this.openEditForm = true
+  }
+
+  replyMessage(message: Message) { 
+    this.editedMessage = message
+    this.openEditForm = false
+    this.openMessageForm = false
+    this.openReplyForm = true
+  }
+
+  reload() {
+    this.openEditForm = false
+    this.openMessageForm = false
+    this.openReplyForm = false
+    this.getMessages()
   }
 
 }

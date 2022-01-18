@@ -56,4 +56,15 @@ export class MessagesService {
       return this.http.post<UserResponse>(baseURL + "search/user/", username, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
+
+    editMessage(message: SimpleMessage): Observable<SimpleMessage> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.put<SimpleMessage>(baseURL + "message/" + message.id + "/update/", message, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    } 
+
 }

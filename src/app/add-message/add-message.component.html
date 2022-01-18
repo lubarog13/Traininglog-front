@@ -11,7 +11,7 @@
                 <p class="full-width">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Получатель</mat-label>
-                        <input matInput formControlName="username" type="text" required placeholder="email , ФИО или логин">
+                        <input matInput formControlName="username" type="text" required placeholder="email , ФИО или логин" [readonly]="isEdit && !reply">
                         <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
                     </mat-form-field>
                 </p>
