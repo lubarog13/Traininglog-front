@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatGridList } from '@angular/material/grid-list';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnswerDialogComponent } from '../answer-dialog/answer-dialog.component';
 import { MessagesService } from '../services/messages.service';
 import { Message } from '../shared/models';
 
@@ -29,7 +31,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
     xs: 1
   } 
 
-  constructor(private route: ActivatedRoute, private router: Router, private messageService: MessagesService, private mediaObserver: MediaObserver) { }
+  constructor(private route: ActivatedRoute, private router: Router, private messageService: MessagesService, private mediaObserver: MediaObserver, public dialog: MatDialog) { }
   ngAfterViewInit(): void {
       this.mediaObserver.asObservable().subscribe((change) => {
         console.log(change)
@@ -103,6 +105,18 @@ export class MessagesComponent implements OnInit, AfterViewInit {
     this.openMessageForm = false
     this.openReplyForm = false
     this.getMessages()
+  }
+
+  deleteMessage(id: number) {
+   this.messageService.deleteMessage(id).subscribe(response => this.reload())
+   }
+
+  openDialog(id: number) {
+    let dialogRef = this.dialog.open(AnswerDialogComponent, {data: { title: "Подтверждение удаления", message: "Вы действительно хотите удалить данное сообщение? Восстановление не является возможным"}})
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if(result==true) this.deleteMessage(id)
+    });
   }
 
 }

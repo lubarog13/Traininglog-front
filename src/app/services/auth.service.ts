@@ -41,4 +41,14 @@ export class AuthService {
       return this.http.post(baseURL + 'auth/users/', user, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
+    editMe(user: User): Observable<User> {
+      const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+      return this.http.patch<User>(baseURL + "auth/users/me/", user, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
 }

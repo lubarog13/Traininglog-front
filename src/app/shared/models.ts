@@ -16,6 +16,7 @@ export class User {
     first_name: string;
     last_name: string;
     second_name?: string;
+    email: string;
     date_birth: string;
     sex: string;
     password?: string;

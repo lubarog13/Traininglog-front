@@ -4,6 +4,7 @@ import { AuthorisationComponent } from "../authorisation/authorisation.component
 import { BuildingsComponent } from "../buildings/buildings.component";
 import { ClubsComponent } from "../clubs/clubs.component";
 import { CoachesComponent } from "../coaches/coaches.component";
+import { EditProfileComponent } from "../edit-profile/edit-profile.component";
 import { HallsComponent } from "../halls/halls.component";
 import { MessagesComponent } from "../messages/messages.component";
 import { RegistrationComponent } from "../registration/registration.component";
@@ -19,5 +20,6 @@ export const routes: Routes = [
     { path: 'info/coaches', component: CoachesComponent},
     {path: 'analysis', component: AnalysisComponent},
     {path: 'profile/messages', component: MessagesComponent},
+    {path: 'profile/edit', component: EditProfileComponent},
     { path: '', redirectTo: '/schedule', pathMatch: 'full' }
 ];

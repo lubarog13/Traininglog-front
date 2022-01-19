@@ -21,6 +21,8 @@ export class AppComponent {
   @Input() activePane: PaneType = 'right';
   menuitems = MENUITEMS
   profileitems = PROFILEITMS
+  name: string
+  surname: string
   title  = 'training-log'
   faBars=faBars
   faUserCircle = faUserCircle
@@ -38,6 +40,8 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.mediaObserver.asObservable().subscribe(changes => this.isCollapsed=(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
+    this.name = localStorage.getItem("first_name")
+    this.surname = localStorage.getItem("last_name")
     AppComponent.showMenu = localStorage.getItem("id")!=undefined
     if(!AppComponent.showMenu) window.location.href="auth"
     console.log(this.isCollapsed)

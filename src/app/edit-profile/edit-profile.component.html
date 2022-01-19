@@ -1,0 +1,63 @@
+<div class="container main-div imaged"
+    fxLayout="column">
+    <mat-card [@expand]>
+        <mat-card-header align="center">
+            <mat-card-title style="font-size: 24px;">Изменение профиля</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form fxFlex novalidate [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+                <p>
+                    <mat-form-field class="half-width" appearance="standard">
+                        <mat-label>Имя</mat-label>
+                      <input matInput formControlName="first_name"  type="text" required>
+                      <mat-error *ngIf="formErrors.first_name">{{formErrors.first_name}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width" appearance="standard">
+                        <mat-label>Фамилия</mat-label>
+                      <input matInput formControlName="last_name" type="text" required>
+                      <mat-error *ngIf="formErrors.last_name">{{formErrors.last_name}}</mat-error>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field class="half-width" appearance="standard">
+                        <mat-label>Отчество</mat-label>
+                      <input matInput formControlName="second_name" placeholder="Отчество" type="text">
+                      <mat-error *ngIf="formErrors.second_name">{{formErrors.second_name}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width" appearance="standard">
+                        <mat-label>Email</mat-label>
+                      <input matInput formControlName="email"  type="text" required>
+                      <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                      <mat-form-field class="half-width" appearance="standard">
+                        <mat-label>Дата рождения</mat-label>
+                        <input matInput [matDatepicker]="picker"  [max]="maxDate" formControlName="date_birth">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="formErrors.date_birth">{{formErrors.date_birth}}</mat-error>
+                      </mat-form-field>
+                      <mat-form-field appearance="standard" class="half-width">
+                        <mat-label>Пол</mat-label>
+                        <mat-select formControlName="sex" required="true">
+                          <mat-option value="М">Мужской</mat-option>
+                          <mat-option value="Ж">Женский</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </p>
+                  <div fxLayout="row">
+                      <div fxLayout="column" class="half-width" style="display: inline-block;">
+                        <img mat-card-xl-image src="https://st.depositphotos.com/1386392/1349/v/450/depositphotos_13490275-stock-illustration-basketball-player-vector-illustration.jpg">
+                      </div>
+                      <div fxLayout="column" class="half-width">
+                    <p *ngIf="errMsg" style="color: red;">{{errMsg}}</p>
+                    <span style="width: 100%;">
+                        <button class="submit-button" style="font-size: 13px;" mat-button type="submit" [disabled]="editUserForm.invalid">Изменить</button>
+                    </span>
+                      </div>
+                </div>
+                </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -67,4 +67,14 @@ export class MessagesService {
       return this.http.put<SimpleMessage>(baseURL + "message/" + message.id + "/update/", message, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     } 
 
+
+    deleteMessage(id: number) : Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token")
+        })
+      };
+      return this.http.delete(baseURL + "message/" + id + "/delete/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
 }
