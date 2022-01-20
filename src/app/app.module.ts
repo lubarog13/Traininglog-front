@@ -61,6 +61,7 @@ import { MessagesService } from './services/messages.service';
 import { AddMessageComponent } from './add-message/add-message.component';
 import { AnswerDialogComponent } from './answer-dialog/answer-dialog.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     MessagesComponent,
     AddMessageComponent,
     AnswerDialogComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

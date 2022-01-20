@@ -29,11 +29,7 @@ mat-card-content {
 }
 
 .imaged {
-    background: center url("https://i.pinimg.com/564x/d3/3d/00/d33d00a43c8df4121028c3b8c7f34d07.jpg") no-repeat;
-    -moz-background-size: 100%; /* Firefox 3.6+ */
-    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-    -o-background-size: 100%; /* Opera 9.6+ */
-    background-size: 100%; /* Современные браузеры */
+    background: url("https://image.freepik.com/free-photo/natural-green-grass-background-with-vintage-filter_35652-841.jpg") ;
 }
 
 .mat-card-xl-image {
@@ -42,13 +38,6 @@ mat-card-content {
 }
 
 @media (min-width: 768px) {
-    .imaged {
-        background: center url("https://i.pinimg.com/564x/d3/3d/00/d33d00a43c8df4121028c3b8c7f34d07.jpg") no-repeat;
-        -moz-background-size: 100%; /* Firefox 3.6+ */
-        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-        -o-background-size: 100%; /* Opera 9.6+ */
-        background-size: 100%; /* Современные браузеры */
-    }
     .mat-card-xl-image {
         width: 240px;
         height: 240px;
@@ -56,13 +45,6 @@ mat-card-content {
 }
 
 @media (min-width: 992px) {
-    .imaged {
-        background: center url("https://oskol-kray.ru/media/filer_public_thumbnails/filer_public/25/08/2508bf45-92b9-4291-8b73-1aa08ad7f52d/basketbol.jpeg__750x415_q90_crop-True_subsampling-2_upscale.jpeg") no-repeat;
-        -moz-background-size: 100%; /* Firefox 3.6+ */
-        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-        -o-background-size: 100%; /* Opera 9.6+ */
-        background-size: 100%; /* Современные браузеры */
-    }
     .mat-card-xl-image {
         width: 240px;
         height: 240px;

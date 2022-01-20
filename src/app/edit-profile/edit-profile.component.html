@@ -48,10 +48,10 @@
                   </p>
                   <div fxLayout="row">
                       <div fxLayout="column" class="half-width" style="display: inline-block;">
-                        <img mat-card-xl-image src="https://st.depositphotos.com/1386392/1349/v/450/depositphotos_13490275-stock-illustration-basketball-player-vector-illustration.jpg">
+                        <img mat-card-xl-image src="https://st2.depositphotos.com/4230085/6186/v/450/depositphotos_61861881-stock-illustration-volleyball-ball.jpg">
                       </div>
                       <div fxLayout="column" class="half-width">
-                    <p *ngIf="errMsg" style="color: red;">{{errMsg}}</p>
+                    <p *ngIf="errMsg" [style.color]="errMsg==='Успешно обновлено'? 'blue': 'red'">{{errMsg}}</p>
                     <span style="width: 100%;">
                         <button class="submit-button" style="font-size: 13px;" mat-button type="submit" [disabled]="editUserForm.invalid">Изменить</button>
                     </span>

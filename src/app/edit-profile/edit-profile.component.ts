@@ -99,6 +99,7 @@ export class EditProfileComponent implements OnInit {
       console.log(response)
       this.errMsg = undefined
       this.reload()
+      this.errMsg = "Успешно обновлено"
     }, err => {
       console.log(err)
       this.errMsg = "Ошибка обновления"
