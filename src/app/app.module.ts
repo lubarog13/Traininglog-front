@@ -46,6 +46,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import { CoachesComponent } from './coaches/coaches.component';
+import {YouTubePlayerModule} from '@angular/youtube-player'
 import { 
 	IgxPieChartModule,
 	IgxLegendModule,
@@ -62,6 +63,7 @@ import { AddMessageComponent } from './add-message/add-message.component';
 import { AnswerDialogComponent } from './answer-dialog/answer-dialog.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FooterComponent } from './footer/footer.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 
 @NgModule({
@@ -81,7 +83,8 @@ import { FooterComponent } from './footer/footer.component';
     AddMessageComponent,
     AnswerDialogComponent,
     EditProfileComponent,
-    FooterComponent
+    FooterComponent,
+    AboutusComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,8 @@ import { FooterComponent } from './footer/footer.component';
 	IgxItemLegendModule,
   IgxCategoryChartModule,
   IgxCarouselModule,
-	IgxSliderModule
+	IgxSliderModule,
+  YouTubePlayerModule
   ],
   providers: [
     WorkoutService,

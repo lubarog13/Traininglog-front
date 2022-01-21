@@ -1,4 +1,5 @@
 import { Route, Routes } from "@angular/router";
+import { AboutusComponent } from "../aboutus/aboutus.component";
 import { AnalysisComponent } from "../analysis/analysis.component";
 import { AuthorisationComponent } from "../authorisation/authorisation.component";
 import { BuildingsComponent } from "../buildings/buildings.component";
@@ -21,5 +22,6 @@ export const routes: Routes = [
     {path: 'analysis', component: AnalysisComponent},
     {path: 'profile/messages', component: MessagesComponent},
     {path: 'profile/edit', component: EditProfileComponent},
+    {path: "aboutus", component: AboutusComponent},
     { path: '', redirectTo: '/schedule', pathMatch: 'full' }
 ];

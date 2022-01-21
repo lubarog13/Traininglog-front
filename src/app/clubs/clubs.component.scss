@@ -1,7 +1,8 @@
 @import '/src/styles.scss';
 .container {
     margin: 0;
-    height: 93vh;
+    min-height: 93vh;
+    padding-bottom: 30px;
     background: url(https://phonoteka.org/uploads/posts/2021-04/1618372516_21-phonoteka_org-p-abstraktnii-besshovnii-fon-22.jpg);
 }
 
