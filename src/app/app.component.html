@@ -26,6 +26,7 @@
                     <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
                         <button mat-menu-item disabled="true">Здравствуйте, {{name + " " + surname}}</button>
                     <button mat-menu-item *ngFor="let item of profileitems" (click)="goToHref(item.route)"><fa-icon [icon]="item.iconName" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">{{item.displayName}}</span></button>
+                    <button mat-menu-item  (click)="openLogoutDialog()"><fa-icon [icon]="faSignOutAlt" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">"Выход"</span></button>
                     </div>
                 </mat-menu>
             <button mat-icon-button *ngIf="isCollapsed" (click)="drawer.toggle()"><fa-icon [icon]="faBars" class="fa fa-2x endEl"></fa-icon></button>
@@ -56,6 +57,10 @@
                 <mat-divider style="background: rgb(245, 245, 253);"></mat-divider>
             </mat-list-item>
             </div>
+        <mat-list-item>
+            <b><p matLine (click)="openLogoutDialog()">Выход</p> </b>
+        </mat-list-item>    
+        <mat-divider></mat-divider>
     </mat-list>
 </mat-drawer>
 </mat-drawer-container>

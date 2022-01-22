@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
 import { Club, SignUp } from '../shared/models';
-import { SignUpResponse } from '../shared/responses';
+import { ClubsResponse, SignUpResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
@@ -39,5 +39,14 @@ export class ClubsService {
         })
       };
       return this.http.delete(baseURL + "signup/" + signup_id + "/delete/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    getClubsForCoach(coach_id: number): Observable<ClubsResponse> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token")
+        })
+      };
+      return this.http.get<ClubsResponse>(baseURL + "coach/" + coach_id + "/clubs/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 }

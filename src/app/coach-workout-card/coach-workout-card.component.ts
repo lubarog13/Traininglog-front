@@ -1,17 +1,12 @@
-<div class="container"
-     fxLayout="column">
-     <div fxFlex>
-<div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
-    <div fxFlex.gt-md="50" align="center" id="calendar_schedule">
-        <mat-card appMaterialElevation [@expand] style="width: 50%; height: 60%; margin-top: 15%; margin-bottom: 15%;">
-            <mat-calendar style="color: black;" [dateFilter]="myFilter" (selectedChange)="dateClick($event)"></mat-calendar>
-          </mat-card>
-    </div>
-    <div fxFlex="50" id="schedule" >
-            <h2 style="text-align: center; color: white;" class="mat-elevation-z3">{{headerText}}</h2>
-            <mat-grid-list #grid rowHeight="400px" >
-                <mat-grid-tile *ngFor="let workout of workouts">
-                    <mat-card appMaterialElevation [@expand] *ngIf="!is_coach">
+import { Component, Input, OnInit } from '@angular/core';
+import { SimplePresence, Workout } from '../shared/models';
+import { faEdit, faWindowClose, faQuestionCircle, faThumbsUp, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { PresenceService } from '../services/presence.service';
+
+@Component({
+  selector: 'app-coach-workout-card',
+  template: `
+    <mat-card appMaterialElevation [@expand]>
                         <mat-card-header>
                         <mat-card-title>
                             {{workout.club.name}}
@@ -34,7 +29,7 @@
                                  : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 
                                  + workout.club.coach.user.second_name.charAt(0)+ "."}}</span></div>
                              <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>
-                             <div *ngIf="(whoDontKnow!=undefined || whoGoes!=undefined || whoNotGoes!=undefined) && currentWorkoutId==workout.id">
+                             <div *ngIf="(whoDontKnow!=undefined || whoGoes!=undefined || whoNotGoes!=undefined)">
                             <mat-divider></mat-divider>
                              <div fxLayout="row" align="center" class="whoGoes" style="width: 100%;">
                                  <div fxFlex="33">
@@ -57,27 +52,15 @@
                                 </div>
                              </div>
                              </div>
-                             <div *ngIf="workout.is_on==true" fxLayout="row" align="center" style="background: #2FFF00;" class="info">
-                                <fa-icon [icon]="faThumbsUp" style="color: black; margin-right: 10px;" ></fa-icon>
-                                 Вы идете на тренировку
-                             </div>
-                             <div *ngIf="workout.is_on==false" fxLayout="row" style="background: #d14747;color: white;" class="info">
-                                <fa-icon [icon]="faTimesCircle" style="margin-right: 10px;" ></fa-icon>
-                                Вы не идете на тренировку
-                             </div>
-                                 <form *ngIf="sendReason.has(workout.id) && sendReason.get(workout.id)==true" novalidate [formGroup]="reasonForm" #reasonform="ngForm" (ngSubmit)="onSubmit(workout.id)">
-                                    <textarea style="width: 100%; margin-top: 20px;" rows="5" matInput formControlName="reason" placeholder="Введите причину отсутствия" type="text" required></textarea>
-                                    <button type="submit" mat-button class="submit-button">Сохранить</button>
-                                 </form>
                         </mat-card-content>
                         <mat-card-footer>
-                            <button mat-button class="button-ok" (click)="updatePresence(workout.id, true, null)">
-                                <fa-icon [icon]="faThumbsUp" style="color: white;" ></fa-icon>
-                                Я иду
+                            <button mat-button class="button-ok" style="font-size: 11px">
+                                <fa-icon [icon]="faEdit" style="color: blue;" ></fa-icon>
+                              Редактировать
                             </button>
-                            <button mat-button class="button-no" (click)="updatePresence(workout.id, false, null)">
-                                <fa-icon [icon]="faTimesCircle"></fa-icon>
-                                Я не иду
+                            <button mat-button class="button-no">
+                                <fa-icon [icon]="faWindowClose"></fa-icon>
+                                Отменить
                             </button>
                             <button mat-button class="button-who-goes"  (click)="getPresences(workout.id)">
                                 <fa-icon [icon]="faQuestionCircle"></fa-icon>
@@ -85,15 +68,38 @@
                             </button>
                         </mat-card-footer>
                     </mat-card>
-                    <app-coach-workout-card *ngIf="is_coach"
-                        [workout]="workout"
-                    >
-                    </app-coach-workout-card>
-                </mat-grid-tile>
-            </mat-grid-list>
-            </div>
-</div>
-</div>
-<app-add-workout *ngIf="openAddForm" (windowClosed)="openAddForm=false" id="add-workout"></app-add-workout>
-<button mat-fab id="add-button" (click)="openAddForm=true"><mat-icon>add</mat-icon></button>
-</div>
+  `,
+  styleUrls: ['../schedule/schedule.component.scss'],
+})
+export class CoachWorkoutCardComponent implements OnInit {
+
+  @Input("workout") workout: Workout
+  whoGoes: SimplePresence[]
+  whoNotGoes: SimplePresence[]
+  whoDontKnow: SimplePresence[]
+  faEdit = faEdit
+  faWindowClose = faWindowClose
+  faQuestionCircle = faQuestionCircle
+  faThumbsUp = faThumbsUp
+  faTimesCircle = faTimesCircle
+
+  constructor(private presenceService: PresenceService) { }
+
+  ngOnInit(): void {
+  }
+
+  getPresences(id: number): void {
+    if(this.whoGoes==undefined || this.whoNotGoes==undefined || this.whoDontKnow==undefined){
+      this.presenceService.getPresencesForWorkout(id).subscribe((response)=> {
+        this.whoGoes = response.Presences.filter((presence) => presence.is_attend==true)
+        this.whoNotGoes = response.Presences.filter((presence) => presence.is_attend==false)
+        this.whoDontKnow = response.Presences.filter((presence) => presence.is_attend==null)
+      })
+    } else {
+      this.whoGoes=undefined
+      this.whoNotGoes=undefined
+      this.whoDontKnow=undefined
+    }
+  }
+
+}

@@ -72,10 +72,5 @@ export const PROFILEITMS: NavItem[] = [
         displayName: "Редактировать профиль",
         iconName: faUserEdit,
         route: "/profile/edit/"
-    },
-    {
-        displayName: "Выход",
-        iconName: faSignOutAlt,
-        route: "/profile/logout/"
     }
 ]

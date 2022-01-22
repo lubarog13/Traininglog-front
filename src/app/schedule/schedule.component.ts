@@ -33,11 +33,13 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   faThumbsUp = faThumbsUp
   faTimesCircle = faTimesCircle
   faQuestionCircle = faQuestionCircle
+  openAddForm = false
   whoGoes: SimplePresence[]
   whoNotGoes: SimplePresence[]
   whoDontKnow: SimplePresence[]
   reasonForm: FormGroup
   sendReason: Map<number,boolean> = new Map<number,boolean>()
+  is_coach: boolean
   headerText = "Тренировки на неделе"
   months = ["январе", "феврале", "марте", "апреле", "мае", "июне", "июле", "августе", "сентябре", "октябре", "ноябре", "декабре"]
   currentWorkoutId=0
@@ -96,9 +98,31 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
+    this.is_coach =  localStorage.getItem("is_coach")=="true"
     this.height = window.innerHeight - 500
-    console.log(this.height)
-    this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+    console.log(localStorage.getItem("coach_id"))
+
+    if (localStorage.getItem("is_coach")=="true") {
+      this.workoutService.getMonthWorkoutsForCoach(Number.parseInt(localStorage.getItem("coach_id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+        response => {
+          this.monthWorkouts=response.Workouts
+          for(let workout of this.monthWorkouts){
+            workout.start_date= new Date(workout.start_time)
+            workout.end_date = new Date(workout.end_time)
+            workout.color = this.colors[workout.type]
+          }
+          console.log(this.monthWorkouts)
+          this.myFilter = (d: Date | null): boolean => {
+            for(let workout of this.monthWorkouts) {
+              if(workout.start_date.getDate()==d.getDate()) return true
+            }
+            return false
+          };
+         }
+          , errmess =>this.errmess=errmess
+       )  
+    }
+    else this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
       response => {
         this.monthWorkouts=response.Workouts
         for(let workout of this.monthWorkouts){
@@ -116,7 +140,8 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
        }
         , errmess =>this.errmess=errmess
      )  
-       this.workoutService.getWeekWorkouts(4).subscribe(response => {
+
+       this.workoutService.getWeekWorkouts(localStorage.getItem("is_coach")=="true"? Number.parseInt(localStorage.getItem("coach_id")): Number.parseInt(localStorage.getItem("id")), localStorage.getItem("is_coach")).subscribe(response => {
          this.workouts=response.Workouts
          for(let workout of this.workouts){
            workout.start_date= new Date(workout.start_time)
@@ -180,7 +205,28 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
 
   monthSelected() {
     this.headerText = "Тренировки в " + this.months[this.currentMonth.getMonth()]
-    this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), this.currentMonth.getMonth() +1, this.currentMonth.getFullYear()).subscribe(
+    if (localStorage.getItem("is_coach")=="true") {
+      this.workoutService.getMonthWorkoutsForCoach(Number.parseInt(localStorage.getItem("coach_id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+        response => {
+          this.monthWorkouts=response.Workouts
+          for(let workout of this.monthWorkouts){
+            workout.start_date= new Date(workout.start_time)
+            workout.end_date = new Date(workout.end_time)
+            workout.color = this.colors[workout.type]
+          }
+          console.log(this.monthWorkouts)
+          this.myFilter = (d: Date | null): boolean => {
+            for(let workout of this.monthWorkouts) {
+              if(workout.start_date.getDate()==d.getDate()) return true
+            }
+            return false
+          };
+          this.workouts = this.monthWorkouts
+         }
+          , errmess =>this.errmess=errmess
+       )  
+    }
+    else this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), this.currentMonth.getMonth() +1, this.currentMonth.getFullYear()).subscribe(
       response => {
         this.monthWorkouts=response.Workouts
         for(let workout of this.monthWorkouts){

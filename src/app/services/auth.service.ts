@@ -51,4 +51,14 @@ export class AuthService {
       return this.http.patch<User>(baseURL + "auth/users/me/", user, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
+
+    logout(): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token")
+        })
+      };
+      return this.http.post(baseURL + "auth/token/logout", null, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
 }

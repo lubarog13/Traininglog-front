@@ -15,13 +15,17 @@ export class WorkoutService {
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
-    getWeekWorkouts(id: number): Observable<WorkoutResponse> {
+    getWeekWorkouts(id: number, is_coach: string): Observable<WorkoutResponse> {
       const httpOptions = {
         headers: new HttpHeaders({
           'Authorization':  'Token ' + localStorage.getItem("token")
         })
       };
-       return this.http.get<WorkoutResponse>(baseURL + "user/" + id + "/week_workouts/", httpOptions)
+      if(is_coach=="true") {
+        return this.http.get<WorkoutResponse>(baseURL + "coach/" + id + "/week_workouts/", httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+      }
+       else return this.http.get<WorkoutResponse>(baseURL + "user/" + id + "/week_workouts/", httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
@@ -32,6 +36,16 @@ export class WorkoutService {
         })
       };
       return this.http.get<WorkoutResponse>(baseURL + "user/" + user_id + "/workouts/"+ month + "/" + year +"/", httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    getMonthWorkoutsForCoach(coach_id: number, month: number, year: number): Observable<WorkoutResponse> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token")
+        })
+      };
+      return this.http.get<WorkoutResponse>(baseURL + "coach/" + coach_id + "/workouts/"+ month + "/" + year +"/", httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError))
     }
 }

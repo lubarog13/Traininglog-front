@@ -19,6 +19,7 @@ import {MatMenuModule } from '@angular/material/menu'
 import { WorkoutService } from './services/workout.service';
 import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
+import { MatRadioModule } from '@angular/material/radio'
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BuildingService } from './services/building.service';
@@ -64,6 +65,8 @@ import { AnswerDialogComponent } from './answer-dialog/answer-dialog.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { CoachWorkoutCardComponent } from './coach-workout-card/coach-workout-card.component';
+import { AddWorkoutComponent } from './add-workout/add-workout.component';
 
 
 @NgModule({
@@ -84,7 +87,9 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     AnswerDialogComponent,
     EditProfileComponent,
     FooterComponent,
-    AboutusComponent
+    AboutusComponent,
+    CoachWorkoutCardComponent,
+    AddWorkoutComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     MatGridListModule,
     FlexLayoutModule,
     MatCardModule,
+    MatRadioModule,
     FontAwesomeModule,
     MatButtonModule,
     MatSidenavModule,

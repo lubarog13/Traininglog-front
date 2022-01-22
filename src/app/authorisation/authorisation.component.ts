@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { expand } from '../animations/app.animations';
 import { AppComponent } from '../app.component';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 import { User } from '../shared/models';
 import { SharedService } from '../shared/sharedservice';
 
@@ -21,7 +22,7 @@ export class AuthorisationComponent implements OnInit {
   token: string
   hide = true
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -45,7 +46,9 @@ export class AuthorisationComponent implements OnInit {
           localStorage.setItem("first_name", response.first_name)
           localStorage.setItem("last_name", response.last_name)
           localStorage.setItem("id", response.id.toString())
+          localStorage.setItem("is_coach", response.is_coach? "true": "false")
           AppComponent.changeMenu(true)
+          if (response.is_coach==true) this.getCoachInfo()
           window.location.href="schedule"
         }, err => console.log(err))
       },
@@ -58,6 +61,13 @@ export class AuthorisationComponent implements OnInit {
         console.log(this.errMess)
       }
     )
+  }
+
+  getCoachInfo() {
+    this.userService.getCoachForUser(Number.parseInt(localStorage.getItem("id"))).subscribe(response => {
+      localStorage.setItem("coach_id", response.Coach.id.toString())
+      console.log(response.Coach.id)
+    })
   }
 
   changed() {

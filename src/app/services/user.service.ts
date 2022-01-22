@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
 import { Coach, MonthsAnalysis, TypesAnalysis } from '../shared/models';
-import { UserResponse } from '../shared/responses';
+import { CoachResponse, UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
@@ -57,5 +57,15 @@ export class UserService {
       })
     };
     return this.http.get<MonthsAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/not_attend/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+
+   getCoachForUser(id: number): Observable<CoachResponse> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<CoachResponse>(baseURL + "coach/user" + id + "/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 }
