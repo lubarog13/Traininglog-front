@@ -153,3 +153,34 @@ export interface MonthsAnalysis {
     nov: number;
     dec: number;
 }
+
+export class WorkoutForCreate {
+    start_time: string;
+    end_time: string;
+    type: string;
+    other_type?: string;
+    is_carried_out: boolean;
+    coach_replace?: number;
+    hall: number;
+    club: number;
+
+    constructor(
+        start_time: string,
+        end_time: string,
+        type: string,
+        is_carried_out: boolean,
+        hall: number,
+        club: number,
+        other_type?: string,
+        coach_replace?: number
+        ) {
+            this.start_time = start_time
+            this.end_time = end_time
+            this.type = type
+            this.other_type = other_type
+            this.is_carried_out = is_carried_out
+            this.coach_replace = coach_replace
+            this.hall = hall
+            this.club = club
+        }
+}

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SimplePresence, Workout } from '../shared/models';
 import { faEdit, faWindowClose, faQuestionCircle, faThumbsUp, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { PresenceService } from '../services/presence.service';
+import { expand } from '../animations/app.animations';
 
 @Component({
   selector: 'app-coach-workout-card',
@@ -53,7 +54,7 @@ import { PresenceService } from '../services/presence.service';
                              </div>
                              </div>
                         </mat-card-content>
-                        <mat-card-footer>
+                        <mat-card-footer style="display: flex;">
                             <button mat-button class="button-ok" style="font-size: 11px">
                                 <fa-icon [icon]="faEdit" style="color: blue;" ></fa-icon>
                               Редактировать
@@ -70,6 +71,9 @@ import { PresenceService } from '../services/presence.service';
                     </mat-card>
   `,
   styleUrls: ['../schedule/schedule.component.scss'],
+  animations: [
+    expand()
+  ]
 })
 export class CoachWorkoutCardComponent implements OnInit {
 

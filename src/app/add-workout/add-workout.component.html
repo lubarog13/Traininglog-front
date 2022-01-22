@@ -1,9 +1,9 @@
-<mat-card style="width: 300px; height: 600px;">
+<mat-card style="width: 340px;" [style.height]="workoutForm.value['type']=='другое'? '650px': '600px'">
     <mat-card-header>
         <mat-card-title style="width: 100%;">
             Создание тренировки
         </mat-card-title>
-        <div style="width: 20%; display: flex; justify-content: end;"><button mat-icon-button (click)="windowClosed.emit('closed')"><mat-icon>cancel</mat-icon></button></div>
+        <div style="width: 25%; display: flex; justify-content: end;"><button mat-icon-button (click)="windowClosed.emit('closed')"><mat-icon>cancel</mat-icon></button></div>
     </mat-card-header>
     <mat-card-content>
         <form novalidate [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
@@ -37,6 +37,11 @@
                     </mat-select>
                     <mat-error *ngIf="formErrors.type">{{formErrors.type}}</mat-error>
                 </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width" *ngIf="workoutForm.value['type']=='другое'">
+                    <mat-label>Тип</mat-label>
+                    <input matInput type="text"  formControlName="other_type">
+                    <mat-error *ngIf="formErrors.other_type">{{formErrors.other_type}}</mat-error>
+                </mat-form-field>
                 <div>
                 <mat-radio-group [(ngModel)]="selectedOption" formControlName="selectedOption">
                     <mat-radio-button [value]="1">Одна тренировка</mat-radio-button>
@@ -44,17 +49,6 @@
                 </mat-radio-group>
                 </div>
                 <div class="full-width" *ngIf="selectedOption==1" style="padding-top: 10px;">
-                    <mat-form-field appearance="outline" style="width: 100px;">
-                        <mat-label>Время начала</mat-label>
-                        <input matInput type="time" placeholder="HH:mm" formControlName="start_time">
-                        <mat-error *ngIf="formErrors.start_time">{{formErrors.start_time}}</mat-error>
-                    </mat-form-field>
-                    -
-                    <mat-form-field appearance="outline" style="width: 100px;">
-                        <mat-label>Время окончания</mat-label>
-                        <input matInput type="time" placeholder="HH:mm" formControlName="end_time">
-                        <mat-error *ngIf="formErrors.end_time">{{formErrors.end_time}}</mat-error>
-                    </mat-form-field>
                     <mat-form-field class="half-width" appearance="outline">
                         <mat-label>Дата</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="date">
@@ -73,8 +67,40 @@
                         <mat-checkbox formControlName="sb">сб</mat-checkbox>
                         <mat-checkbox formControlName="vs">вс</mat-checkbox>
                     </div>
+                    <p style="color: red;" *ngIf="checkedErr">{{checkedErr}}</p>
+                    <div fxLayout="row">
+                        <mat-form-field style="width: 40%;" appearance="outline">
+                            <mat-label>Дата начала</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="start_date">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-error *ngIf="formErrors.start_date">{{formErrors.start_date}}</mat-error>
+                          </mat-form-field>
+                          <span style="width: 10%; display: flex; justify-content: center; align-items: center; padding-top: -10px;">-</span> 
+                          <mat-form-field style="width: 40%;" appearance="outline">
+                            <mat-label>Дата конца</mat-label>
+                            <input matInput [matDatepicker]="datepicker" formControlName="end_date">
+                            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker></mat-datepicker>
+                            <mat-error *ngIf="formErrors.end_date">{{formErrors.end_date}}</mat-error>
+                          </mat-form-field>
+                    </div>
                 </div>
-            <div class="submit-block">
+                <div  fxLayout="row">
+                    <mat-form-field appearance="outline" style="width: 100px;">
+                        <mat-label>Время начала</mat-label>
+                        <input matInput type="time" placeholder="HH:mm" formControlName="start_time">
+                        <mat-error *ngIf="formErrors.start_time">{{formErrors.start_time}}</mat-error>
+                    </mat-form-field>
+                    -
+                    <mat-form-field appearance="outline" style="width: 100px;">
+                        <mat-label>Время окончания</mat-label>
+                        <input matInput type="time" placeholder="HH:mm" formControlName="end_time">
+                        <mat-error *ngIf="formErrors.end_time">{{formErrors.end_time}}</mat-error>
+                    </mat-form-field>
+                </div>
+            <mat-progress-bar *ngIf="value" mode="determinate" [value]="value"></mat-progress-bar>    
+            <div class="submit-block" style="margin-top: -20px;">
                 <button type="submit" class="submit-button" mat-button [disabled]="workoutForm.invalid">Сохранить</button>
             </div>
         </form>

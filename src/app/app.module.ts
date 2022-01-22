@@ -67,6 +67,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { CoachWorkoutCardComponent } from './coach-workout-card/coach-workout-card.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { AddWorkoutComponent } from './add-workout/add-workout.component';
   IgxCategoryChartModule,
   IgxCarouselModule,
 	IgxSliderModule,
-  YouTubePlayerModule
+  YouTubePlayerModule,
+  MatProgressBarModule
   ],
   providers: [
     WorkoutService,

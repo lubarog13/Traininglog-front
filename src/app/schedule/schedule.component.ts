@@ -206,7 +206,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   monthSelected() {
     this.headerText = "Тренировки в " + this.months[this.currentMonth.getMonth()]
     if (localStorage.getItem("is_coach")=="true") {
-      this.workoutService.getMonthWorkoutsForCoach(Number.parseInt(localStorage.getItem("coach_id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+      this.workoutService.getMonthWorkoutsForCoach(Number.parseInt(localStorage.getItem("coach_id")), this.currentMonth.getMonth() + 1, this.currentMonth.getFullYear()).subscribe(
         response => {
           this.monthWorkouts=response.Workouts
           for(let workout of this.monthWorkouts){

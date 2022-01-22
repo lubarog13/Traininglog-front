@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { Workout } from '../shared/models';
+import { Workout, WorkoutForCreate } from '../shared/models';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { WorkoutResponse } from '../shared/responses';
@@ -48,4 +48,15 @@ export class WorkoutService {
       return this.http.get<WorkoutResponse>(baseURL + "coach/" + coach_id + "/workouts/"+ month + "/" + year +"/", httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError))
     }
+
+    createWorkout(workout: WorkoutForCreate): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post(baseURL + "workout/create/", workout, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+    
 }

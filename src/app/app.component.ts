@@ -86,7 +86,6 @@ export class AppComponent {
     if (this.timedOutCloser) {
       clearTimeout(this.timedOutCloser);
     }
-    this.isMenuOpened=true
     trigger.openMenu();
   }
 

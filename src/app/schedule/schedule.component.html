@@ -94,6 +94,6 @@
             </div>
 </div>
 </div>
-<app-add-workout *ngIf="openAddForm" (windowClosed)="openAddForm=false" id="add-workout"></app-add-workout>
-<button mat-fab id="add-button" (click)="openAddForm=true"><mat-icon>add</mat-icon></button>
+<app-add-workout *ngIf="openAddForm" (windowClosed)="openAddForm=false" (created)="openAddForm=false; monthSelected()" id="add-workout"></app-add-workout>
+<button mat-fab id="add-button" (click)="openAddForm= !openAddForm"><mat-icon>add</mat-icon></button>
 </div>
