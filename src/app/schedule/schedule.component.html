@@ -87,6 +87,7 @@
                     </mat-card>
                     <app-coach-workout-card *ngIf="is_coach"
                         [workout]="workout"
+                        (edit)="editedWorkout = workout; openEditForm=true"
                     >
                     </app-coach-workout-card>
                 </mat-grid-tile>
@@ -94,6 +95,8 @@
             </div>
 </div>
 </div>
+<app-edit-workout *ngIf="openEditForm" (windowClosed)="openEditForm=false" (created)="openEditForm=false; monthSelected()" id="edit-workout" [workout]="editedWorkout"></app-edit-workout>
 <app-add-workout *ngIf="openAddForm" (windowClosed)="openAddForm=false" (created)="openAddForm=false; monthSelected()" id="add-workout"></app-add-workout>
+<button mat-fab color="primary" id="edit-button" [disabled]="!openEditForm" (click)="openEditForm=false"><mat-icon>edit</mat-icon></button>
 <button mat-fab id="add-button" (click)="openAddForm= !openAddForm"><mat-icon>add</mat-icon></button>
 </div>

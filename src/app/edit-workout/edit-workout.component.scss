@@ -1,0 +1,14 @@
+@import '/src/styles.scss';
+.full-width {
+    width: 100%;
+}
+
+.submit-block {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+.mat-checkbox {
+    margin-left: 5px;
+}

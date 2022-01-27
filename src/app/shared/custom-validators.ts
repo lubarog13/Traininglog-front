@@ -63,6 +63,17 @@ export class CustomValidators {
         }
       }
 
+      static timeValidator(control: AbstractControl) {
+        if(control.get("start_time").value!=null && control.get("end_time").value!=null){
+          const start_time: string[] = (control.get("start_time").value).split(":")
+          const end_time: string[] = (control.get("end_time").value).split(":")
+          if(Number.parseInt(start_time[0])>Number.parseInt(end_time[0]))
+            control.get("end_time").setErrors({TooBig: true})
+          else if (Number.parseInt(start_time[0])==Number.parseInt(end_time[0]) && Number.parseInt(start_time[1])>Number.parseInt(end_time[1]))
+            control.get("end_time").setErrors({TooBig: true})  
+      }
+    }
+
       static othertypeValidator(control: AbstractControl) {
         const type: string = control.get("type").value
         if(type=="другое" && (control.get("other_type").value==null || control.get("other_type").value.length==0)) {

@@ -67,7 +67,8 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { CoachWorkoutCardComponent } from './coach-workout-card/coach-workout-card.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { EditWorkoutComponent } from './edit-workout/edit-workout.component'
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     FooterComponent,
     AboutusComponent,
     CoachWorkoutCardComponent,
-    AddWorkoutComponent
+    AddWorkoutComponent,
+    EditWorkoutComponent
   ],
   imports: [
     BrowserModule,

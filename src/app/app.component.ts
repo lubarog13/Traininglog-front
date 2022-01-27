@@ -47,7 +47,7 @@ export class AppComponent {
     this.name = localStorage.getItem("first_name")
     this.surname = localStorage.getItem("last_name")
     AppComponent.showMenu = localStorage.getItem("id")!=undefined
-    if(!AppComponent.showMenu && window.location.href!=="http://localhost:4200/auth") window.location.href="auth"
+    if(!AppComponent.showMenu && (window.location.href!=="http://localhost:4200/auth" && window.location.href!=="http://localhost:4200/registration")) window.location.href="auth"
     console.log(this.isCollapsed)
   }
 

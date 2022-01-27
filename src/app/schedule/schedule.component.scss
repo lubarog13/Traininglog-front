@@ -111,14 +111,38 @@
     right: 0;
     bottom: 0;
     margin-right: 3%;
-    margin-bottom: 3%;
+    margin-bottom: 30px;
     z-index: 1000;
 }
+
+#edit-button {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 3%;
+    margin-bottom: 100px;
+    z-index: 998;
+}
+
 #add-workout {
     position: fixed;
     right: 0;
     bottom: 0;
     margin-right: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 80px;
     z-index: 1000;
+}
+
+#edit-workout {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 5%;
+    margin-bottom: 120px;
+    z-index: 1000;
+}
+
+.mat-button.mat-primary.mat-button-disabled[_ngcontent-xmk-c751], .mat-button.mat-accent.mat-button-disabled[_ngcontent-xmk-c751], .mat-button.mat-warn.mat-button-disabled[_ngcontent-xmk-c751], .mat-button.mat-button-disabled.mat-button-disabled[_ngcontent-xmk-c751], .mat-icon-button.mat-primary.mat-button-disabled[_ngcontent-xmk-c751], .mat-icon-button.mat-accent.mat-button-disabled[_ngcontent-xmk-c751], .mat-icon-button.mat-warn.mat-button-disabled[_ngcontent-xmk-c751], .mat-icon-button.mat-button-disabled.mat-button-disabled[_ngcontent-xmk-c751], .mat-stroked-button.mat-primary.mat-button-disabled[_ngcontent-xmk-c751], .mat-stroked-button.mat-accent.mat-button-disabled[_ngcontent-xmk-c751], .mat-stroked-button.mat-warn.mat-button-disabled[_ngcontent-xmk-c751], .mat-stroked-button.mat-button-disabled.mat-button-disabled[_ngcontent-xmk-c751]{
+    color: rgba(255, 255, 255, 0.75) !important;
+    background: red;
 }

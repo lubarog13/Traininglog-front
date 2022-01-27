@@ -58,5 +58,16 @@ export class WorkoutService {
       };
       return this.http.post(baseURL + "workout/create/", workout, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
+
+
+    editWorkout(workout: WorkoutForCreate, id: number): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.put(baseURL + "workout/" + id +"/update/", workout, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
     
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SimplePresence, Workout } from '../shared/models';
 import { faEdit, faWindowClose, faQuestionCircle, faThumbsUp, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { PresenceService } from '../services/presence.service';
@@ -55,11 +55,11 @@ import { expand } from '../animations/app.animations';
                              </div>
                         </mat-card-content>
                         <mat-card-footer style="display: flex;">
-                            <button mat-button class="button-ok" style="font-size: 11px">
-                                <fa-icon [icon]="faEdit" style="color: blue;" ></fa-icon>
+                            <button mat-button class="button-ok" style="font-size: 11px" (click)="edit.emit('edit')" [disabled]="canEdit">
+                                <fa-icon [icon]="faEdit" ></fa-icon>
                               Редактировать
                             </button>
-                            <button mat-button class="button-no">
+                            <button mat-button class="button-no" [disabled]="canEdit">
                                 <fa-icon [icon]="faWindowClose"></fa-icon>
                                 Отменить
                             </button>
@@ -78,9 +78,11 @@ import { expand } from '../animations/app.animations';
 export class CoachWorkoutCardComponent implements OnInit {
 
   @Input("workout") workout: Workout
+  @Output() edit = new EventEmitter()
   whoGoes: SimplePresence[]
   whoNotGoes: SimplePresence[]
   whoDontKnow: SimplePresence[]
+  canEdit = true
   faEdit = faEdit
   faWindowClose = faWindowClose
   faQuestionCircle = faQuestionCircle
@@ -90,6 +92,7 @@ export class CoachWorkoutCardComponent implements OnInit {
   constructor(private presenceService: PresenceService) { }
 
   ngOnInit(): void {
+    this.canEdit = this.workout.start_date < new Date()
   }
 
   getPresences(id: number): void {

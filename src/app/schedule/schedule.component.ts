@@ -34,6 +34,8 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   faTimesCircle = faTimesCircle
   faQuestionCircle = faQuestionCircle
   openAddForm = false
+  openEditForm = false
+  editedWorkout: Workout
   whoGoes: SimplePresence[]
   whoNotGoes: SimplePresence[]
   whoDontKnow: SimplePresence[]
