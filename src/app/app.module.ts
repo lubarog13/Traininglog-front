@@ -68,7 +68,9 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { CoachWorkoutCardComponent } from './coach-workout-card/coach-workout-card.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { EditWorkoutComponent } from './edit-workout/edit-workout.component'
+import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
+import { LogComponent } from './log/log.component';
+import {MatTableModule} from '@angular/material/table'
 
 
 @NgModule({
@@ -92,7 +94,8 @@ import { EditWorkoutComponent } from './edit-workout/edit-workout.component'
     AboutusComponent,
     CoachWorkoutCardComponent,
     AddWorkoutComponent,
-    EditWorkoutComponent
+    EditWorkoutComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
@@ -122,6 +125,7 @@ import { EditWorkoutComponent } from './edit-workout/edit-workout.component'
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTableModule,
     GoogleMapsModule,
     MatTabsModule,
     MatCheckboxModule,

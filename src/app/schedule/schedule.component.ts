@@ -64,7 +64,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   currentMonth = new Date()
   height: number
   presences: Map<number, boolean> = new Map<number,boolean>()
-
+  selected_date = new Date()
   constructor(private workoutService: WorkoutService, private presenceService: PresenceService,private mediaObserver: MediaObserver, private fb: FormBuilder, private renderer: Renderer2) 
   { 
     this.createForm()
@@ -84,6 +84,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
         Array.from(monthPrevBtn).forEach((button) => {
           this.renderer.listen(button, 'click', (event) => {
             this.currentMonth.setMonth(this.currentMonth.getMonth() -1)
+            this.selected_date = this.currentMonth
             this.monthSelected()
           });
         });
@@ -93,6 +94,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
         Array.from(monthNextBtn).forEach((button) => {
           this.renderer.listen(button, 'click', (event) => {
             this.currentMonth.setMonth(this.currentMonth.getMonth() +1)
+            this.selected_date = this.currentMonth
             this.monthSelected()
           });
         });
@@ -252,6 +254,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   dateClick(d: Date) {
     this.headerText = "Тренировки "+ d.toLocaleDateString()
     this.workouts = this.monthWorkouts.filter(workout => workout.start_date.getDate()==d.getDate())
+    this.selected_date = d
   }
 
 }

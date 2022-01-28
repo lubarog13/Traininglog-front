@@ -4,7 +4,7 @@
 <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
     <div fxFlex.gt-md="50" align="center" id="calendar_schedule">
         <mat-card appMaterialElevation [@expand] style="width: 50%; height: 60%; margin-top: 15%; margin-bottom: 15%;">
-            <mat-calendar style="color: black;" [dateFilter]="myFilter" (selectedChange)="dateClick($event)"></mat-calendar>
+            <mat-calendar style="color: black;" [dateFilter]="myFilter" (selectedChange)="dateClick($event)" [selected]="selected_date"></mat-calendar>
           </mat-card>
     </div>
     <div fxFlex="50" id="schedule" >

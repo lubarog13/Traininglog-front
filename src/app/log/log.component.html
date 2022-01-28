@@ -1,0 +1,61 @@
+<div class="container">
+    <div fxFlex>
+        <div fxLayout="row" fxLayout.lt-md="column" style="height: 100%;">
+            <div fxLayout="column" fxFlex.gt-sm="50" id="calendar">
+                <mat-card appMaterialElevation [@expand] style="width: 50%; height: 60%; margin-top: 15%; margin-bottom: 15%;">
+                    <mat-calendar style="color: black;" [dateFilter]="myFilter" (selectedChange)="dateClick($event)" [selected]="selected_date"></mat-calendar>
+                  </mat-card>
+            </div>
+            <div fxLayout="column" fxFlex="50" id="log">
+                <div *ngFor="let workout of day_workouts" class="workout">
+                    <h3>{{workout.club.group}}</h3>
+                    <div fxLayout="row" class="table-box">
+                    <table mat-table [dataSource]="getPresencesByWorkoutId(workout.id)" class="mat-elevation-z8">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Занимающийся</th>
+                            <td mat-cell *matCellDef="let presence" style="padding-right: 10px;"> {{presence.user.last_name + " " + presence.user.first_name + " " + presence.user.second_name}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="is_attend">
+                            <th mat-header-cell *matHeaderCellDef>Присутствие</th>
+                            <td mat-cell *matCellDef="let presence" (click)="presence.is_attend=true; updatePresence(presence)"> <div class="centured"><i class="fa fa-check" style="color: green;" *ngIf="presence.is_attend==true"></i>
+                    
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="not_attend">
+                            <th mat-header-cell *matHeaderCellDef style="padding-left: 10px; padding-right: 10px;">Отсутствие</th>
+                            <td mat-cell *matCellDef="let presence" (click)="presence.is_attend=false; updatePresence(presence)"> <div class="centured">
+                                <i class="fa fa-check fa-lg" style="color: red;" *ngIf="presence.is_attend==false"></i>
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="delay">
+                            <th mat-header-cell *matHeaderCellDef style="padding-left: 10px; padding-right: 10px;">Опоздание</th>
+                            <td mat-cell *matCellDef="let presence" (click)="presence.delay=!presence.delay; updatePresence(presence)"> <div class="centured">
+                                <i class="fa fa-check fa-lg" style="color: red;" *ngIf="presence.delay==true"></i>
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="early_ret">
+                            <th mat-header-cell *matHeaderCellDef style="padding-left: 10px; padding-right: 10px;">Ранний уход</th>
+                            <td mat-cell *matCellDef="let presence" (click)="presence.early_ret=!presence.early_ret; updatePresence(presence)"> <div class="centured">
+                                <i class="fa fa-check fa-lg" style="color: red;" *ngIf="presence.early_ret==true"></i>
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="reason">
+                            <th mat-header-cell *matHeaderCellDef style="padding-left: 10px; padding-right: 10px;">Причина</th>
+                            <td mat-cell *matCellDef="let presence"> <div class="centured reason">
+                                {{presence.reason}}
+                                </div>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

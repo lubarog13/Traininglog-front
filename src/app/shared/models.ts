@@ -131,6 +131,26 @@ export interface SimplePresence {
     early_ret: boolean;
 }
 
+export class PresenceForCreate {
+    id: number;
+    user: number;
+    workout: number;
+    is_attend?: boolean;
+    reason?: string;
+    delay: boolean;
+    early_ret: boolean;
+
+    constructor(presence: Presence) {
+        this.id = presence.id
+        this.user = presence.user.id
+        this.workout = presence.workout.id
+        this.is_attend = presence.is_attend
+        this.reason = presence.reason
+        this.delay = presence.delay
+        this.early_ret = presence.early_ret
+    }
+}
+
 export interface TypesAnalysis {
     Cardio: number;
     Strength: number;

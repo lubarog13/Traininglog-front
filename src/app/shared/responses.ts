@@ -1,4 +1,4 @@
-import { Club, Coach, Message, SignUp, SimplePresence, User, Workout } from "./models";
+import { Club, Coach, Message, Presence, SignUp, SimplePresence, User, Workout } from "./models";
 
 export interface WorkoutResponse {
   Workouts: Workout[]
@@ -6,6 +6,10 @@ export interface WorkoutResponse {
 
 export interface SimplePresenceResponse {
   Presences: SimplePresence[]
+}
+
+export interface PresencesResponse {
+  Presences: Presence[]
 }
 
 export interface SignUpResponse {

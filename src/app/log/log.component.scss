@@ -1,0 +1,65 @@
+@import '/src/styles.scss';
+
+#calendar {
+    //background: url(https://sun9-65.userapi.com/impg/H7O1e7ceF8DO0HHz6YhssJB04f0vSJtYRyOFcw/_5nYcV5N5RM.jpg?size=604x512&quality=96&sign=1d8459d84444b931e562ceb06fa88fdf&type=album) no-repeat;
+    background: url(https://mrsss.ru/sites/mrsss.ru/files/styles/blog_image/public/bezymyannyy1_279.jpg?itok=20dwZniC) no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+    align-items: center;
+    max-height: 93vh;
+    background-color: rgb(231, 231, 216);
+}
+
+.container {
+    min-height: 93vh;
+    margin: 0;
+}
+
+.centured {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.reason {
+    max-width: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.workout {
+    padding-top: 30px;
+}
+
+.table-box {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+#log {
+    background: url(https://img4.goodfon.ru/wallpaper/nbig/e/bf/tekstura-pesok-volny.jpg) fixed no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+    max-width: 93vh;
+    overflow-y: auto;
+}
+
+@media (min-width: 992px) {
+    #log {
+        max-width: max-content;
+    }
+}
+
+.mat-cell:hover {
+    background: rgb(199, 196, 196);
+}
