@@ -204,3 +204,20 @@ export class WorkoutForCreate {
             this.club = club
         }
 }
+
+export interface GroupAnalysisItem {
+    workout__club__id: number,
+    workout__club__group: string,
+    pcount: number,
+    club__group: string,
+    wcount: number
+}
+
+export interface GroupAnalysis {
+    Stat: GroupAnalysisItem[]
+}
+
+export class Month {
+    day: string
+    constructor(day: string) { this.day = day}
+}

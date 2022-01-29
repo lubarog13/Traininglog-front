@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Coach, MonthsAnalysis, TypesAnalysis } from '../shared/models';
+import { Coach, GroupAnalysis, Month, MonthsAnalysis, TypesAnalysis } from '../shared/models';
 import { CoachResponse, UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -67,5 +67,34 @@ export class UserService {
       })
     };
     return this.http.get<CoachResponse>(baseURL + "coach/user" + id + "/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getPresenceCountForMonth(month: Month): Observable<GroupAnalysis> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<GroupAnalysis>(baseURL + "coach/" + localStorage.getItem("coach_id") + "/analysis/groups/presences/month/", month, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getWorkoutCountForMonth(month: Month): Observable<GroupAnalysis> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<GroupAnalysis>(baseURL + "coach/" + localStorage.getItem("coach_id") + "/analysis/groups/month/", month, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getAnalysisForMonth(month: number): Observable<TypesAnalysis>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<TypesAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/presences/count/" + month, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 }

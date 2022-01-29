@@ -1,0 +1,88 @@
+<div class="container"
+fxLayout="column"
+>
+<div id="head_image">
+    <h1 id="title">Аналитика</h1>
+</div>
+<mat-tab-group [selectedIndex]="active.value" (selectedIndexChange)="active.setValue($event)">
+    <mat-tab label="Для тренировок">
+        <div
+            fxLayout="column">
+        <div fxLayout="column" fxLayout.gt-xs="row" fxFlex="70" fxFlex.lt-sm="150">
+            <div class="sample" fxFlex="50" style="margin-bottom: 20px;">
+                <div class="options vertical">
+                    <span class="legendTitle">Тренировки по типу</span>
+                    <igx-item-legend #legend></igx-item-legend>
+                </div>
+            
+                <div class="chart">
+                    
+                    <igx-pie-chart #chart *ngIf="data"
+                    height="100%"
+                    width="100%"
+                    [dataSource]="data"
+                    [legend]="legend"
+                    valueMemberPath="Value"
+                    labelMemberPath="Label"
+                    (sliceClick)="pieSliceClickEvent($event)"
+                    labelsPosition="BestFit"
+                    labelExtent="30">
+                </igx-pie-chart>
+                </div>
+            </div>
+            <div class="sample" fxFlex="50" style="margin-bottom: 20px;">
+                <mat-form-field appearance="standard">
+                    <mat-select [(value)]="selected" (selectionChange)="getGroupStat(); getMonthAnalysis()">
+                      <mat-option *ngFor="let month of months" [value]="month">
+                        {{month}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="options vertical">
+                    <span id="legendTitle">Среднее количество посещений для групп</span>
+                </div>
+                <div class="chart">
+                    <igx-category-chart height="100%" width="100%" *ngIf="data2"
+                            [dataSource]="data2"
+                            chartType="Column"
+                            xAxisInterval="1"
+                            yAxisTitle="Среднее кол-во присутствующих"
+                            yAxisTitleLeftMargin="10"
+                            yAxisTitleRightMargin="5"
+                            yAxisLabelLeftMargin="0"
+                            isHorizontalZoomEnabled="false"
+                            brushes="#6db1ff"
+                            isVerticalZoomEnabled="false">
+                    </igx-category-chart>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxFlex="30">
+            <div fxFlex="30" id="allBox" class="centered">
+                <div style="height: fit-content;">Всего:</div>
+            </div>
+            <div fxFlex="30" class="centered" fxLayout="column">
+                <div id="total">{{total}}</div>
+                <div id="subtotal">тренировки</div>
+            </div>
+            <div fxFlex="10"></div>
+            <div fxFlex="30" class="centered" style="align-items: baseline; " fxLayout="column">
+                <div class="type-div"><span class="type-box" style="background: red;"></span>
+                <div class="type-text" style="color: red;">{{forTypes.For_all}} общих</div></div>
+                <div class="type-div"><span class="type-box" style="background: #FF5E00;"></span>
+                <div class="type-text" style="color: #FF5E00;">{{forTypes.Cardio}} кардио</div></div>
+                <div class="type-div"><span class="type-box" style="background: #9EA000;"></span>
+                    <div class="type-text" style="color: #9EA000;">{{forTypes.Another}} других</div></div>
+                    <div class="type-div"><span class="type-box" style="background: #2FFF00;"></span>
+                    <div class="type-text" style="color: #2FFF00;">{{forTypes.Strength}} силовых</div></div>
+                    <div class="type-div"><span class="type-box" style="background: #245796;"></span>
+                    <div class="type-text" style="color: #245796;">{{forTypes.For_tech}} на технику</div></div>
+            </div>
+        </div>
+        </div>
+        </mat-tab>
+    <mat-tab label="Для групп">
+    </mat-tab>
+    <mat-tab label="Для занимающихся">
+    </mat-tab>
+</mat-tab-group>

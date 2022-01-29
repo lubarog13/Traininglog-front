@@ -6,7 +6,7 @@
                     <mat-calendar style="color: black;" [dateFilter]="myFilter" (selectedChange)="dateClick($event)" [selected]="selected_date"></mat-calendar>
                   </mat-card>
             </div>
-            <div fxLayout="column" fxFlex="50" id="log">
+            <div fxLayout="column" fxFlex.gt-sm="50" id="log">
                 <div *ngFor="let workout of day_workouts" class="workout">
                     <h3>{{workout.club.group}}</h3>
                     <div fxLayout="row" class="table-box">

@@ -70,7 +70,8 @@ import { AddWorkoutComponent } from './add-workout/add-workout.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
 import { LogComponent } from './log/log.component';
-import {MatTableModule} from '@angular/material/table'
+import {MatTableModule} from '@angular/material/table';
+import { CoachAnalysisComponent } from './coach-analysis/coach-analysis.component'
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import {MatTableModule} from '@angular/material/table'
     CoachWorkoutCardComponent,
     AddWorkoutComponent,
     EditWorkoutComponent,
-    LogComponent
+    LogComponent,
+    CoachAnalysisComponent
   ],
   imports: [
     BrowserModule,
