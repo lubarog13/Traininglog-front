@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Club, SignUp } from '../shared/models';
+import { Club, SignUp, TypesAnalysis } from '../shared/models';
 import { ClubsResponse, SignUpResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -48,5 +48,14 @@ export class ClubsService {
         })
       };
       return this.http.get<ClubsResponse>(baseURL + "coach/" + coach_id + "/clubs/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    getClubAnalysis(club_id: number): Observable<TypesAnalysis> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token")
+        })
+      };
+      return this.http.get<TypesAnalysis>(baseURL +"coach/" + localStorage.getItem("coach_id") + "/analysis/club/" + club_id + "/workouts/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 }

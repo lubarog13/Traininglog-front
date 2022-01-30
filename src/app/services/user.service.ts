@@ -97,4 +97,14 @@ export class UserService {
     };
     return this.http.get<TypesAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/presences/count/" + month, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
+
+   getPresenceCountForGroups(day: Month): Observable<GroupAnalysis> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<GroupAnalysis>(baseURL + "coach/" + localStorage.getItem("coach_id") + "/analysis/groups/presences/", day, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
 }

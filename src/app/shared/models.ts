@@ -157,6 +157,7 @@ export interface TypesAnalysis {
     For_tech: number;
     For_all: number;
     Another: number;
+    club?: string
 }
 
 export interface MonthsAnalysis {

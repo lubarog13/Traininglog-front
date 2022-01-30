@@ -4,7 +4,7 @@ fxLayout="column"
 <div id="head_image">
     <h1 id="title">Аналитика</h1>
 </div>
-<mat-tab-group [selectedIndex]="active.value" (selectedIndexChange)="active.setValue($event)">
+<mat-tab-group [selectedIndex]="active.value" (selectedIndexChange)="active.setValue($event)" (selectedTabChange)="selectedChange()">
     <mat-tab label="Для тренировок">
         <div
             fxLayout="column">
@@ -82,6 +82,58 @@ fxLayout="column"
         </div>
         </mat-tab>
     <mat-tab label="Для групп">
+        <div fxLayout="column" fxLayout.gt-xs="row">
+            <div fxFlex.gt-xs="50" fxLayout="column">
+                <mat-form-field appearance="standard" id="week_days">
+                    <mat-select [(value)]="selectedDay" (selectionChange)="getClubsAnalysis()">
+                      <mat-option *ngFor="let week_day of week_days" [value]="week_day">
+                        {{week_day}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="options vertical">
+                    <span id="legendTitle"> Количество посещений для групп</span>
+                </div>
+                <div class="chart">
+                    <igx-category-chart height="100%" width="100%" *ngIf="data3"
+                            [dataSource]="data3"
+                            chartType="Column"
+                            xAxisInterval="1"
+                            yAxisTitle="Количество присутствовавших"
+                            yAxisTitleLeftMargin="10"
+                            yAxisTitleRightMargin="5"
+                            yAxisLabelLeftMargin="0"
+                            isHorizontalZoomEnabled="false"
+                            brushes="#6db1ff"
+                            isVerticalZoomEnabled="false">
+                    </igx-category-chart>
+                </div>
+            </div>
+            <div fxFlex.gt-xs="50" fxLayout="column" fxFlexOffset.xs="10">
+                <div *ngFor="let analysis of clubAnalysis" fxLayout="row">
+                        <div fxFlex="30" class="allBox centered">
+                            <div style="height: fit-content;">{{analysis.club}}</div>
+                        </div>
+                        <div fxFlex="30" class="centered" fxLayout="column">
+                            <div class="total">{{(analysis.Another + analysis.Cardio + analysis.For_all + analysis.For_tech + analysis.Strength)}}</div>
+                            <div class="subtotal">тренировки</div>
+                        </div>
+                        <div fxFlex="10"></div>
+                        <div fxFlex="30" class="centered" style="align-items: baseline; " fxLayout="column">
+                            <div class="type-div"><span class="type-box" style="background: red;"></span>
+                            <div class="type-text" style="color: red;">{{analysis.For_all}} общих</div></div>
+                            <div class="type-div"><span class="type-box" style="background: #FF5E00;"></span>
+                            <div class="type-text" style="color: #FF5E00;">{{analysis.Cardio}} кардио</div></div>
+                            <div class="type-div"><span class="type-box" style="background: #9EA000;"></span>
+                                <div class="type-text" style="color: #9EA000;">{{analysis.Another}} других</div></div>
+                                <div class="type-div"><span class="type-box" style="background: #2FFF00;"></span>
+                                <div class="type-text" style="color: #2FFF00;">{{analysis.Strength}} силовых</div></div>
+                                <div class="type-div"><span class="type-box" style="background: #245796;"></span>
+                                <div class="type-text" style="color: #245796;">{{analysis.For_tech}} на технику</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </mat-tab>
     <mat-tab label="Для занимающихся">
     </mat-tab>

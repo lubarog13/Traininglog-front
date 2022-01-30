@@ -58,7 +58,7 @@
     font-size: 20px;
 }
 
-#allBox {
+#allBox, .allBox {
     -webkit-box-shadow: 18px -11px 6px 0px rgba(34, 60, 80, 0.2);
 -moz-box-shadow: 18px -11px 6px 0px rgba(34, 60, 80, 0.2);
 box-shadow: 18px -11px 6px 0px rgba(34, 60, 80, 0.2);
@@ -70,7 +70,13 @@ height: inherit;
 min-height: 200px;
 }
 
-#total {
+.allBox {
+    color: #686868;
+    font-size: 16px;
+    text-align: center;
+}
+
+#total, .total {
    background: linear-gradient( rgba(255, 0, 0, 1), rgba(255, 94, 0, 1), rgba(25, 21, 228, 1), rgba(63, 81, 181, 1));
     -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -86,7 +92,7 @@ justify-content: center;
 align-items: center;
 }
 
-#subtotal {
+#subtotal,  .subtotal{
     background: linear-gradient( rgba(255, 0, 0, 1), rgba(255, 94, 0, 1), rgba(25, 21, 228, 1), rgba(63, 81, 181, 1));
     -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -126,5 +132,10 @@ align-items: center;
 #title {
     color: red;
     font-size: 30pt;
+    margin-left: 20%;
+}
+
+#week_days {
+    width: 50%;
     margin-left: 20%;
 }

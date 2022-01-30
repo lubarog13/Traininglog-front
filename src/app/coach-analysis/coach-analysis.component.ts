@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IgxPieChartComponent } from 'igniteui-angular-charts';
+import { ClubsService } from '../services/clubs.service';
 import { UserService } from '../services/user.service';
-import { GroupAnalysisItem, Month, TypesAnalysis } from '../shared/models';
+import { Club, GroupAnalysisItem, Month, TypesAnalysis } from '../shared/models';
 
 @Component({
   selector: 'app-coach-analysis',
@@ -17,18 +18,26 @@ export class CoachAnalysisComponent implements OnInit {
     total: number;
     forTypes: TypesAnalysis
     public data2: any[];
-    public data3: any[]
+    public data3: any[];
     months = ["Всего", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     selected= this.months[0]
+    week_days = ["Всего", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
+    selectedDay = this.week_days[0]
     workout_counts: GroupAnalysisItem[]
     presence_counts: GroupAnalysisItem[]
+    presence_count: GroupAnalysisItem[]
+    clubs: Club[]
+    clubAnalysis: TypesAnalysis[]
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private clubService: ClubsService) {
     }
 
   ngOnInit(): void {
       this.getMonthAnalysis()
       this.getGroupStat()
+      this.clubService.getClubsForCoach(Number.parseInt(localStorage.getItem("coach_id"))).subscribe(response =>{
+        this.clubs = response.Clubs
+      })
 /*       this.data2 = [
         {Group: 'девочки 2007-2008', Количество: 0.3},
         {Group: 'девочки 2007-2008', Количество: 0},
@@ -93,12 +102,50 @@ export class CoachAnalysisComponent implements OnInit {
     }
   }
 
+  getClubsAnalysis() {
+    var index = this.week_days.indexOf(this.selectedDay);
+    var day: Month;
+    if (index==0) {
+      day =new Month("all")
+    } else if (index==7) day= new Month("1")
+    else {
+      day = new Month((index+1).toString())
+    }
+    this.userService.getPresenceCountForGroups(day).subscribe(response => {
+      this.presence_count = response.Stat
+      this.data3=[]
+      this.clubAnalysis = []
+      for (let presence of this.presence_count) {
+        this.data3.push({Group: this.clubs.filter( club => club.id== presence.workout__club__id)[0].group, Количество: presence.pcount})
+        this.getClubStat(presence.workout__club__id)
+      }
+      console.log(this.data3)
+    })
+  }
+
+  getClubStat(club_id: number) {
+    this.clubService.getClubAnalysis(club_id).subscribe(response=> {
+      response.club = this.clubs.filter( club => club.id== club_id)[0].group
+      this.clubAnalysis.push(response)}
+      )
+  }
+
   public pieSliceClickEvent(e: any): void {
     e.args.isExploded = !e.args.isExploded;
 }
 
 public ngAfterViewInit(): void {
     this.chart.explodedSlices.add(3);
+}
+
+selectedChange() {
+  if(this.active.value==0) {
+    this.getMonthAnalysis()
+      this.getGroupStat()
+  }
+  else if (this.active.value==1) {
+    this.getClubsAnalysis()
+  }
 }
 
 }
