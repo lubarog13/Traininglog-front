@@ -32,31 +32,42 @@ export class UserService {
     return this.http.get<Coach[]>(baseURL+"coaches/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 
-   getAnalysisForTypes(): Observable<TypesAnalysis> {
+   getAnalysisForTypes(user_id?: number): Observable<TypesAnalysis> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization':  'Token ' + localStorage.getItem("token")
       })
     };
+    if(user_id==null || user_id==undefined){
     return this.http.get<TypesAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/types/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    } else {
+      return this.http.get<TypesAnalysis>(baseURL + "user/" + user_id + "/analysis/types/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
    }
 
-   getAnalysisForMonths(): Observable<MonthsAnalysis> {
+   getAnalysisForMonths(user_id?: number): Observable<MonthsAnalysis> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization':  'Token ' + localStorage.getItem("token")
       })
     };
-    return this.http.get<MonthsAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    if(user_id==null || user_id==undefined){
+      return this.http.get<MonthsAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }  
+    else return this.http.get<MonthsAnalysis>(baseURL + "user/" + user_id + "/analysis/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 
-   getNotAttendCOuntForMonths(): Observable<MonthsAnalysis> {
+   getNotAttendCOuntForMonths(user_id?: number): Observable<MonthsAnalysis> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization':  'Token ' + localStorage.getItem("token")
       })
     };
+    if(user_id==null || user_id==undefined){
     return this.http.get<MonthsAnalysis>(baseURL + "user/" + localStorage.getItem("id") + "/analysis/not_attend/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    } else {
+      return this.http.get<MonthsAnalysis>(baseURL + "user/" + user_id + "/analysis/not_attend/" + (new Date().getMonth()==0? (new Date().getFullYear() -1): new Date().getFullYear()) , httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
    }
 
 

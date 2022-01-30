@@ -113,7 +113,12 @@ align-items: center;
   font-family: 'Roboto';
     font-weight: 700;
 }
-
+@media (min-width: 992px) {
+    #divider {
+        height: 63vh;
+        margin: 0;
+    }
+}
 .type-div {
     margin-top: 7px;
     display: flex;
@@ -138,4 +143,16 @@ align-items: center;
 #week_days {
     width: 50%;
     margin-left: 20%;
+}
+
+
+
+    .mat-list-base .mat-list-item:hover, .mat-list-base .mat-list-option:hover {
+    background-color: rgb(240, 240, 240);
+    z-index: 1;
+    transform: scale(1.01);
+}
+
+h2 {
+    padding-left: 40px;
 }

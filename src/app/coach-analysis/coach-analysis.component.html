@@ -136,5 +136,91 @@ fxLayout="column"
         </div>
     </mat-tab>
     <mat-tab label="Для занимающихся">
+        <div fxLayout="column" fxLayout.gt-sm="row" style="min-height: 63vh;">
+            <div fxFlex.gt-sm="30">
+                <mat-accordion style="overflow: auto;">
+                    <mat-expansion-panel *ngFor="let club of clubs">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{club.group}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{ club.name}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-list>
+                            <mat-list-item *ngFor="let user of usersForClub.get(club.id)" (click)="getUserAnalysis(user)">
+                                <h3 matLine>{{user.last_name + " " + user.first_name.charAt(0) +". "+ user.second_name.charAt(0)}}</h3>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <mat-divider vertical="true" id="divider"></mat-divider>
+            </div>
+            <div fxFlex.gt-sm="70" *ngIf="selectedUser" fxLayout="column">
+                <h2>{{selectedUser.last_name + " " + selectedUser.first_name + " " + selectedUser.second_name}}</h2>
+                <div fxLayout="column" fxLayout.gt-xs="row" fxFlex="70">
+                    <div class="sample" fxFlex="50" style="margin-bottom: 20px;">
+                        <div class="options vertical">
+                            <span class="legendTitle">Посещения по типу тренировок</span>
+                            <igx-item-legend #legend1></igx-item-legend>
+                        </div>
+                    
+                        <div class="chart">
+                            <igx-pie-chart #chart1 *ngIf="data4"
+                            height="100%"
+                            width="100%"
+                            [dataSource]="data4"
+                            [legend]="legend1"
+                            valueMemberPath="Value"
+                            labelMemberPath="Label"
+                            (sliceClick)="pieSliceClickEvent($event)"
+                            labelsPosition="BestFit"
+                            labelExtent="30">
+                        </igx-pie-chart>
+                        </div>
+                    </div>
+                    <div class="sample" fxFlex="50">
+                        <div class="options vertical">
+                            <span class="legendTitle">Посещения тренировок</span>
+                        </div>
+                        <div class="chart">
+                            <igx-category-chart height="100%" width="100%"
+                                [dataSource]="data5"
+                                chartType="line"
+                                outlines="#22f907, #ff0000"
+                                brushes="#22f907, #ff0000"
+                                markerBrushes="white"
+                                markerOutlines = "#22f907, #ff0000"
+                                yAxisTitle="Кол-во"
+                                yAxisTitleLeftMargin="5">
+                            </igx-category-chart>
+                        </div>
+                    </div>
+                        </div>
+                        <div fxLayout="row" fxFlex="30">
+                            <div fxFlex="30" id="allBox" class="centered">
+                                <div style="height: fit-content;">Всего:</div>
+                            </div>
+                            <div fxFlex="30" class="centered" fxLayout="column">
+                                <div id="total">{{total}}</div>
+                                <div id="subtotal">тренировки</div>
+                            </div>
+                            <div fxFlex="10"></div>
+                            <div fxFlex="30" class="centered" style="align-items: baseline; " fxLayout="column">
+                                <div class="type-div"><span class="type-box" style="background: red;"></span>
+                                <div class="type-text" style="color: red;">{{forTypes.For_all}} общих</div></div>
+                                <div class="type-div"><span class="type-box" style="background: #FF5E00;"></span>
+                                <div class="type-text" style="color: #FF5E00;">{{forTypes.Cardio}} кардио</div></div>
+                                <div class="type-div"><span class="type-box" style="background: #9EA000;"></span>
+                                    <div class="type-text" style="color: #9EA000;">{{forTypes.Another}} других</div></div>
+                                    <div class="type-div"><span class="type-box" style="background: #2FFF00;"></span>
+                                    <div class="type-text" style="color: #2FFF00;">{{forTypes.Strength}} силовых</div></div>
+                                    <div class="type-div"><span class="type-box" style="background: #245796;"></span>
+                                    <div class="type-text" style="color: #245796;">{{forTypes.For_tech}} на технику</div></div>
+                            </div>
+                        </div>
+            </div>
+        </div>
     </mat-tab>
 </mat-tab-group>

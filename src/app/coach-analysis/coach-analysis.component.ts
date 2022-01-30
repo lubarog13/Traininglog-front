@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { IgxPieChartComponent } from 'igniteui-angular-charts';
 import { ClubsService } from '../services/clubs.service';
 import { UserService } from '../services/user.service';
-import { Club, GroupAnalysisItem, Month, TypesAnalysis } from '../shared/models';
+import { Club, GroupAnalysisItem, Month, TypesAnalysis, User } from '../shared/models';
 
 @Component({
   selector: 'app-coach-analysis',
@@ -19,6 +19,8 @@ export class CoachAnalysisComponent implements OnInit {
     forTypes: TypesAnalysis
     public data2: any[];
     public data3: any[];
+    public data4: any[];
+    public data5: any[];
     months = ["Всего", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     selected= this.months[0]
     week_days = ["Всего", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
@@ -28,6 +30,8 @@ export class CoachAnalysisComponent implements OnInit {
     presence_count: GroupAnalysisItem[]
     clubs: Club[]
     clubAnalysis: TypesAnalysis[]
+    usersForClub: Map<number, User[]> = new Map
+    selectedUser: User
 
     constructor(private userService: UserService, private clubService: ClubsService) {
     }
@@ -146,6 +150,46 @@ selectedChange() {
   else if (this.active.value==1) {
     this.getClubsAnalysis()
   }
+  else{
+    this.usersForClub.clear()
+    for (let club of this.clubs){
+      this.userService.getUsersForClub(club.id).subscribe(response=> this.usersForClub.set(club.id, response.Users))
+    }
+  }
+}
+
+getUserAnalysis(user: User) {
+  this.userService.getAnalysisForTypes(user.id).subscribe(response => {
+    this.total = response.Cardio+response.Strength+response.For_tech+response.For_all+response.Another
+    this.forTypes=response
+    this.data4 = [
+      { Value: response.Cardio, Label: "Кардио " + response.Cardio / this.total * 100+ "%"},
+      { Value: response.Strength, Label: "Силовая " + response.Strength/ this.total* 100 + "%"},
+      { Value: response.For_tech, Label: "На технику " + response.For_tech/ this.total* 100 + "%"},
+      { Value: response.For_all, Label: "Общая " + response.For_all/ this.total* 100 + "%"},
+      { Value: response.Another, Label: "Другое " + response.Another/ this.total* 100 + "%"}
+    ];
+  })
+  this.userService.getAnalysisForMonths(user.id).subscribe(response => {
+    this.userService.getNotAttendCOuntForMonths(user.id).subscribe(response1 => {
+      this.data5 = [
+        { Month: "Январь", Присутствий: response.jan, Отсутствий: response1.jan},
+        { Month: "Февраль", Присутствий: response.feb, Отсутствий: response1.feb},
+        { Month: "Март", Присутствий: response.mar, Отсутствий: response1.mar},
+        { Month: "Апрель", Присутствий: response.apr, Отсутствий: response1.apr},
+        { Month: "Май", Присутствий: response.may, Отсутствий: response1.may},
+        { Month: "Июнь", Присутствий: response.jun, Отсутствий: response1.jun},
+        { Month: "Июль", Присутствий: response.jul, Отсутствий: response1.jul},
+        { Month: "Август", Присутствий: response.aug, Отсутствий: response1.aug},
+        { Month: "Сентябрь", Присутствий: response.sep, Отсутствий: response1.sep},
+        { Month: "Октябрь", Присутствий: response.oct, Отсутствий: response1.oct},
+        { Month: "Ноябрь", Присутствий: response.nov, Отсутствий: response1.nov},
+        { Month: "Декабрь", Count: response.dec, Отсутствий: response1.dec}
+      ];
+    })
+  }
+  )
+  this.selectedUser=user
 }
 
 }
