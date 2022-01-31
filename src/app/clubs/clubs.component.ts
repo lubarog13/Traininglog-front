@@ -35,6 +35,8 @@ export class ClubsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('gridList') gridList: MatGridList
   @ViewChild('gridTooList') gridTooList: MatGridList
+  @ViewChild('gridTooTooList') gridTooTooList: MatGridList
+  openAddForm = false
   gridByBreakpoint = {
     xl: 5,
     lg: 4,
@@ -52,6 +54,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   building_names: Check[]
   showFilterEdit = false
   sign_ups: SignUp[]
+  is_coach: boolean
   usersForClubs: Map<number,User[]> = new Map
 
   constructor(private route: ActivatedRoute, private router: Router, private clubService: ClubsService, private mediaObserver: MediaObserver, private userService: UserService) { 
@@ -61,11 +64,15 @@ export class ClubsComponent implements OnInit, AfterViewInit {
     this.mediaObserver.asObservable().subscribe((change) => {
       console.log(change)
       this.gridList.cols = this.gridByBreakpoint[change[0].mqAlias]
+      if(!this.is_coach)
       this.gridTooList.cols=this.gridList.cols
+      else
+      this.gridTooTooList.cols = this.gridList.cols
     });
   }
 
   ngOnInit(): void {
+    this.is_coach = localStorage.getItem("is_coach")=="true"
     this.route.queryParams.subscribe(params => {
       this.myclubs = (params.myclubs=="true")
       this.active.setValue(this.myclubs==true ? 1: 0)
@@ -108,7 +115,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
       this.building_names = b_names.map(name => new Check(name, false))
       console.log(c_names)
     }, err=> this.errMess=err)
-    else
+    else if (!this.is_coach){
     this.clubService.getSignUpsForUser(Number.parseInt(localStorage.getItem("id"))).subscribe(response=> {
       this.sign_ups = response.Sign_Ups
       for(let signup of this.sign_ups){
@@ -117,6 +124,12 @@ export class ClubsComponent implements OnInit, AfterViewInit {
       console.log("signups", this.sign_ups)
     }, err => this.errMess=err
     )
+  }
+  else {
+    this.clubService.getClubsForCoach(Number.parseInt(localStorage.getItem("coach_id"))).subscribe(response => {
+      this.clubs = response.Clubs
+    })
+  }
   }
 
   onChanged(ev: EventTarget) {

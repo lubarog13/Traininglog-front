@@ -222,3 +222,17 @@ export class Month {
     day: string
     constructor(day: string) { this.day = day}
 }
+
+export class ClubForCreate {
+    name: string;
+    group: string;
+    coach: number;
+    building: number
+
+    constructor(name: string, group: string, coach: number, building: number) {
+        this.name = name
+        this.group = group
+        this.coach = coach
+        this.building = building
+    }
+}

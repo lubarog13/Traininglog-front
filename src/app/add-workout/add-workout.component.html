@@ -11,7 +11,7 @@
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Группа</mat-label>
                     <mat-select formControlName="club" required="true">
-                        <mat-option *ngFor="let club of clubs" [value]="club.id">{{club.group}}</mat-option>
+                        <mat-option *ngFor="let club of clubs" [value]="club.id">{{club.name + " " + club.group}}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="formErrors.club">{{formErrors.club}}</mat-error>
                 </mat-form-field>
