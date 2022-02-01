@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Club, ClubForCreate, SignUp, TypesAnalysis } from '../shared/models';
+import { Club, ClubForCreate, SignUp, SignUpForCreate, TypesAnalysis } from '../shared/models';
 import { ClubsResponse, SignUpResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -67,5 +67,15 @@ export class ClubsService {
         })
       };
       return this.http.post(baseURL + "club/create/", club, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    createSignup(signup: SignUpForCreate): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post(baseURL + "coach/signup/create/", signup, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 }

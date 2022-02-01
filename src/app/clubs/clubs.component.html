@@ -118,13 +118,15 @@ fxLayout="column"
                         </mat-card-content>
                         <mat-card-actions>
                             <button class="primary-button" style="width: 60%; font-size: 9pt; padding-left: 3%;" mat-button (click)="getUsersForClub(club.id)">Посмотреть занимающихся</button>
-                            <button class="primary-button" style="background: green; padding-left: 3%;" mat-button >Добавить запись</button>
+                            <button class="primary-button" style="background: green; padding-left: 3%;" mat-button (click)="selectedClub=club; openAddSignupForm=true">Добавить запись</button>
                         </mat-card-actions>
                     </mat-card>
+                    <app-add-signup [club]="club" *ngIf="openAddSignupForm" (windowClosed)="openAddSignupForm=false" class="add-club"></app-add-signup>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-tab>
     </mat-tab-group>
-    <app-add-club *ngIf="openAddForm" (windowClosed)="openAddForm=false" (clubCreated)="openAddForm=false; getClubs()" id="add-club"></app-add-club>
-    <button mat-fab id="add-button" (click)="openAddForm= !openAddForm" *ngIf="is_coach"><mat-icon>add</mat-icon></button>
+    <app-add-signup [club]="selectedClub" *ngIf="openAddSignupForm" (windowClosed)="openAddSignupForm=false" class="add-club" (created)="openAddSignupForm=false; getClubs()"></app-add-signup>
+    <app-add-club *ngIf="openAddForm" (windowClosed)="openAddForm=false" (clubCreated)="openAddForm=false; getClubs()" class="add-club"></app-add-club>
+    <button mat-fab id="add-button" (click)="openAddForm= openAddSignupForm? false: !openAddForm; openAddSignupForm=false" *ngIf="is_coach"><mat-icon>add</mat-icon></button>
 </div>

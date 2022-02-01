@@ -1,0 +1,44 @@
+<div fxLayout="column">
+    <mat-card style="width: 300px; height: 450px;">
+        <mat-card-header>
+            <mat-card-title style="width: 100%;">
+                Создание записи
+            </mat-card-title>
+            <div style="width: 30%; display: flex; justify-content: end;"><button mat-icon-button (click)="windowClosed.emit('closed')"><mat-icon>cancel</mat-icon></button></div>
+        </mat-card-header>
+        <mat-card-content>
+            <form novalidate [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                <p class="full-width">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Группа</mat-label>
+                        <input matInput formControlName="club" required readonly value="club1.name + ' ' + club1.group">
+                        <mat-error *ngIf="formErrors.club">{{formErrors.club}}</mat-error>
+                    </mat-form-field>
+                </p>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Имя пользователя</mat-label>
+                        <input matInput formControlName="username" type="text">
+                        <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+                    </mat-form-field>
+                    <p *ngIf="errMsg" style="color: red;">{{errMsg}}</p>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Начало записи</mat-label>
+                        <input matInput [matDatepicker]="picker1" formControlName="start_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                        <mat-error *ngIf="formErrors.start_date">{{formErrors.start_date}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Окончание записи</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="end_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-error *ngIf="formErrors.start_date">{{formErrors.end_date}}</mat-error>
+                    </mat-form-field>
+                <div class="submit-block">
+                    <button type="submit" class="submit-button" mat-button [disabled]="signUpForm.invalid">Отправить</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

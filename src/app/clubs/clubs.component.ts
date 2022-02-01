@@ -37,6 +37,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   @ViewChild('gridTooList') gridTooList: MatGridList
   @ViewChild('gridTooTooList') gridTooTooList: MatGridList
   openAddForm = false
+  openAddSignupForm = false
   gridByBreakpoint = {
     xl: 5,
     lg: 4,
@@ -53,6 +54,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   coach_names: Check[]
   building_names: Check[]
   showFilterEdit = false
+  selectedClub: Club
   sign_ups: SignUp[]
   is_coach: boolean
   usersForClubs: Map<number,User[]> = new Map

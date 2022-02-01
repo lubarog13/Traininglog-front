@@ -236,3 +236,10 @@ export class ClubForCreate {
         this.building = building
     }
 }
+
+export interface SignUpForCreate {
+    club: number;
+    user: number;
+    start_date: string;
+    end_date: string;
+}

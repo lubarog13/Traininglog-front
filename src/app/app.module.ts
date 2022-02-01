@@ -72,7 +72,8 @@ import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
 import { LogComponent } from './log/log.component';
 import {MatTableModule} from '@angular/material/table';
 import { CoachAnalysisComponent } from './coach-analysis/coach-analysis.component';
-import { AddClubComponent } from './add-club/add-club.component'
+import { AddClubComponent } from './add-club/add-club.component';
+import { AddSignupComponent } from './add-signup/add-signup.component'
 
 
 @NgModule({
@@ -99,7 +100,8 @@ import { AddClubComponent } from './add-club/add-club.component'
     EditWorkoutComponent,
     LogComponent,
     CoachAnalysisComponent,
-    AddClubComponent
+    AddClubComponent,
+    AddSignupComponent
   ],
   imports: [
     BrowserModule,

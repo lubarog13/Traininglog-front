@@ -80,4 +80,12 @@ export class CustomValidators {
           control.get("other_type").setErrors({required: true})
         }
       }
+
+      static dateValidator(control: AbstractControl) {
+        const start_date: Date = control.get("start_date").value
+        const end_date: Date = control.get("end_date").value
+        if (start_date< new Date()) control.get("start_date").setErrors({TooSmall: true})
+        if (end_date< new Date()) control.get("end_date").setErrors({TooSmall: true})
+        if(start_date>=end_date) control.get("end_date").setErrors({TooBig: true}) 
+      }
 }
