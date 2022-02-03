@@ -65,13 +65,20 @@ fxLayout="column"
                             <div><b>Здание:</b> <span><a [routerLink]="['/info/buildings']" [queryParams]="{building_id: club.building.id}">{{club.building.name}}</a></span></div>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button class="primary-button" style="width: 40%;" mat-button>Подать заявку</button>
+                            <button class="primary-button" style="width: 40%;" mat-button [disabled]="is_coach" (click)="openDialog(club)">Подать заявку</button>
                         </mat-card-actions>
                     </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-tab> 
         <mat-tab label="Мои секции" >
+            <p id="add-signup">
+            <mat-form-field appearance="fill" >
+                <mat-label>Добавить запись</mat-label>
+                <input matInput placeholder="Введите идентификатор" [(ngModel)]="identifier">
+            </mat-form-field>
+            <button style="margin-left: 30px" mat-raised-button color="primary" [disabled]="!identifier" (click)="createSignup()">Добавить</button>
+        </p>
             <mat-grid-list #gridTooList rowHeight="330px" class="main" *ngIf="!is_coach">
                 <mat-grid-tile *ngFor="let signup of sign_ups">
                     <mat-card style="width: 80%">
@@ -92,7 +99,7 @@ fxLayout="column"
                             </div>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button class="primary-button" style="width: 50%; font-size: 9pt;" mat-button (click)="getUsersForClub(signup.club.id)">Посмотреть занимающихся</button>
+                            <button class="primary-button" style="width: 60%; font-size: 9pt; padding-left: 3%;" mat-button (click)="getUsersForClub(signup.club.id)">Посмотреть занимающихся</button>
                             <button class="primary-button" style="background: red;" mat-button (click)="deleteSignup(signup.id)">Удалить запись</button>
                         </mat-card-actions>
                     </mat-card>

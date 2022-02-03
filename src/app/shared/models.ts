@@ -238,8 +238,9 @@ export class ClubForCreate {
 }
 
 export interface SignUpForCreate {
-    club: number;
+    club?: number;
     user: number;
     start_date: string;
     end_date: string;
+    identifier?: string;
 }

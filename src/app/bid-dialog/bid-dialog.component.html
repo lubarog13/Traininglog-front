@@ -1,0 +1,21 @@
+<div fxLayout="column">
+    <h2 mat-dialog-title>Запись на секцию</h2>
+    <mat-dialog-content>
+        <form novalidate [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+                <mat-form-field class="full-width" appearance="outline" >
+                    <mat-label>Заголовок</mat-label>
+                    <input matInput formControlName="heding" type="text" required>
+                    <mat-error *ngIf="formErrors.heding">{{formErrors.heding}}</mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Текст сообщения</mat-label>
+                    <textarea matInput formControlName="message" type="text" rows="10" ></textarea>
+                    <mat-error *ngIf="formErrors.message">{{formErrors.message}}</mat-error>
+                </mat-form-field>
+            <div class="submit-block">
+                <button type="submit" class="submit-button" mat-button [disabled]="messageForm.invalid">Отправить</button>
+                <button type="button" mat-button [mat-dialog-close]="true">Назад</button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>

@@ -73,7 +73,8 @@ import { LogComponent } from './log/log.component';
 import {MatTableModule} from '@angular/material/table';
 import { CoachAnalysisComponent } from './coach-analysis/coach-analysis.component';
 import { AddClubComponent } from './add-club/add-club.component';
-import { AddSignupComponent } from './add-signup/add-signup.component'
+import { AddSignupComponent } from './add-signup/add-signup.component';
+import { BidDialogComponent } from './bid-dialog/bid-dialog.component'
 
 
 @NgModule({
@@ -101,7 +102,8 @@ import { AddSignupComponent } from './add-signup/add-signup.component'
     LogComponent,
     CoachAnalysisComponent,
     AddClubComponent,
-    AddSignupComponent
+    AddSignupComponent,
+    BidDialogComponent
   ],
   imports: [
     BrowserModule,

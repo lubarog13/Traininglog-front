@@ -1,12 +1,15 @@
+import { formatDate } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatGridList } from '@angular/material/grid-list';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { first, switchMap } from 'rxjs';
+import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
 import { ClubsService } from '../services/clubs.service';
 import { UserService } from '../services/user.service';
-import { Building, Club, Coach, SignUp, User } from '../shared/models';
+import { Building, Club, Coach, SignUp, SignUpForCreate, User } from '../shared/models';
 
 class Filter {
   by_coach: boolean
@@ -58,8 +61,9 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   sign_ups: SignUp[]
   is_coach: boolean
   usersForClubs: Map<number,User[]> = new Map
+  identifier: string
 
-  constructor(private route: ActivatedRoute, private router: Router, private clubService: ClubsService, private mediaObserver: MediaObserver, private userService: UserService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private clubService: ClubsService, private mediaObserver: MediaObserver, private userService: UserService, public dialog: MatDialog) { 
     
   }
   ngAfterViewInit(): void {
@@ -200,6 +204,19 @@ export class ClubsComponent implements OnInit, AfterViewInit {
     }, err=> {
       
     })
+  }
+
+  openDialog(club: Club) {
+    this.dialog.open(BidDialogComponent, {width: '80%', data: {club: club}})
+  }
+
+  createSignup() {
+    var end_date = new Date()
+    end_date.setDate(end_date.getDate() + 30)
+    var signup: SignUpForCreate = {user:  Number.parseInt(localStorage.getItem("id")), start_date:  formatDate(new Date(), "yyyy-MM-dd", "en-US"), end_date: formatDate(end_date, "yyyy-MM-dd", "en-US"), identifier: this.identifier}
+    this.clubService.createSignupByIdentifier(signup).subscribe(response => this.getClubs(), err => console.log(err))
+    this.identifier = undefined
+  
   }
 
 }
