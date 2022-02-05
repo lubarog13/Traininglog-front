@@ -18,7 +18,7 @@
                     <mat-form-field class="full-width" appearance="outline" >
                         <mat-label>Здание</mat-label>
                         <mat-select formControlName="building" required="true">
-                            <mat-option *ngFor="let building of buildings" [value]="building.id">{{building.address + " д. " + building.number + building.liter}}</mat-option>
+                            <mat-option *ngFor="let building of buildings" [value]="building.id">{{building.name}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="formErrors.building">{{formErrors.building}}</mat-error>
                     </mat-form-field>

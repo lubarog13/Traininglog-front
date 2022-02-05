@@ -1,7 +1,7 @@
 <div class="container"
      fxLayout="column">
      <div fxFlex>
-        <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
+        <div fxLayout="column" fxLayout.gt-sm="row" style="height: 100%;">
             <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings" class="main">
                 <mat-list *ngIf="isVertical && buildings">
                 <mat-list-item *ngFor="let building of buildings" appHighlight (click)="click(building)">
@@ -23,7 +23,7 @@
             </div> 
             <mat-divider [vertical]="isVertical"></mat-divider>
             <div fxFlex="50" fxFlex.gt-sm="70" *ngIf="selectedBuilding" >
-                <div style="width: 100%;"  fxLayout.gt-md="row" fxLayout="column">
+                <div style="width: 100%;"  fxLayout.gt-sm="row" fxLayout="column">
                     <div fxFlex="40" style="padding: 30px;">
                          <h3 style="text-align: center;">{{selectedBuilding.name}}</h3>
                         <p ><b>Город:</b> {{selectedBuilding.city}}</p>
@@ -35,7 +35,7 @@
                 </div>
                 <div style="width: 100%;" align="end">
                     
-                <google-map width="100%" [center]="center">
+                <google-map width="100%" [center]="center" (mapClick)="markerDragEnd($event)" [draggable]="false">
                     <map-marker
                         [position]="center"
   >
@@ -48,4 +48,5 @@
         </div>
         </div>
          </div>
+         <a href="/building/create/"><button mat-fab id="add-button"><mat-icon>add</mat-icon></button></a>
 </div>

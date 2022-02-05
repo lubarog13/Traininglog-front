@@ -42,4 +42,9 @@ export class BuildingsComponent implements OnInit {
       }
   }
 
+  markerDragEnd($event: google.maps.MapMouseEvent | google.maps.IconMouseEvent) {
+    console.log($event);
+    console.log($event.latLng.lat())
+  }
+
 }

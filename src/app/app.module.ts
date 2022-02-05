@@ -74,7 +74,10 @@ import {MatTableModule} from '@angular/material/table';
 import { CoachAnalysisComponent } from './coach-analysis/coach-analysis.component';
 import { AddClubComponent } from './add-club/add-club.component';
 import { AddSignupComponent } from './add-signup/add-signup.component';
-import { BidDialogComponent } from './bid-dialog/bid-dialog.component'
+import { BidDialogComponent } from './bid-dialog/bid-dialog.component';
+import { CreateBuildingComponent } from './create-building/create-building.component';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+
 
 
 @NgModule({
@@ -103,7 +106,8 @@ import { BidDialogComponent } from './bid-dialog/bid-dialog.component'
     CoachAnalysisComponent,
     AddClubComponent,
     AddSignupComponent,
-    BidDialogComponent
+    BidDialogComponent,
+    CreateBuildingComponent
   ],
   imports: [
     BrowserModule,
@@ -116,6 +120,7 @@ import { BidDialogComponent } from './bid-dialog/bid-dialog.component'
     FontAwesomeModule,
     MatButtonModule,
     MatSidenavModule,
+    NgxMatFileInputModule,
     BrowserAnimationsModule,
     SidebarModule,
     HttpClientModule,

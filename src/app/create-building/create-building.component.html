@@ -1,0 +1,61 @@
+<div class="container" fxLayout="column">
+    <div fxFlex id="main-box">
+        <div fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlex.gt-sm="50" id="left-form">
+                <h2>Создание здания</h2>
+                <form novalidate [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Название</mat-label>
+                        <input matInput formControlName="name" type="text" required placeholder="СОК Ижорец">
+                      <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Город</mat-label>
+                        <input matInput formControlName="city" type="text" required placeholder="Санкт-Петербург">
+                      <mat-error *ngIf="formErrors.city">{{formErrors.city}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Адрес(Улица/проспект/переулок)</mat-label>
+                        <input matInput formControlName="address" type="text" required  placeholder="ул. Тверская">
+                      <mat-error *ngIf="formErrors.address">{{formErrors.address}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width" appearance="outline">
+                        <mat-label>Номер</mat-label>
+                        <input matInput formControlName="number" type="number" required>
+                      <mat-error *ngIf="formErrors.number">{{formErrors.number}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width" appearance="outline">
+                        <mat-label>Литера</mat-label>
+                        <input matInput formControlName="liter" type="text">
+                      <mat-error *ngIf="formErrors.liter">{{formErrors.liter}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width" appearance="outline">
+                        <mat-label>lat</mat-label>
+                        <input matInput formControlName="lat" type="number" required [(ngModel)]="center.lat">
+                      <mat-error *ngIf="formErrors.lat">{{formErrors.lat}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="half-width" appearance="outline">
+                        <mat-label>lng</mat-label>
+                        <input matInput formControlName="lng" type="number" [(ngModel)]="center.lng">
+                      <mat-error *ngIf="formErrors.lng">{{formErrors.lng}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Изображение</mat-label>
+                        <ngx-mat-file-input formControlName="image" accept="image/*"></ngx-mat-file-input>
+                      <mat-error *ngIf="formErrors.image">{{formErrors.image}}</mat-error>
+                    </mat-form-field>
+                    <button type="submit" class="submit-button" mat-button [disabled]="buildingForm.invalid">Сохранить</button>
+                </form>
+            </div>
+            <div fxFlex.gt-sm="50">
+                <h4>Выберите местоположение</h4>
+                <google-map width="100%" height="90%" [center]="center" (mapClick)="markerDragEnd($event)" [draggable]="false">
+                    <map-marker
+                        [position]="center"
+  >
+  </map-marker>
+                </google-map>
+            </div>
+        </div>
+    </div>
+</div>

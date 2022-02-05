@@ -6,6 +6,7 @@ import { BuildingsComponent } from "../buildings/buildings.component";
 import { ClubsComponent } from "../clubs/clubs.component";
 import { CoachAnalysisComponent } from "../coach-analysis/coach-analysis.component";
 import { CoachesComponent } from "../coaches/coaches.component";
+import { CreateBuildingComponent } from "../create-building/create-building.component";
 import { EditProfileComponent } from "../edit-profile/edit-profile.component";
 import { HallsComponent } from "../halls/halls.component";
 import { LogComponent } from "../log/log.component";
@@ -26,5 +27,6 @@ export const routes: Routes = [
     {path: 'profile/edit', component: EditProfileComponent},
     {path: "aboutus", component: AboutusComponent},
     {path: "traininglog", component: LogComponent},
+    {path: "building/create", component: CreateBuildingComponent},
     { path: '', redirectTo: '/schedule', pathMatch: 'full' }
 ];

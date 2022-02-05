@@ -9,7 +9,7 @@
                 <a *ngIf="menuItem.children!=null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)">
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
-                <a *ngIf="menuItem.children==null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]">
+                <a *ngIf="menuItem.children==null" mat-button [routerLink]="menuItem.disabled==true? ['#']: [menuItem.route]" [routerLinkActive]="[menuItem.active]"  [disabled]="menuItem.disabled==true" style="background: #245796;">
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
                 <mat-menu #menu="matMenu" [hasBackdrop]="false">

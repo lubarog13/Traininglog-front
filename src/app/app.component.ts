@@ -39,6 +39,7 @@ export class AppComponent {
   public showBackdrop: boolean = false;
  
   public closeOnDocumentClick: boolean = true;
+  is_coach = localStorage.getItem("is_coach")=="true"
 
   constructor(private mediaObserver: MediaObserver, private authService: AuthService, public dialog: MatDialog) { }
 
@@ -49,6 +50,7 @@ export class AppComponent {
     AppComponent.showMenu = localStorage.getItem("id")!=undefined
     if(!AppComponent.showMenu && (window.location.href!=="http://localhost:4200/auth" && window.location.href!=="http://localhost:4200/registration")) window.location.href="auth"
     console.log(this.isCollapsed)
+    this.menuitems[1].disabled = !this.is_coach
   }
 
   closeBar (): void {
@@ -124,6 +126,8 @@ export class AppComponent {
     localStorage.removeItem("first_name")
     localStorage.removeItem("last_name")
     localStorage.removeItem("id")
+    localStorage.removeItem("is_coach")
+    localStorage.removeItem("coach_id")
   }
   
 }

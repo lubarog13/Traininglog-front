@@ -39,7 +39,7 @@
 }
 
 .main {
-    background: url(https://i.pinimg.com/564x/32/8f/a6/328fa63d50c67172597d9430aa7ccce4.jpg) no-repeat;
+    background: url(https://i.pinimg.com/564x/32/8f/a6/328fa63d50c67172597d9430aa7ccce4.jpg);
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
@@ -52,4 +52,13 @@
 
 .mat-list-item .bold {
     font-weight: bold;
+}
+
+#add-button {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 3%;
+    margin-bottom: 30px;
+    z-index: 1000;
 }
