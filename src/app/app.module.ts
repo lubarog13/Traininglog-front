@@ -77,6 +77,7 @@ import { AddSignupComponent } from './add-signup/add-signup.component';
 import { BidDialogComponent } from './bid-dialog/bid-dialog.component';
 import { CreateBuildingComponent } from './create-building/create-building.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { EditBuildingComponent } from './edit-building/edit-building.component';
 
 
 
@@ -107,7 +108,8 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     AddClubComponent,
     AddSignupComponent,
     BidDialogComponent,
-    CreateBuildingComponent
+    CreateBuildingComponent,
+    EditBuildingComponent
   ],
   imports: [
     BrowserModule,

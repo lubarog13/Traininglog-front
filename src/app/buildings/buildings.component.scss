@@ -1,6 +1,6 @@
 .container {
     margin: 0;
-    height: 93vh;
+    min-height: 93vh;
 }
     .mat-card-md-image {
         width: 112px;
@@ -39,11 +39,12 @@
 }
 
 .main {
-    background: url(https://i.pinimg.com/564x/32/8f/a6/328fa63d50c67172597d9430aa7ccce4.jpg);
+    background: url(https://i.pinimg.com/564x/32/8f/a6/328fa63d50c67172597d9430aa7ccce4.jpg) repeat-y;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
     background-size: 100%; /* Современные браузеры */
+    min-height: 100%;
 }
 
 .mat-list-item {

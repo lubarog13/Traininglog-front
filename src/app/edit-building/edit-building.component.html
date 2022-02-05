@@ -2,7 +2,7 @@
     <div fxFlex class="main-box">
         <div fxLayout="row" fxLayout.lt-md="column">
             <div fxFlex="50" id="left-form">
-                <h2>Создание здания</h2>
+                <h2>Редактирование здания</h2>
                 <form novalidate [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Название</mat-label>
@@ -39,17 +39,20 @@
                         <input matInput formControlName="lng" type="number" [(ngModel)]="center.lng">
                       <mat-error *ngIf="formErrors.lng">{{formErrors.lng}}</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="full-width" appearance="outline">
+                    <div class="main-box">
+                    <mat-form-field class="half-width" appearance="outline">
                         <mat-label>Изображение</mat-label>
                         <ngx-mat-file-input formControlName="image" accept="image/*"></ngx-mat-file-input>
                       <mat-error *ngIf="formErrors.image">{{formErrors.image}}</mat-error>
                     </mat-form-field>
+                    <img class="half-width" src="{{ BaseURL + 'media/' + id + '_building.jpg'}}">
+                    </div>
                     <button type="submit" class="submit-button" mat-button [disabled]="buildingForm.invalid">Сохранить</button>
                 </form>
             </div>
             <div fxFlex="50">
                 <h4 style="width: 100%; padding-top: 50px;">Выберите местоположение</h4>
-                <div style="width: 100%;" class="main-box" align="end">
+                <div style="width: 100%;" align="end">
                     
                   <google-map width="100%" [center]="center" (mapClick)="markerDragEnd($event)" [draggable]="false">
                       <map-marker

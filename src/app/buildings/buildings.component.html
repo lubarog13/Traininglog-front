@@ -4,10 +4,11 @@
         <div fxLayout="column" fxLayout.gt-sm="row" style="height: 100%;">
             <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings" class="main">
                 <mat-list *ngIf="isVertical && buildings">
-                <mat-list-item *ngFor="let building of buildings" appHighlight (click)="click(building)">
-                    <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-list-avatar>
-                    <h3 matLine class="bold">{{building.name}}</h3>
-                    <p matLine> {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
+                <mat-list-item *ngFor="let building of buildings" appHighlight>
+                    <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-list-avatar (click)="click(building)">
+                    <h3 matLine class="bold" (click)="click(building)">{{building.name}}</h3>
+                    <p matLine (click)="click(building)"> {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
+                    <a [routerLink]='["/building/update/"]' [queryParams]="{id: building.id}"><mat-icon style="color: black;">edit</mat-icon></a>
                     <mat-divider></mat-divider>
                 </mat-list-item>
                 </mat-list>
