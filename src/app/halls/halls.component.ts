@@ -19,6 +19,9 @@ export class HallsComponent implements OnInit {
   data: Map<Building, Hall[]> = new Map<Building, Hall[]>()
   errMsg: string
   selectedHall: Hall
+  openForm = false
+  openEditForm = false
+  editedHall: Hall
   isVertical=true
   center: google.maps.LatLngLiteral
   hall_id = 0
@@ -26,10 +29,17 @@ export class HallsComponent implements OnInit {
   constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getValues()
+    this.mediaObserver.asObservable().subscribe(changes => this.isVertical=!(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
+  }
+
+  getValues() {
     this.route.queryParams.subscribe(params => {
       if(params.hall_id!=undefined){
       this.hall_id = Number.parseInt(params.hall_id)
       }
+      this.halls=[]
+      this.data.clear()
     this.buildingService.getHalls().subscribe((responce) => {
       this.halls=responce
       this.click(this.halls[0])
@@ -45,7 +55,6 @@ export class HallsComponent implements OnInit {
       console.log(this.selectedHall)
     },(err) => this.errMsg=err )
   })
-    this.mediaObserver.asObservable().subscribe(changes => this.isVertical=!(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
   }
 
 

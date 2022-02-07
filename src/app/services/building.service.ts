@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, map } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Building, Hall } from '../shared/models';
+import { Building, Hall, HallForCreate } from '../shared/models';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
@@ -71,6 +71,49 @@ export class BuildingService {
         })
       };
       return this.http.put(baseURL+'building/' + id +  '/update/', building, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    createHall(hall: HallForCreate): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post(baseURL+'hall/create/', hall, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+
+    getHall(id: number): Observable<Hall> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token")
+        })
+      };
+      return this.http.get<Hall>(baseURL + "hall/" + id + "/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    updateHall(id: number, hall: HallForCreate): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.put(baseURL+'hall/' + id +  '/update/', hall, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    postHallFile(fileToUpload: File): Observable<Object> {
+      const formData: FormData = new FormData();
+      formData.append('image_file', fileToUpload, "1");
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Accept': '*/*'
+        })
+      };
+      console.log(formData.get('image_file'))
+      return this.http.post(baseURL + 'upload/hall/', formData, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
   
 }

@@ -1,0 +1,47 @@
+<div fxLayout="column">
+    <mat-card style="width: 350px; height: 550px;">
+        <mat-card-header>
+            <mat-card-title style="width: 100%;">
+                Обновление зала
+            </mat-card-title>
+            <div style="width: 30%; display: flex; justify-content: end;"><button mat-icon-button (click)="windowClosed.emit('closed')"><mat-icon>cancel</mat-icon></button></div>
+        </mat-card-header>
+        <mat-card-content>
+            <form novalidate [formGroup]="hallForm" (ngSubmit)="onSubmit()">
+                <p class="full-width">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Название</mat-label>
+                        <input matInput formControlName="name" required>
+                        <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+                    </mat-form-field>
+                </p>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Номер</mat-label>
+                        <input matInput formControlName="number" type="number">
+                        <mat-error *ngIf="formErrors.number">{{formErrors.number}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Здание</mat-label>
+                        <mat-select formControlName="building" required="true">
+                            <mat-option *ngFor="let building of buildings" [value]="building.id">{{building.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formErrors.building">{{formErrors.building}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Наполняемость</mat-label>
+                        <input matInput formControlName="occupancy" type="number">
+                        <mat-error *ngIf="formErrors.occupancy">{{formErrors.occupancy}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Изображение</mat-label>
+                        <ngx-mat-file-input  formControlName="image" accept="image/*"></ngx-mat-file-input>
+                        <mat-error *ngIf="formErrors.image">{{formErrors.image}}</mat-error>
+                    </mat-form-field>
+                    <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" height="50px">
+                <div class="submit-block">
+                    <button type="submit" class="submit-button" mat-button [disabled]="hallForm.invalid">Сохранить</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

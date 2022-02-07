@@ -78,6 +78,8 @@ import { BidDialogComponent } from './bid-dialog/bid-dialog.component';
 import { CreateBuildingComponent } from './create-building/create-building.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { EditBuildingComponent } from './edit-building/edit-building.component';
+import { CreateHallComponent } from './create-hall/create-hall.component';
+import { UpdateHallComponent } from './update-hall/update-hall.component';
 
 
 
@@ -109,7 +111,9 @@ import { EditBuildingComponent } from './edit-building/edit-building.component';
     AddSignupComponent,
     BidDialogComponent,
     CreateBuildingComponent,
-    EditBuildingComponent
+    EditBuildingComponent,
+    CreateHallComponent,
+    UpdateHallComponent
   ],
   imports: [
     BrowserModule,

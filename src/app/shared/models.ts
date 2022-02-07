@@ -244,3 +244,10 @@ export interface SignUpForCreate {
     end_date: string;
     identifier?: string;
 }
+
+export interface HallForCreate {
+    name: string;
+    number?: number;
+    building: number;
+    occupancy: number;
+}

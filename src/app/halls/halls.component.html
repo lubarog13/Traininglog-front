@@ -30,6 +30,7 @@
                         <mat-list-item *ngFor="let hall of building.value" (click)="click(hall)">
                             <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" mat-list-avatar>
                             <h3 matLine>{{hall.name+", "+hall.number }}</h3>
+                            <button mat-icon-button (click)="editedHall=hall; openEditForm=true; openForm=false"><mat-icon style="color: black;">edit</mat-icon></button>
                         </mat-list-item>
                     </mat-list>
                 </mat-expansion-panel>
@@ -74,4 +75,7 @@
         </div>
         </div>
      </div>
+     <app-update-hall *ngIf="openEditForm" (windowClosed)="openEditForm=false" class="add-hall" (created)="openEditForm=false; getValues()" [hall]="editedHall"></app-update-hall>
+     <app-create-hall *ngIf="openForm" (windowClosed)="openForm=false; " class="add-hall" (created)="openForm=false; getValues()"></app-create-hall>
+     <button mat-fab id="add-button" (click)="openEditForm? openEditForm=false: openForm=!openForm"><mat-icon>add</mat-icon></button>
 </div>

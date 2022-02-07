@@ -24,7 +24,7 @@ export class CreateBuildingComponent implements OnInit {
 
   validationMessages = {
     'name': {
-      'required': 'Введите название здание',
+      'required': 'Введите название здания',
       'minlength': 'Название должно быть больше 2 символов',
       'maxlength': 'Название должно быть меньше 100 символов'
     },
