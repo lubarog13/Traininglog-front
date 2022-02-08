@@ -55,7 +55,7 @@ import { expand } from '../animations/app.animations';
                              </div>
                         </mat-card-content>
                         <mat-card-footer style="display: flex;">
-                            <button mat-button class="button-ok" style="font-size: 11px" (click)="edit.emit('edit')" [disabled]="canEdit">
+                            <button mat-button class="button-ok" (click)="edit.emit('edit')" [disabled]="canEdit">
                                 <fa-icon [icon]="faEdit" ></fa-icon>
                               Редактировать
                             </button>

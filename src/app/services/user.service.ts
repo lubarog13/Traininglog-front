@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Coach, GroupAnalysis, Month, MonthsAnalysis, TypesAnalysis } from '../shared/models';
+import { Coach, GroupAnalysis, Month, MonthsAnalysis, TypesAnalysis, User } from '../shared/models';
 import { CoachResponse, UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -117,5 +117,14 @@ export class UserService {
       })
     };
     return this.http.post<GroupAnalysis>(baseURL + "coach/" + localStorage.getItem("coach_id") + "/analysis/groups/presences/", day, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getUser(id: number): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<User>(baseURL + "user/" + id + "/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 }

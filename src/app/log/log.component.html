@@ -13,7 +13,7 @@
                     <table mat-table [dataSource]="getPresencesByWorkoutId(workout.id)" class="mat-elevation-z8">
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef> Занимающийся</th>
-                            <td mat-cell *matCellDef="let presence" style="padding-right: 10px;"> {{presence.user.last_name + " " + presence.user.first_name + " " + presence.user.second_name}} </td>
+                            <td mat-cell *matCellDef="let presence" style="padding-right: 10px;" (click)="openDialog(presence.user)"> {{presence.user.last_name + " " + presence.user.first_name + " " + presence.user.second_name}} </td>
                         </ng-container>
                         <ng-container matColumnDef="is_attend">
                             <th mat-header-cell *matHeaderCellDef>Присутствие</th>

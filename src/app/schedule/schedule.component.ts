@@ -3,13 +3,15 @@ import { MatGridList } from '@angular/material/grid-list';
 import { BuildingService } from '../services/building.service';
 import { WorkoutService } from '../services/workout.service';
 import { baseURL } from '../shared/baseurl';
-import { Building, SimplePresence, Workout, Presence } from '../shared/models';
+import { Building, SimplePresence, Workout, Presence, User } from '../shared/models';
 import {MediaChange, MediaObserver} from '@angular/flex-layout';
 import { expand } from '../animations/app.animations';
 import { faThumbsUp, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import { PresenceService } from '../services/presence.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCalendar } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { UserInfoComponent } from '../user-info/user-info.component';
 
 @Component({
   selector: 'app-schedule',
@@ -65,7 +67,8 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   height: number
   presences: Map<number, boolean> = new Map<number,boolean>()
   selected_date = new Date()
-  constructor(private workoutService: WorkoutService, private presenceService: PresenceService,private mediaObserver: MediaObserver, private fb: FormBuilder, private renderer: Renderer2) 
+  constructor(private workoutService: WorkoutService, private presenceService: PresenceService,private mediaObserver: MediaObserver, private fb: FormBuilder
+    , private renderer: Renderer2, public dialog: MatDialog) 
   { 
     this.createForm()
   }
@@ -255,6 +258,12 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     this.headerText = "Тренировки "+ d.toLocaleDateString()
     this.workouts = this.monthWorkouts.filter(workout => workout.start_date.getDate()==d.getDate())
     this.selected_date = d
+  }
+
+  openDialog(user: User) {
+    let dialogRef = this.dialog.open(UserInfoComponent, {data: { user: user}})
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

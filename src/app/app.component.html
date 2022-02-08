@@ -22,7 +22,7 @@
             <span class="flex-spacer"></span>
             <div *ngIf="staticChangeMenu" fxLayout="row" >
             <div  *ngIf="!isCollapsed" ><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl" [matMenuTriggerFor]="menu1" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)"></fa-icon></div>
-                <mat-menu #menu1="matMenu">
+                <mat-menu #menu1="matMenu" [hasBackdrop]="false">
                     <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
                         <button mat-menu-item disabled="true">Здравствуйте, {{name + " " + surname}}</button>
                     <button mat-menu-item *ngFor="let item of profileitems" (click)="goToHref(item.route)"><fa-icon [icon]="item.iconName" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">{{item.displayName}}</span></button>

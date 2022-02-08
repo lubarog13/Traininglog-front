@@ -93,7 +93,7 @@ fxLayout="column"
                             <div><b>Окончание записи:</b> <span>{{signup.end_time.toLocaleDateString()}}</span></div>
                             <div *ngIf="usersForClubs.has(signup.club.id)" class="users-list">
                                 <p><b>Занмающиеся:</b></p>
-                                <span *ngFor="let user of usersForClubs.get(signup.club.id)" style="padding-left: 5px; padding-right: 5px; color: blue; float: left;">
+                                <span *ngFor="let user of usersForClubs.get(signup.club.id)" class="users" (click)="openUserDialog(user)">
                                     {{user.last_name + " " + user.first_name.charAt(0) + ". " + user.second_name.charAt(0) + "."}}
                                 </span>
                             </div>
@@ -118,7 +118,7 @@ fxLayout="column"
                             <div><b>Идентификатор:</b> <span>{{club.identifier}}</span></div>
                             <div *ngIf="usersForClubs.has(club.id)" class="users-list">
                                 <p><b>Занмающиеся:</b></p>
-                                <span *ngFor="let user of usersForClubs.get(club.id)" style="padding-left: 5px; padding-right: 5px; color: blue; float: left;">
+                                <span *ngFor="let user of usersForClubs.get(club.id)" class="users" (click)="openUserDialog(user)">
                                     {{user.last_name + " " + user.first_name.charAt(0) + ". " + user.second_name.charAt(0) + "."}}
                                 </span>
                             </div>

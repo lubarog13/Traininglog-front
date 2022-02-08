@@ -80,6 +80,7 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { EditBuildingComponent } from './edit-building/edit-building.component';
 import { CreateHallComponent } from './create-hall/create-hall.component';
 import { UpdateHallComponent } from './update-hall/update-hall.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 
 
@@ -113,7 +114,8 @@ import { UpdateHallComponent } from './update-hall/update-hall.component';
     CreateBuildingComponent,
     EditBuildingComponent,
     CreateHallComponent,
-    UpdateHallComponent
+    UpdateHallComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,

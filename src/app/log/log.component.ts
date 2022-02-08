@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { PresenceService } from '../services/presence.service';
 import { WorkoutService } from '../services/workout.service';
-import { Presence, Workout, SimplePresence, PresenceForCreate } from '../shared/models';
+import { Presence, Workout, SimplePresence, PresenceForCreate, User } from '../shared/models';
 import { expand } from '../animations/app.animations';
 import { group } from 'console';
+import { UserInfoComponent } from '../user-info/user-info.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-log',
@@ -24,7 +26,7 @@ export class LogComponent implements OnInit, AfterViewInit {
   presences: Presence[];
   displayedColumns: string[] = ['name', 'is_attend', 'not_attend', 'delay', 'early_ret', 'reason'];
 
-  constructor(private workoutService: WorkoutService, private presenceService: PresenceService, private renderer: Renderer2) { }
+  constructor(private workoutService: WorkoutService, private presenceService: PresenceService, private renderer: Renderer2, public dialog: MatDialog) { }
 
 
   ngAfterViewInit(): void {
@@ -106,6 +108,12 @@ export class LogComponent implements OnInit, AfterViewInit {
 
   updatePresence(presence: Presence) {
     this.presenceService.updatePresenceSimple(new PresenceForCreate(presence)).subscribe(response=> this.reloadWorkouts, err=> console.log(err))
+  }
+
+  openDialog(user: User) {
+    let dialogRef = this.dialog.open(UserInfoComponent, {data: { user: user}})
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }
 

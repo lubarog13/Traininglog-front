@@ -10,6 +10,7 @@ import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
 import { ClubsService } from '../services/clubs.service';
 import { UserService } from '../services/user.service';
 import { Building, Club, Coach, SignUp, SignUpForCreate, User } from '../shared/models';
+import { UserInfoComponent } from '../user-info/user-info.component';
 
 class Filter {
   by_coach: boolean
@@ -217,6 +218,12 @@ export class ClubsComponent implements OnInit, AfterViewInit {
     this.clubService.createSignupByIdentifier(signup).subscribe(response => this.getClubs(), err => console.log(err))
     this.identifier = undefined
   
+  }
+
+  openUserDialog(user: User) {
+    let dialogRef = this.dialog.open(UserInfoComponent, {data: { user: user}})
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

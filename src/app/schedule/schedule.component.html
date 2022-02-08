@@ -39,21 +39,21 @@
                              <div fxLayout="row" align="center" class="whoGoes" style="width: 100%;">
                                  <div fxFlex="33">
                                     <fa-icon [icon]="faThumbsUp" style="color: green; align-content: center;"></fa-icon>
-                                     <p *ngFor="let presence of whoGoes" align="left">
+                                     <button mat-button *ngFor="let presence of whoGoes" align="left" (click)="openDialog(presence.user)">
                                          {{presence.user.last_name + " "+ presence.user.first_name.charAt(0) + ". " + presence.user.second_name.charAt(0) + "."}}
-                                     </p>
+                                     </button>
                                  </div>
                                  <div fxFlex="33">
                                     <fa-icon [icon]="faQuestionCircle" style="color: grey;"></fa-icon>
-                                    <p *ngFor="let presence of whoDontKnow" align="left">
+                                    <button mat-button  *ngFor="let presence of whoDontKnow" align="left" (click)="openDialog(presence.user)">
                                         {{presence.user.last_name + " "+ presence.user.first_name.charAt(0) + ". " + presence.user.second_name.charAt(0) + "."}}
-                                    </p>
+                                    </button>
                                 </div>
                                  <div fxFlex="33">
                                     <fa-icon [icon]="faTimesCircle" style="color: red;"></fa-icon>
-                                    <p *ngFor="let presence of whoNotGoes" align="left">
+                                    <button mat-button  *ngFor="let presence of whoNotGoes" align="left" (click)="openDialog(presence.user)">
                                         {{presence.user.last_name + " "+ presence.user.first_name.charAt(0) + ". " + presence.user.second_name.charAt(0) + "."}}
-                                    </p>
+                                    </button>
                                 </div>
                              </div>
                              </div>
