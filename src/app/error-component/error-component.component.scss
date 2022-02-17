@@ -1,0 +1,30 @@
+.error {
+    width: 100%;
+    min-height: 90vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    justify-content: center;
+    &__img {
+        width: 200px;
+        height: auto;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__text {
+        text-align: center;
+    }
+
+    &__subtext {
+        text-align: center;
+        color: #666666;
+    }
+}

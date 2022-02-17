@@ -1,0 +1,24 @@
+<div class="error">
+    <div class="error__content" *ngIf="code===404">
+        <img class="error__img" src="assets/404_error.png">
+        <h3 class="error__text">Страницы не существует</h3>
+        <a href="/"><button mat-button class="primary-button">Вернуться на главную</button></a>
+    </div>
+    <div class="error__content" *ngIf="code===500 || code===0">
+        <img class="error__img" src="assets/server_error.png">
+        <h3 class="error__text">Произошла ошибка на сервере</h3>
+        <p class="error__subtext">Но мы ее чиним</p>
+    </div>
+    <div class="error__content" *ngIf="code===400">
+        <img class="error__img" src="assets/error.png">
+        <h3 class="error__text">Ошибка обработки запроса</h3>
+        <p class="error__subtext">Повторите позже</p>
+        <a href="/"><button mat-button class="primary-button">Вернуться на главную</button></a>
+    </div>
+    <div class="error__content" *ngIf="code==-1">
+        <img class="error__img" src="assets/unknown.png">
+        <h3 class="error__text">Произошла неизвестная ошибка</h3>
+        <p class="error__subtext">Если бы мы знали, что это такое, но мы не знаем</p>
+        <a href="/"><button mat-button class="primary-button">Вернуться на главную</button></a>
+    </div>
+</div>

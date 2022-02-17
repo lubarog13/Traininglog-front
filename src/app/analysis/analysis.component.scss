@@ -1,6 +1,6 @@
 .container {
     margin: 0;
-    height: 93vh;
+    min-height: 93vh;
     overflow: auto;
 }
 
@@ -22,6 +22,7 @@
     font-weight: 500;
     font-size: 24pt;
     height: 100%;
+    min-height: 200px;
     }
     
     #total {

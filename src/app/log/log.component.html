@@ -1,5 +1,5 @@
 <div class="container">
-    <div fxFlex>
+    <div fxFlex *ngIf="!errMess">
         <div fxLayout="row" fxLayout.lt-md="column" style="height: 100%;">
             <div fxLayout="column" fxFlex.gt-sm="50" id="calendar">
                 <mat-card appMaterialElevation [@expand] style="width: 50%; height: 60%; margin-top: 15%; margin-bottom: 15%;">
@@ -58,4 +58,5 @@
             </div>
         </div>
     </div>
+    <app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>
 </div>

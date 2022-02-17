@@ -1,5 +1,6 @@
 <div class="container"
 fxLayout="column"
+*ngIf="!errMess"
 >
 <div id="head_image">
     <h1 id="title">Аналитика</h1>
@@ -224,3 +225,4 @@ fxLayout="column"
         </div>
     </mat-tab>
 </mat-tab-group>
+<app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>

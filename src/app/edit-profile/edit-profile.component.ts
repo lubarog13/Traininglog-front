@@ -71,7 +71,7 @@ export class EditProfileComponent implements OnInit {
     this.authService.getMe().subscribe(response => {
       this.user = response
       this.editUserForm.setValue({first_name: response.first_name, last_name: response.last_name, second_name: response.second_name, email: response.email, date_birth: new Date(response.date_birth), sex: response.sex})
-    })
+    }, err => this.errMsg = err)
   }
 
   createForm() {

@@ -1,6 +1,6 @@
 <div class="container"
      fxLayout="column">
-     <div fxFlex>
+     <div fxFlex *ngIf="!errmess">
 <div fxLayout="column" fxLayout.gt-md="row" style="height: 100%;">
     <div fxFlex.gt-md="50" align="center" id="calendar_schedule">
         <mat-card appMaterialElevation [@expand] style="width: 50%; height: 60%; margin-top: 15%; margin-bottom: 15%;">
@@ -99,4 +99,5 @@
 <app-add-workout *ngIf="openAddForm" (windowClosed)="openAddForm=false" (created)="openAddForm=false; monthSelected()" id="add-workout"></app-add-workout>
 <button mat-fab color="primary" id="edit-button" [disabled]="!openEditForm" (click)="openEditForm=false" *ngIf="is_coach"><mat-icon>edit</mat-icon></button>
 <button mat-fab id="add-button" (click)="openAddForm= !openAddForm" *ngIf="is_coach"><mat-icon>add</mat-icon></button>
+<app-error-component [err]="errmess" *ngIf="errmess"></app-error-component>
 </div>

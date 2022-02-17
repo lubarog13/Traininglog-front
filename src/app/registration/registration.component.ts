@@ -22,6 +22,7 @@ export class RegistrationComponent implements OnInit {
   hide = true
   maxDate = new Date()
   errMsg: string;
+  errMess: String
   formErrors = {
     'first_name': '',
     'last_name': '',
@@ -133,6 +134,9 @@ export class RegistrationComponent implements OnInit {
       console.log(err)
         if(err.includes("username")) {
           this.errMsg = "Такой логин уже существует"
+        }
+        else {
+          this.errMess = err
         }
     })
   }

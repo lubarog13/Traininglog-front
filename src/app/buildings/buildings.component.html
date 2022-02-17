@@ -1,6 +1,6 @@
 <div class="container"
      fxLayout="column">
-     <div fxFlex>
+     <div fxFlex *ngIf="!errMess">
         <div fxLayout="column" fxLayout.gt-sm="row" style="height: 100%;">
             <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings" class="main">
                 <mat-list *ngIf="isVertical && buildings">
@@ -50,4 +50,5 @@
         </div>
          </div>
          <a href="/building/create/"><button mat-fab id="add-button"><mat-icon>add</mat-icon></button></a>
+         <app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>
 </div>

@@ -81,6 +81,8 @@ import { EditBuildingComponent } from './edit-building/edit-building.component';
 import { CreateHallComponent } from './create-hall/create-hall.component';
 import { UpdateHallComponent } from './update-hall/update-hall.component';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { ErrorComponentComponent } from './error-component/error-component.component';
+import { NoPageComponent } from './no-page/no-page.component';
 
 
 
@@ -115,7 +117,9 @@ import { UserInfoComponent } from './user-info/user-info.component';
     EditBuildingComponent,
     CreateHallComponent,
     UpdateHallComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    ErrorComponentComponent,
+    NoPageComponent
   ],
   imports: [
     BrowserModule,

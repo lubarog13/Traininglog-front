@@ -8,7 +8,6 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 export class AboutusComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
 

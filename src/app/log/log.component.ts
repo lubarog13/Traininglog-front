@@ -24,6 +24,7 @@ export class LogComponent implements OnInit, AfterViewInit {
   };
   day_workouts: Workout[];
   presences: Presence[];
+  errMess: String;
   displayedColumns: string[] = ['name', 'is_attend', 'not_attend', 'delay', 'early_ret', 'reason'];
 
   constructor(private workoutService: WorkoutService, private presenceService: PresenceService, private renderer: Renderer2, public dialog: MatDialog) { }
@@ -72,7 +73,7 @@ export class LogComponent implements OnInit, AfterViewInit {
       )))
       this.day_workouts = this.day_workouts.sort((a, b) => <any>new Date(b.start_time) - <any>new Date(a.start_time))
     }, err => {
-      console.log(err)
+      this.errMess = err
     })
   }
 
@@ -90,7 +91,7 @@ export class LogComponent implements OnInit, AfterViewInit {
         return false
       };
     }, 
-      err => console.log(err)
+      err => this.errMess = err
     )
   }
 
@@ -107,7 +108,7 @@ export class LogComponent implements OnInit, AfterViewInit {
 
 
   updatePresence(presence: Presence) {
-    this.presenceService.updatePresenceSimple(new PresenceForCreate(presence)).subscribe(response=> this.reloadWorkouts, err=> console.log(err))
+    this.presenceService.updatePresenceSimple(new PresenceForCreate(presence)).subscribe(response=> this.reloadWorkouts, err=> this.errMess = err)
   }
 
   openDialog(user: User) {

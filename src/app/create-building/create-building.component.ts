@@ -11,6 +11,7 @@ export class CreateBuildingComponent implements OnInit {
 
   buildingForm: FormGroup
   center: google.maps.LatLngLiteral
+  errMess: String
   formErrors = {
     'name': '',
     'city': '',
@@ -120,9 +121,11 @@ export class CreateBuildingComponent implements OnInit {
   onSubmit() {
     this.buildingService.createBuilding(this.buildingForm.value).subscribe(res => {
       this.buildingService.postFile(this.buildingForm.value['image']).subscribe(res => {window.location.href="/info/buildings"}, err=> {
-        console.log(err)
+        this.errMess = err
       })
-    }, err=> console.log(err))
+    }, 
+      err=> this.errMess = err
+    )
   }
 
 }

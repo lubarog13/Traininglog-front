@@ -1,5 +1,6 @@
 <div class="container"
 fxLayout="column"
+*ngIf="!errMess"
 >
 <mat-tab-group [selectedIndex]="active.value" (selectedTabChange)="selectedChange()" (selectedIndexChange)="active.setValue($event)">
     <mat-tab label="Входящие">
@@ -66,3 +67,4 @@ fxLayout="column"
 ></app-add-message>
 <button mat-fab id="add-button" (click)=" openMessageForm= openEditForm || openReplyForm ?false: !openMessageForm; openEditForm=false; openReplyForm = false"><mat-icon *ngIf="!openEditForm && !openReplyForm">add</mat-icon><mat-icon *ngIf="openEditForm || openReplyForm">edit</mat-icon></button>
 </div>
+<app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>

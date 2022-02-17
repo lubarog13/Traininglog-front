@@ -18,6 +18,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
   active = new FormControl(0)
   openMessageForm = false
   openReplyForm = false
+  errMess: String
   editedMessage: Message
   openEditForm = false
   messages: Message[]
@@ -57,7 +58,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
         for(let message of this.messages){
           message.send_date = new Date(message.send_time)
         }
-      })
+      }, err => this.errMess = err)
     } else {
       this.messageService.getMessagesFromUser().subscribe(response => {
         this.messages=response.Messages
@@ -65,7 +66,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
         for(let message of this.messages){
           message.send_date = new Date(message.send_time)
         }
-      })
+      }, err => this.errMess = err)
     }
   }
 

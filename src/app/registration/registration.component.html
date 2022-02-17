@@ -1,5 +1,5 @@
 <div class="container main-div imaged"
-    fxLayout="column">
+    fxLayout="column" *ngIf="!errMess">
     <mat-card [@expand]>
         <mat-card-header align="center">
             <mat-card-title style="font-size: 24px;">Регистрация</mat-card-title>
@@ -80,3 +80,4 @@
         </mat-card-content>
     </mat-card>
 </div>
+<app-error-component *ngIf="!errMess" [err]="errMess"></app-error-component>

@@ -16,6 +16,7 @@ export class AnalysisComponent implements OnInit {
     total: number;
     forTypes: TypesAnalysis
     public data2: any[];
+    errMsg: String
 
     constructor(private userService: UserService) {
     }
@@ -31,7 +32,7 @@ export class AnalysisComponent implements OnInit {
         { Value: response.For_all, Label: "Общая " + response.For_all/ this.total* 100 + "%"},
         { Value: response.Another, Label: "Другое " + response.Another/ this.total* 100 + "%"}
       ];
-    })
+    }, err=> this.errMsg = err)
     this.userService.getAnalysisForMonths().subscribe(response => {
       this.userService.getNotAttendCOuntForMonths().subscribe(response1 => {
         this.data2 = [
@@ -48,7 +49,7 @@ export class AnalysisComponent implements OnInit {
           { Month: "Ноябрь", Присутствий: response.nov, Отсутствий: response1.nov},
           { Month: "Декабрь", Count: response.dec, Отсутствий: response1.dec}
         ];
-      })
+      }, err => this.errMsg = err)
     }
     )
   }

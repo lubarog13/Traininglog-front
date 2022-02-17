@@ -12,6 +12,7 @@ import { EditProfileComponent } from "../edit-profile/edit-profile.component";
 import { HallsComponent } from "../halls/halls.component";
 import { LogComponent } from "../log/log.component";
 import { MessagesComponent } from "../messages/messages.component";
+import { NoPageComponent } from "../no-page/no-page.component";
 import { RegistrationComponent } from "../registration/registration.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 
@@ -30,5 +31,6 @@ export const routes: Routes = [
     {path: "traininglog", component: LogComponent},
     {path: "building/create", component: CreateBuildingComponent},
     {path: "building/update", component: EditBuildingComponent},
-    { path: '', redirectTo: '/schedule', pathMatch: 'full' }
+    { path: '', redirectTo: '/schedule', pathMatch: 'full' },
+    {path: "**", pathMatch: 'full', component: NoPageComponent}
 ];

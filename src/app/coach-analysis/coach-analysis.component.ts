@@ -32,6 +32,7 @@ export class CoachAnalysisComponent implements OnInit {
     clubAnalysis: TypesAnalysis[]
     usersForClub: Map<number, User[]> = new Map
     selectedUser: User
+    errMess: String
 
     constructor(private userService: UserService, private clubService: ClubsService) {
     }
@@ -41,15 +42,7 @@ export class CoachAnalysisComponent implements OnInit {
       this.getGroupStat()
       this.clubService.getClubsForCoach(Number.parseInt(localStorage.getItem("coach_id"))).subscribe(response =>{
         this.clubs = response.Clubs
-      })
-/*       this.data2 = [
-        {Group: 'девочки 2007-2008', Количество: 0.3},
-        {Group: 'девочки 2007-2008', Количество: 0},
-        {Group: 'девочки 2007-2008', Количество: 0.9},
-        {Group: 'девочки 2007-2008', Количество: 0},
-        {Group: 'девочки 2009-2010 г.р.', Количество: 0.5},
-        {Group: 'Девочки 2008-2009', Количество: 0.27}
-    ]; */
+      }, err => this.errMess = err)
   }
 
   getGroupStat() {
@@ -69,10 +62,9 @@ export class CoachAnalysisComponent implements OnInit {
           }
           this.data2.push({Group: workout.club__group, Количество: Number.parseFloat(count.toFixed(2))})
         }
-        console.log(this.data2)
       })
     }
-      , err=> console.log(err))
+      , err=> this.errMess = err)
   }
 
   getMonthAnalysis() {
@@ -89,7 +81,7 @@ export class CoachAnalysisComponent implements OnInit {
           { Value: response.For_all, Label: "Общая " + (response.For_all/ this.total* 100).toFixed(2) + "%"},
           { Value: response.Another, Label: "Другое " + (response.Another/ this.total* 100).toFixed(2) + "%"}
         ];
-    }, err=> console.log(err))
+    }, err=> this.errMess = err)
   }
     else{
       this.userService.getAnalysisForMonth(index).subscribe(response=> {
@@ -102,7 +94,7 @@ export class CoachAnalysisComponent implements OnInit {
             { Value: response.For_all, Label: "Общая " + (response.For_all/ this.total* 100).toFixed(2) + "%"},
             { Value: response.Another, Label: "Другое " + (response.Another/ this.total* 100).toFixed(2) + "%"}
           ];
-      })
+      }, err => this.errMess = err)
     }
   }
 
@@ -123,14 +115,13 @@ export class CoachAnalysisComponent implements OnInit {
         this.data3.push({Group: this.clubs.filter( club => club.id== presence.workout__club__id)[0].group, Количество: presence.pcount})
         this.getClubStat(presence.workout__club__id)
       }
-      console.log(this.data3)
-    })
+    }, err => this.errMess = err)
   }
 
   getClubStat(club_id: number) {
     this.clubService.getClubAnalysis(club_id).subscribe(response=> {
       response.club = this.clubs.filter( club => club.id== club_id)[0].group
-      this.clubAnalysis.push(response)}
+      this.clubAnalysis.push(response)}, err=> this.errMess = err
       )
   }
 
@@ -153,7 +144,7 @@ selectedChange() {
   else{
     this.usersForClub.clear()
     for (let club of this.clubs){
-      this.userService.getUsersForClub(club.id).subscribe(response=> this.usersForClub.set(club.id, response.Users))
+      this.userService.getUsersForClub(club.id).subscribe(response=> this.usersForClub.set(club.id, response.Users), err=> this.errMess = err)
     }
   }
 }
@@ -169,7 +160,7 @@ getUserAnalysis(user: User) {
       { Value: response.For_all, Label: "Общая " + response.For_all/ this.total* 100 + "%"},
       { Value: response.Another, Label: "Другое " + response.Another/ this.total* 100 + "%"}
     ];
-  })
+  }, err => this.errMess = err)
   this.userService.getAnalysisForMonths(user.id).subscribe(response => {
     this.userService.getNotAttendCOuntForMonths(user.id).subscribe(response1 => {
       this.data5 = [
@@ -186,7 +177,7 @@ getUserAnalysis(user: User) {
         { Month: "Ноябрь", Присутствий: response.nov, Отсутствий: response1.nov},
         { Month: "Декабрь", Count: response.dec, Отсутствий: response1.dec}
       ];
-    })
+    }, err => this.errMess = err)
   }
   )
   this.selectedUser=user

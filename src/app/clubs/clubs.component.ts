@@ -203,7 +203,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
     this.clubService.deleteSignup(signup_id).subscribe(response => {
       this.sign_ups = this.sign_ups.filter(signup=> signup.id!=signup_id)
     }, err=> {
-      
+      this.errMess = err
     })
   }
 

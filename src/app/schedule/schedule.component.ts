@@ -195,7 +195,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     }
     this.presenceService.updatePresence(Number.parseInt( localStorage.getItem("id")), workout_id, new Presence(is_attend, reason)).subscribe((request) => console.log("req", request), errmess=> err=errmess)
     if(err!="") {
-      console.log(err)
+     this.errmess = err
       return
     }
     for(let workout of this.workouts) {

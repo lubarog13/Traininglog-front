@@ -1,5 +1,5 @@
 <div class="container" fxLayout="column">
-    <div fxFlex class="main-box">
+    <div fxFlex class="main-box" *ngIf="!errMess">
         <div fxLayout="row" fxLayout.lt-md="column">
             <div fxFlex="50" id="left-form">
                 <h2>Создание здания</h2>
@@ -61,4 +61,5 @@
             </div>
         </div>
     </div>
+    <app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>
 </div>
