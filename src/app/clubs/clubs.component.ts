@@ -63,6 +63,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   is_coach: boolean
   usersForClubs: Map<number,User[]> = new Map
   identifier: string
+  loading = false
 
   constructor(private route: ActivatedRoute, private router: Router, private clubService: ClubsService, private mediaObserver: MediaObserver, private userService: UserService, public dialog: MatDialog) { 
     
@@ -102,6 +103,7 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   }
 
   getClubs() {
+    this.loading = true
     if(!this.myclubs)
     this.clubService.getClubs().subscribe(clubs => {
       this.clubs=clubs
@@ -120,16 +122,22 @@ export class ClubsComponent implements OnInit, AfterViewInit {
       }
       this.coach_names = c_names.map(name=> new Check(name, false))
       this.building_names = b_names.map(name => new Check(name, false))
-      console.log(c_names)
-    }, err=> this.errMess=err)
+      this.loading = false
+    }, err=> {
+      this.errMess=err
+      this.loading = false
+    })
     else if (!this.is_coach){
     this.clubService.getSignUpsForUser(Number.parseInt(localStorage.getItem("id"))).subscribe(response=> {
       this.sign_ups = response.Sign_Ups
       for(let signup of this.sign_ups){
         signup.end_time=new Date(signup.end_date)
       }
-      console.log("signups", this.sign_ups)
-    }, err => this.errMess=err
+      this.loading = false
+    }, err => {
+      this.errMess=err
+      this.loading = false
+    }
     )
   }
   else {

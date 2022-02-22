@@ -1,5 +1,6 @@
+<app-loading *ngIf="loading"></app-loading>
 <div class="container main-div imaged"
-    fxLayout="column" *ngIf="!errMsg">
+    fxLayout="column" *ngIf="!errMsg && !loading">
     <mat-card [@expand]>
         <mat-card-header align="center">
             <mat-card-title style="font-size: 24px;">Изменение профиля</mat-card-title>

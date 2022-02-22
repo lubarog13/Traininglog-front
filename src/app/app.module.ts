@@ -83,6 +83,7 @@ import { UpdateHallComponent } from './update-hall/update-hall.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { ErrorComponentComponent } from './error-component/error-component.component';
 import { NoPageComponent } from './no-page/no-page.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -119,7 +120,8 @@ import { NoPageComponent } from './no-page/no-page.component';
     UpdateHallComponent,
     UserInfoComponent,
     ErrorComponentComponent,
-    NoPageComponent
+    NoPageComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

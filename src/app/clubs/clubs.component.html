@@ -1,7 +1,8 @@
-
+<app-loading *ngIf="loading"></app-loading>
 <div class="container"
 fxLayout="column"
 *ngIf="!errMess" 
+[ngClass]="loading?'unvisible': ''"
 >
     <mat-tab-group [selectedIndex]="active.value" (selectedTabChange)="selectedChange()" (selectedIndexChange)="active.setValue($event)">
         <mat-tab label="Все секции" >
@@ -137,6 +138,6 @@ fxLayout="column"
     <app-add-club *ngIf="openAddForm" (windowClosed)="openAddForm=false" (clubCreated)="openAddForm=false; getClubs()" class="add-club"></app-add-club>
     <button mat-fab id="add-button" (click)="openAddForm= openAddSignupForm? false: !openAddForm; openAddSignupForm=false" *ngIf="is_coach"><mat-icon>add</mat-icon></button>
 </div>
-<div class="container">
-    <app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>
+<div class="container" *ngIf="errMess">
+    <app-error-component [err]="errMess"></app-error-component>
 </div>

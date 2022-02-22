@@ -20,6 +20,7 @@ export class CoachesComponent implements OnInit, AfterViewInit {
     sm: 3,
     xs: 2
   } 
+  loading = false
 
   constructor(private userService: UserService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver ) { }
 
@@ -31,7 +32,14 @@ export class CoachesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.userService.getCoaches().subscribe(response=> this.coaches=response,err=> this.errMess=err)
+    this.loading = true
+    this.userService.getCoaches().subscribe(response=> {
+      this.coaches=response
+      this.loading = false
+    },err=> {
+      this.errMess=err
+      this.loading = false
+    })
   }
 
 }

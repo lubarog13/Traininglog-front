@@ -31,6 +31,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
     sm: 2,
     xs: 1
   } 
+  loading = false
 
   constructor(private route: ActivatedRoute, private router: Router, private messageService: MessagesService, private mediaObserver: MediaObserver, public dialog: MatDialog) { }
   ngAfterViewInit(): void {
@@ -42,6 +43,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.loading = true
     this.route.queryParams.subscribe(params => {
       this.incoming = (params.incoming=="true")
       this.active.setValue(this.incoming==true ? 0: 1)
@@ -58,7 +60,11 @@ export class MessagesComponent implements OnInit, AfterViewInit {
         for(let message of this.messages){
           message.send_date = new Date(message.send_time)
         }
-      }, err => this.errMess = err)
+        this.loading = false
+      }, err => {
+        this.errMess = err
+        this.loading = false
+      })
     } else {
       this.messageService.getMessagesFromUser().subscribe(response => {
         this.messages=response.Messages
@@ -66,7 +72,11 @@ export class MessagesComponent implements OnInit, AfterViewInit {
         for(let message of this.messages){
           message.send_date = new Date(message.send_time)
         }
-      }, err => this.errMess = err)
+        this.loading = false
+      }, err => {
+        this.errMess = err
+        this.loading = false
+      })
     }
   }
 

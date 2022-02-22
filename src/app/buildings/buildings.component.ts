@@ -15,6 +15,7 @@ export class BuildingsComponent implements OnInit {
   errMess: string;
   selectedBuilding: Building
   isVertical=true
+  loading = false
   center: google.maps.LatLngLiteral
 
   constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
@@ -25,13 +26,16 @@ export class BuildingsComponent implements OnInit {
   }
 
   getBuildings() {
+    this.loading = true
     this.buildingService.getBuildings().subscribe((response) => {
       this.buildings = response
-      console.log(response)
       if(this.route.snapshot.queryParams['building_id']!=undefined) this.click(this.buildings.filter(building => building.id==Number.parseInt(this.route.snapshot.queryParams['building_id']))[0])
       else this.click(this.buildings[0])
-      console.log(this.selectedBuilding)
-    }, (err) => this.errMess=err)
+      this.loading = false
+    }, (err) => {
+      this.errMess=err
+      this.loading = false
+    })
   }
 
   click(building: Building) {

@@ -48,6 +48,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   months = ["январе", "феврале", "марте", "апреле", "мае", "июне", "июле", "августе", "сентябре", "октябре", "ноябре", "декабре"]
   currentWorkoutId=0
   isOpen = false
+  loading = false
 
   myFilter = (d: Date | null): boolean => {
     return true
@@ -108,7 +109,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     this.is_coach =  localStorage.getItem("is_coach")=="true"
     this.height = window.innerHeight - 500
     console.log(localStorage.getItem("coach_id"))
-
+    this.loading = true
     if (localStorage.getItem("is_coach")=="true") {
       this.workoutService.getMonthWorkoutsForCoach(Number.parseInt(localStorage.getItem("coach_id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
         response => {
@@ -125,11 +126,17 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
             }
             return false
           };
+          this.loading = false
          }
-          , errmess =>this.errmess=errmess
+          , errmess => {
+            this.errmess=errmess
+            this.loading = false
+          }
        )  
     }
-    else this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
+    else {
+      
+      this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), new Date().getMonth() + 1, new Date().getFullYear()).subscribe(
       response => {
         this.monthWorkouts=response.Workouts
         for(let workout of this.monthWorkouts){
@@ -144,10 +151,15 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
           }
           return false
         };
+        this.loading = false
        }
-        , errmess =>this.errmess=errmess
+        , errmess => {
+          this.errmess=errmess
+          this.loading = false
+        }
      )  
-
+      }
+      this.loading = true
        this.workoutService.getWeekWorkouts(localStorage.getItem("is_coach")=="true"? Number.parseInt(localStorage.getItem("coach_id")): Number.parseInt(localStorage.getItem("id")), localStorage.getItem("is_coach")).subscribe(response => {
          this.workouts=response.Workouts
          for(let workout of this.workouts){
@@ -156,8 +168,12 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
            workout.color = this.colors[workout.type]
          }
          console.log(this.workouts)
+         this.loading = false
         }
-         , errmess =>this.errmess=errmess
+         , errmess => {
+           this.errmess=errmess
+           this.loading = false
+         }
          )
   }
 
@@ -169,12 +185,17 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
 
   getPresences(id: number): void {
     if(!this.isOpen || id!=this.currentWorkoutId){
+      this.loading = true
       this.presenceService.getPresencesForWorkout(id).subscribe((response)=> {
         this.whoGoes = response.Presences.filter((presence) => presence.is_attend==true)
         this.whoNotGoes = response.Presences.filter((presence) => presence.is_attend==false)
         this.whoDontKnow = response.Presences.filter((presence) => presence.is_attend==null)
         this.currentWorkoutId=id
         this.isOpen=true
+        this.loading = false
+      }, err => {
+        this.errmess = err
+        this.loading = false
       })
     } else {
       this.whoGoes=undefined
@@ -193,7 +214,11 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     } else if (is_attend==false) {
       this.sendReason.set(workout_id, false)
     }
-    this.presenceService.updatePresence(Number.parseInt( localStorage.getItem("id")), workout_id, new Presence(is_attend, reason)).subscribe((request) => console.log("req", request), errmess=> err=errmess)
+    this.loading = true
+    this.presenceService.updatePresence(Number.parseInt( localStorage.getItem("id")), workout_id, new Presence(is_attend, reason)).subscribe((request) => this.loading = false, errmess=> {
+      this.errmess=errmess
+      this.loading = false
+    })
     if(err!="") {
      this.errmess = err
       return
@@ -211,7 +236,9 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   }
 
   monthSelected() {
+    console.log('ok')
     this.headerText = "Тренировки в " + this.months[this.currentMonth.getMonth()]
+    this.loading = true
     if (localStorage.getItem("is_coach")=="true") {
       this.workoutService.getMonthWorkoutsForCoach(Number.parseInt(localStorage.getItem("coach_id")), this.currentMonth.getMonth() + 1, this.currentMonth.getFullYear()).subscribe(
         response => {
@@ -229,8 +256,12 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
             return false
           };
           this.workouts = this.monthWorkouts
+          this.loading = false
          }
-          , errmess =>this.errmess=errmess
+          , errmess => {
+            this.errmess=errmess
+            this.loading = false
+          }
        )  
     }
     else this.workoutService.getMonthWorkouts(Number.parseInt( localStorage.getItem("id")), this.currentMonth.getMonth() +1, this.currentMonth.getFullYear()).subscribe(
@@ -249,8 +280,12 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
           return false
         };
         this.workouts = this.monthWorkouts
+        this.loading = false
        }
-        , errmess =>this.errmess=errmess
+        , errmess => {
+          this.errmess=errmess
+          this.loading = false
+        }
      )  
   }
 

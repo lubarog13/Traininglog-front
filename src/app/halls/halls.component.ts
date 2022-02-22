@@ -23,6 +23,7 @@ export class HallsComponent implements OnInit {
   openEditForm = false
   editedHall: Hall
   isVertical=true
+  loading=false
   center: google.maps.LatLngLiteral
   hall_id = 0
 
@@ -34,6 +35,7 @@ export class HallsComponent implements OnInit {
   }
 
   getValues() {
+    this.loading = true
     this.route.queryParams.subscribe(params => {
       if(params.hall_id!=undefined){
       this.hall_id = Number.parseInt(params.hall_id)
@@ -52,8 +54,11 @@ export class HallsComponent implements OnInit {
         this.data.set(building, this.halls.filter(hall => hall.building.id==building.id))
       }
       if(this.hall_id!=0) this.selectedHall = this.halls.filter(hall=> hall.id==this.hall_id)[0]
-      console.log(this.selectedHall)
-    },(err) => this.errMsg=err )
+      this.loading = false
+    },(err) => {
+      this.errMsg=err 
+      this.loading = false
+    })
   })
   }
 

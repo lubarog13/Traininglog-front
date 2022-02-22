@@ -1,4 +1,6 @@
+<app-loading *ngIf="loading"></app-loading>
 <div class="container"
+*ngIf="!loading"
      fxLayout="column">
      <div fxFlex *ngIf="!errMess">
         <div fxLayout="column" fxLayout.gt-sm="row" style="height: 100%;">

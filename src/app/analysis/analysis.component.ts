@@ -17,11 +17,13 @@ export class AnalysisComponent implements OnInit {
     forTypes: TypesAnalysis
     public data2: any[];
     errMsg: String
+    loading = false
 
     constructor(private userService: UserService) {
     }
 
   ngOnInit(): void {
+    this.loading = true
     this.userService.getAnalysisForTypes().subscribe(response => {
       this.total = response.Cardio+response.Strength+response.For_tech+response.For_all+response.Another
       this.forTypes=response
@@ -32,7 +34,11 @@ export class AnalysisComponent implements OnInit {
         { Value: response.For_all, Label: "Общая " + response.For_all/ this.total* 100 + "%"},
         { Value: response.Another, Label: "Другое " + response.Another/ this.total* 100 + "%"}
       ];
-    }, err=> this.errMsg = err)
+      this.loading = false
+    }, err=> {
+      this.errMsg = err
+      this.loading = false
+    })
     this.userService.getAnalysisForMonths().subscribe(response => {
       this.userService.getNotAttendCOuntForMonths().subscribe(response1 => {
         this.data2 = [
@@ -49,7 +55,11 @@ export class AnalysisComponent implements OnInit {
           { Month: "Ноябрь", Присутствий: response.nov, Отсутствий: response1.nov},
           { Month: "Декабрь", Count: response.dec, Отсутствий: response1.dec}
         ];
-      }, err => this.errMsg = err)
+        this.loading = false
+      }, err=> {
+        this.errMsg = err
+        this.loading = false
+      })
     }
     )
   }

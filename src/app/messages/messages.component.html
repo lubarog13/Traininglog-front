@@ -1,6 +1,8 @@
+<app-loading *ngIf="loading"></app-loading>
 <div class="container"
 fxLayout="column"
 *ngIf="!errMess"
+[ngClass]="loading?'unvisible': ''"
 >
 <mat-tab-group [selectedIndex]="active.value" (selectedTabChange)="selectedChange()" (selectedIndexChange)="active.setValue($event)">
     <mat-tab label="Входящие">

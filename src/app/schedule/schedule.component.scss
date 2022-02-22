@@ -8,8 +8,18 @@
 
 .on_train {
     color: $green-aceent-color;
-
 }
+
+.calendar-card {
+    width: fit-content !important;
+    margin-top: 15%; 
+    margin-bottom: 15%;
+
+    .calendar {
+    width: 50vh;
+    }
+}
+
 .dont_know {
     color: rgb(100, 98, 98);
     margin-left: 5px;
@@ -91,6 +101,7 @@
     -o-background-size: 100%; /* Opera 9.6+ */
     background-size: 100%; /* Современные браузеры */
     max-height: 93vh;
+    background-color: #1e6fb3;
 }
 
 @media (min-width: 992px) {
@@ -103,7 +114,7 @@
 }
 .container {
     margin: 0;
-    height: 93vh;
+    min-height: 93vh;
 }
 
 #add-button {
