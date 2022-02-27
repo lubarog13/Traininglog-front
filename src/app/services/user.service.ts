@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
-import { Coach, GroupAnalysis, Month, MonthsAnalysis, TypesAnalysis, User } from '../shared/models';
-import { CoachResponse, UserResponse } from '../shared/responses';
+import { Coach, FCMDevice, GroupAnalysis, Month, MonthsAnalysis, TypesAnalysis, User } from '../shared/models';
+import { CoachResponse, DeviceResponse, UserResponse } from '../shared/responses';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
@@ -126,5 +126,34 @@ export class UserService {
       })
     };
     return this.http.get<User>(baseURL + "user/" + id + "/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   getDevicesForUser(): Observable<DeviceResponse> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token")
+      })
+    };
+    return this.http.get<DeviceResponse>(baseURL + "user/" + localStorage.getItem("id") + "/fcmdevices/", httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   createDevice(device: FCMDevice): Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(baseURL + "fcmdevice/create/", device, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   updateDevice(device: FCMDevice): Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put(baseURL + "fcmdevice/" +  device.id +"/update/", device, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
 }

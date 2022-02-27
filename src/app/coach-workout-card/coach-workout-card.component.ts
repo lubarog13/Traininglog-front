@@ -30,6 +30,7 @@ import { expand } from '../animations/app.animations';
                                  : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 
                                  + workout.club.coach.user.second_name.charAt(0)+ "."}}</span></div>
                              <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>
+                             <div class="workout_cancel" *ngIf="workout.is_carried_out">Тренировка отменена</div>
                              <div *ngIf="(whoDontKnow!=undefined || whoGoes!=undefined || whoNotGoes!=undefined)">
                             <mat-divider></mat-divider>
                              <div fxLayout="row" align="center" class="whoGoes" style="width: 100%;">
@@ -59,7 +60,7 @@ import { expand } from '../animations/app.animations';
                                 <fa-icon [icon]="faEdit" ></fa-icon>
                               Редактировать
                             </button>
-                            <button mat-button class="button-no" [disabled]="canEdit">
+                            <button mat-button class="button-no" [disabled]="canEdit || workout.is_carried_out" (click)="cancel.emit('cancel')" >
                                 <fa-icon [icon]="faWindowClose"></fa-icon>
                                 Отменить
                             </button>
@@ -79,6 +80,7 @@ export class CoachWorkoutCardComponent implements OnInit {
 
   @Input("workout") workout: Workout
   @Output() edit = new EventEmitter()
+  @Output() cancel = new EventEmitter()
   whoGoes: SimplePresence[]
   whoNotGoes: SimplePresence[]
   whoDontKnow: SimplePresence[]

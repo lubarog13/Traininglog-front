@@ -251,3 +251,20 @@ export interface HallForCreate {
     building: number;
     occupancy: number;
 }
+
+export interface FCMDevice {
+    id: number;
+    name:string;
+    active: boolean;
+    date_created: string;
+    device_id?: string;
+    registration_id: string;
+    type: string;
+    user: number
+}
+
+export interface Notification {
+    club: number;
+    title: string;
+    message: string;
+}

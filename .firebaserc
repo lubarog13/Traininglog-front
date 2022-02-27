@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "traininglog-22569": {
+      "hosting": {
+        "training-log": [
+          "traininglog-22569"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "traininglog-22569"
+  }
+}

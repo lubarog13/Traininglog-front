@@ -84,6 +84,9 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { ErrorComponentComponent } from './error-component/error-component.component';
 import { NoPageComponent } from './no-page/no-page.component';
 import { LoadingComponent } from './loading/loading.component';
+import { environment } from "../environments/environment";
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
 
 
 

@@ -3,7 +3,7 @@ import { MatGridList } from '@angular/material/grid-list';
 import { BuildingService } from '../services/building.service';
 import { WorkoutService } from '../services/workout.service';
 import { baseURL } from '../shared/baseurl';
-import { Building, SimplePresence, Workout, Presence, User } from '../shared/models';
+import { Building, SimplePresence, Workout, Presence, User, WorkoutForCreate } from '../shared/models';
 import {MediaChange, MediaObserver} from '@angular/flex-layout';
 import { expand } from '../animations/app.animations';
 import { faThumbsUp, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
@@ -299,6 +299,15 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
     let dialogRef = this.dialog.open(UserInfoComponent, {data: { user: user}})
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  cancelWorkout(workout: Workout) {
+    const wfc: WorkoutForCreate = new WorkoutForCreate(workout.start_time, workout.end_time, workout.type, true, workout.hall.id, workout.club.id, workout.other_type, workout.coach_replace? workout.coach_replace.id: null)
+      this.workoutService.editWorkout(wfc, workout.id).subscribe(res => {
+          this.workoutService.sendNotification(workout).subscribe(()=> alert("Вы отменили тренировку"),err => this.errmess = err)
+      }, err => {
+        this.errmess = err
+      })
   }
 
 }

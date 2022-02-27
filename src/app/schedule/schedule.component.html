@@ -37,6 +37,7 @@
                                  : workout.club.coach.user.last_name + " " + workout.club.coach.user.first_name.charAt(0) + ". " 
                                  + workout.club.coach.user.second_name.charAt(0)+ "."}}</span></div>
                              <div>Тип: <span class="right_column"> {{workout.type!="другое"? workout.type: workout.other_type}}</span></div>
+                             <div class="workout_cancel" *ngIf="workout.is_carried_out">Тренировка отменена</div>
                              <div *ngIf="(whoDontKnow!=undefined || whoGoes!=undefined || whoNotGoes!=undefined) && currentWorkoutId==workout.id">
                             <mat-divider></mat-divider>
                              <div fxLayout="row" align="center" class="whoGoes" style="width: 100%;">
@@ -91,6 +92,7 @@
                     <app-coach-workout-card *ngIf="is_coach"
                         [workout]="workout"
                         (edit)="editedWorkout = workout; openEditForm=true"
+                        (cancel)="cancelWorkout(workout)"
                     >
                     </app-coach-workout-card>
                 </mat-grid-tile>

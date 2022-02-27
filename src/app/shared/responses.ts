@@ -1,4 +1,4 @@
-import { Club, Coach, Message, Presence, SignUp, SimplePresence, User, Workout } from "./models";
+import { Club, Coach, FCMDevice, Message, Presence, SignUp, SimplePresence, User, Workout } from "./models";
 
 export interface WorkoutResponse {
   Workouts: Workout[]
@@ -31,4 +31,8 @@ export interface CoachResponse {
 
 export interface ClubsResponse {
   Clubs: Club[]
+}
+
+export interface DeviceResponse {
+  Devices: FCMDevice[]
 }

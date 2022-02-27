@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { Workout, WorkoutForCreate } from '../shared/models';
+import { Workout, WorkoutForCreate, Notification } from '../shared/models';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { WorkoutResponse } from '../shared/responses';
+import { formatDate } from '@angular/common';
 
 
 @Injectable({
@@ -68,6 +69,21 @@ export class WorkoutService {
         })
       };
       return this.http.put(baseURL + "workout/" + id +"/update/", workout, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
+    sendNotification(workout: Workout): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      const notification: Notification  = {
+        club: workout.club.id,
+        title: `Тренировка ${formatDate(workout.start_date, "dd.MM", "en-US")} в ${formatDate(workout.start_date, "HH:mm", "en-Us")} отменена`,
+        message: `Занятие для группы ${workout.club.group + " " + workout.club.name} отменено `
+      }
+      return this.http.post(baseURL + "send_message/", notification, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
     
 }

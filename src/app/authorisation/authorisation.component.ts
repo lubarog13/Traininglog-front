@@ -66,7 +66,7 @@ export class AuthorisationComponent implements OnInit {
   getCoachInfo() {
     this.userService.getCoachForUser(Number.parseInt(localStorage.getItem("id"))).subscribe(response => {
       localStorage.setItem("coach_id", response.Coach.id.toString())
-      console.log(response.Coach.id)
+      console.log("coach_id", response.Coach.id)
     })
   }
 
