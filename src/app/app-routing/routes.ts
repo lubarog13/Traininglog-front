@@ -14,12 +14,14 @@ import { LogComponent } from "../log/log.component";
 import { MessagesComponent } from "../messages/messages.component";
 import { NoPageComponent } from "../no-page/no-page.component";
 import { RegistrationComponent } from "../registration/registration.component";
+import { ResetPasswordComponent } from "../reset-password/reset-password.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 
 export const routes: Routes = [
     { path: 'schedule', component: ScheduleComponent},
     { path: 'auth', component: AuthorisationComponent},
     { path: 'registration', component: RegistrationComponent},
+    { path: 'reset-password', component: ResetPasswordComponent},
     { path: 'info/buildings', component: BuildingsComponent},
     { path: 'info/halls', component: HallsComponent},
     { path: 'info/clubs', component: ClubsComponent},

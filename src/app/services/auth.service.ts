@@ -61,4 +61,17 @@ export class AuthService {
       return this.http.post(baseURL + "auth/token/logout", null, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
+    resetPassword(email): Observable<Object> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  'Token ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        })
+      };
+      const body = {
+        email: email
+      }
+      return this.http.post(baseURL + "auth/users/reset_password/", body, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+    }
+
 }

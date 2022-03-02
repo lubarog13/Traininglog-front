@@ -9,7 +9,9 @@
                 <p style="width: 90%;"><mat-form-field style="width: 100%;" appearance="outline"><mat-label>Логин{{" " + " "}}</mat-label><input matInput (input)="changed()" formControlName="login" type="text" required></mat-form-field></p>
                 <p style="width: 90%;"><mat-form-field style="width: 100%;" appearance="outline"><mat-label>Пароль</mat-label><input matInput (input)="changed()" formControlName="password" [type]="hide ? 'password' : 'text'" required><button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button></mat-form-field></p>
+                  </button></mat-form-field>
+                  <a class="forgot_password" href="reset-password">Забыли пароль?</a>
+                </p>
                 <br *ngIf="!errMess">
                 <p style="color: red;" *ngIf="errMess">{{errMess}}</p>
                 <button class="submit-button" mat-button type="submit" [disabled]="authForm.invalid">Войти</button><a style="margin-left: 20px;" href="registration">Регистрация</a>
