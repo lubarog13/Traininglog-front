@@ -1,5 +1,8 @@
 # TrainingLog
 
+![Screenshot](screen1.jpg)
+![Screenshot](screen2.png)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
 ## Development server
