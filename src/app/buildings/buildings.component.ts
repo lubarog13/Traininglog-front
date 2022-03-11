@@ -51,4 +51,8 @@ export class BuildingsComponent implements OnInit {
     console.log($event.latLng.lat())
   }
 
+  getIsAdmin(): boolean {
+    return localStorage.getItem("username")==='admin';
+  }
+
 }

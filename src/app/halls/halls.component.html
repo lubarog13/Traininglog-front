@@ -79,6 +79,6 @@
      </div>
      <app-update-hall *ngIf="openEditForm" (windowClosed)="openEditForm=false" class="add-hall" (created)="openEditForm=false; getValues()" [hall]="editedHall"></app-update-hall>
      <app-create-hall *ngIf="openForm" (windowClosed)="openForm=false; " class="add-hall" (created)="openForm=false; getValues()"></app-create-hall>
-     <button mat-fab id="add-button" (click)="openEditForm? openEditForm=false: openForm=!openForm"><mat-icon>add</mat-icon></button>
+     <button *ngIf="getIsAdmin()" mat-fab id="add-button" (click)="openEditForm? openEditForm=false: openForm=!openForm"><mat-icon>add</mat-icon></button>
      <app-error-component *ngIf="errMsg" [err]="errMsg"></app-error-component>
 </div>

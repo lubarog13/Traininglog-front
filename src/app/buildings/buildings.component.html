@@ -51,6 +51,6 @@
         </div>
         </div>
          </div>
-         <a href="/building/create/"><button mat-fab id="add-button"><mat-icon>add</mat-icon></button></a>
+         <a href="/building/create/" *ngIf="getIsAdmin()" ><button mat-fab id="add-button"><mat-icon>add</mat-icon></button></a>
          <app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>
 </div>

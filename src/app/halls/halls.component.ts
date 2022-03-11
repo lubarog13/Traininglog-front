@@ -62,6 +62,10 @@ export class HallsComponent implements OnInit {
   })
   }
 
+  getIsAdmin(): boolean {
+    return localStorage.getItem("username")==='admin';
+  }
+
 
   click(hall: Hall) {
     this.selectedHall=hall

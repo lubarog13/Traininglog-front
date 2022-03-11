@@ -143,7 +143,8 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   else {
     this.clubService.getClubsForCoach(Number.parseInt(localStorage.getItem("coach_id"))).subscribe(response => {
       this.clubs = response.Clubs
-    })
+    }, err => this.errMess = err)
+    this.loading = false
   }
   }
 

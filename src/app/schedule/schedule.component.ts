@@ -26,7 +26,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit{
   @ViewChild('reasonform') reasonFormDirective;
 
   gridByBreakpoint = {
-    xl: 3,
+    xl: 2,
     lg: 2,
     md: 2,
     sm: 2,

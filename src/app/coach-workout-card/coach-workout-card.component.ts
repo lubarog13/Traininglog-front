@@ -7,7 +7,7 @@ import { expand } from '../animations/app.animations';
 @Component({
   selector: 'app-coach-workout-card',
   template: `
-    <mat-card appMaterialElevation [@expand]>
+    <mat-card appMaterialElevation [@expand] class="coach__card">
                         <mat-card-header>
                         <mat-card-title>
                             {{workout.club.name}}
