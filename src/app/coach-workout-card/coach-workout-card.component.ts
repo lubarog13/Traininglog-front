@@ -58,7 +58,7 @@ import { expand } from '../animations/app.animations';
                         <mat-card-footer style="display: flex;">
                             <button mat-button class="button-ok" (click)="edit.emit('edit')" [disabled]="canEdit">
                                 <fa-icon [icon]="faEdit" ></fa-icon>
-                              Редактировать
+                              Редакт.
                             </button>
                             <button mat-button class="button-no" [disabled]="canEdit || workout.is_carried_out" (click)="cancel.emit('cancel')" >
                                 <fa-icon [icon]="faWindowClose"></fa-icon>

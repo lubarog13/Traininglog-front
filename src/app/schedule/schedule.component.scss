@@ -95,7 +95,7 @@
   }
 
   #calendar_schedule {
-    background: url(http://localhost:8000/media/image_4.png) no-repeat;
+    background: url(https://bf81-178-66-156-123.ngrok.io/media/image_4.png) no-repeat;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
@@ -160,13 +160,10 @@
 
 .mat-card {
     width: 80%;
+    overflow-y: auto;
 }
 
 .workout_cancel {
     color: red;
     font-weight: 600;
-}
-
-.coach__card {
-    min-width: 400px;
 }

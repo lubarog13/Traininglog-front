@@ -26,10 +26,12 @@ export class HallsComponent implements OnInit {
   loading=false
   center: google.maps.LatLngLiteral
   hall_id = 0
+  isAdmin = false
 
   constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.isAdmin = localStorage.getItem("username")==="admin";
     this.getValues()
     this.mediaObserver.asObservable().subscribe(changes => this.isVertical=!(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
   }

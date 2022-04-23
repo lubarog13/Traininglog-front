@@ -47,6 +47,7 @@ export class AppComponent {
  
   public closeOnDocumentClick: boolean = true;
   is_coach = localStorage.getItem("is_coach")=="true"
+  is_admin = localStorage.getItem("username")==="admin"
 
   constructor(private mediaObserver: MediaObserver, private authService: AuthService, public dialog: MatDialog, private userService: UserService, private router: Router) { }
 
@@ -55,7 +56,7 @@ export class AppComponent {
     this.name = localStorage.getItem("first_name")
     this.surname = localStorage.getItem("last_name")
     AppComponent.showMenu = localStorage.getItem("id")!=undefined
-    if(!AppComponent.showMenu && !(window.location.href==="http://localhost:4200/auth" || window.location.href==="http://localhost:4200/registration")) window.location.href="auth"
+    if(!AppComponent.showMenu && !(window.location.href==="http://localhost:4200/auth" || window.location.href==="http://localhost:4200/registration" || window.location.href==="http://localhost:4200/reset-password")) window.location.href="auth"
     console.log(this.isCollapsed)
     this.menuitems[1].disabled = !this.is_coach
     this.requestPermission();

@@ -48,8 +48,10 @@ export class AuthorisationComponent implements OnInit {
           localStorage.setItem("id", response.id.toString())
           localStorage.setItem("is_coach", response.is_coach? "true": "false")
           AppComponent.changeMenu(true)
-          if (response.is_coach==true) this.getCoachInfo()
-          window.location.href="schedule"
+          if (response.is_coach==true) {
+            this.getCoachInfo()
+          }
+          else window.location.href="schedule"
         }, err => console.log(err))
       },
       err => {
@@ -66,7 +68,7 @@ export class AuthorisationComponent implements OnInit {
   getCoachInfo() {
     this.userService.getCoachForUser(Number.parseInt(localStorage.getItem("id"))).subscribe(response => {
       localStorage.setItem("coach_id", response.Coach.id.toString())
-      console.log("coach_id", response.Coach.id)
+      window.location.href="schedule"
     })
   }
 

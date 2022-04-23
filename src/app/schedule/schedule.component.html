@@ -12,7 +12,7 @@
     </div>
     <div fxFlex="50" id="schedule" >
             <h2 style="text-align: center; color: white;" class="mat-elevation-z3">{{headerText}}</h2>
-            <mat-grid-list #grid rowHeight="400px" >
+            <mat-grid-list #grid rowHeight="500px" >
                 <mat-grid-tile *ngFor="let workout of workouts">
                     <mat-card appMaterialElevation [@expand] *ngIf="!is_coach">
                         <mat-card-header>

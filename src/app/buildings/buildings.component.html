@@ -10,7 +10,7 @@
                     <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-list-avatar (click)="click(building)">
                     <h3 matLine class="bold" (click)="click(building)">{{building.name}}</h3>
                     <p matLine (click)="click(building)"> {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
-                    <a [routerLink]='["/building/update/"]' [queryParams]="{id: building.id}"><mat-icon style="color: black;">edit</mat-icon></a>
+                    <a *ngIf="isAdmin" [routerLink]='["/building/update/"]' [queryParams]="{id: building.id}"><mat-icon style="color: black;">edit</mat-icon></a>
                     <mat-divider></mat-divider>
                 </mat-list-item>
                 </mat-list>

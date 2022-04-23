@@ -17,11 +17,13 @@ export class BuildingsComponent implements OnInit {
   isVertical=true
   loading = false
   center: google.maps.LatLngLiteral
+  isAdmin = false
 
   constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
       this.getBuildings()
+      this.isAdmin = localStorage.getItem("username")==="admin";
     this.mediaObserver.asObservable().subscribe(changes => this.isVertical=!(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
   }
 

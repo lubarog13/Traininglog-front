@@ -32,7 +32,7 @@
                         <mat-list-item *ngFor="let hall of building.value" (click)="click(hall)">
                             <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" mat-list-avatar>
                             <h3 matLine>{{hall.name+", "+hall.number }}</h3>
-                            <button mat-icon-button (click)="editedHall=hall; openEditForm=true; openForm=false"><mat-icon style="color: black;">edit</mat-icon></button>
+                            <button mat-icon-button *ngIf="isAdmin" (click)="editedHall=hall; openEditForm=true; openForm=false"><mat-icon style="color: black;">edit</mat-icon></button>
                         </mat-list-item>
                     </mat-list>
                 </mat-expansion-panel>

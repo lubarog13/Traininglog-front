@@ -43,10 +43,10 @@ export class ClubsComponent implements OnInit, AfterViewInit {
   openAddForm = false
   openAddSignupForm = false
   gridByBreakpoint = {
-    xl: 5,
-    lg: 4,
-    md: 3,
-    sm: 2,
+    xl: 4,
+    lg: 3,
+    md: 2,
+    sm: 1,
     xs: 1
   } 
   myclubs: boolean
