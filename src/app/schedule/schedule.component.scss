@@ -12,7 +12,7 @@
 
 .calendar-card {
     width: fit-content !important;
-    margin-top: 15%; 
+    margin-top: 15%;
     margin-bottom: 15%;
 
     .calendar {
@@ -84,18 +84,18 @@
     height: 340px;
     display: block;
   }
-  
+
   .fixed-calendar .md-calendar-scroll-mask {
     width: 340px !important;
   }
-  
+
   .fixed-calendar .md-virtual-repeat-scroller {
     width: 340px !important;
     height: 308px;
   }
 
   #calendar_schedule {
-    background: url(https://bf81-178-66-156-123.ngrok.io/media/image_4.png) no-repeat;
+    background: url(https://lubarog13.pythonanywhere.com/media/image_4.png) no-repeat;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
@@ -108,7 +108,7 @@
     #calendar_schedule {
         -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-    -o-background-size: 100%; 
+    -o-background-size: 100%;
     background-size: 100%;
     }
 }
