@@ -24,7 +24,7 @@ type PaneType = 'left' | 'right';
     flyInOut(),
     slide(),
     expand()
-  ] 
+  ]
 })
 export class AppComponent {
   @Input() activePane: PaneType = 'right';
@@ -44,7 +44,7 @@ export class AppComponent {
   public static isCollapsed: boolean = false
   public showBackdrop: boolean = false;
   message:any = null;
- 
+
   public closeOnDocumentClick: boolean = true;
   is_coach = localStorage.getItem("is_coach")=="true"
   is_admin = localStorage.getItem("username")==="admin"
@@ -88,7 +88,7 @@ export class AppComponent {
   }
   get staticChangeMenu() {
     return AppComponent.showMenu;
-  } 
+  }
 
   goToHref(href: string) {
     window.location.href = href
@@ -143,7 +143,7 @@ export class AppComponent {
   requestPermission() {
     const messaging = getMessaging();
     const username = localStorage.getItem("username")
-    getToken(messaging, 
+    getToken(messaging,
      { vapidKey: environment.firebase.vapidKey}).then(
        (currentToken) => {
          if (currentToken) {
@@ -191,5 +191,5 @@ export class AppComponent {
       console.log(err)
     })
   }
-  
+
 }
