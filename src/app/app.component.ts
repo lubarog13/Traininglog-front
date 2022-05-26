@@ -56,7 +56,7 @@ export class AppComponent {
     this.name = localStorage.getItem("first_name")
     this.surname = localStorage.getItem("last_name")
     AppComponent.showMenu = localStorage.getItem("id")!=undefined
-    if(!AppComponent.showMenu && !(window.location.href==="http://localhost:4200/auth" || window.location.href==="http://localhost:4200/registration" || window.location.href==="http://localhost:4200/reset-password")) window.location.href="auth"
+    if(!AppComponent.showMenu && !(window.location.pathname==="/auth" || window.location.pathname==="/registration" || window.location.pathname==="/reset-password")) this.router.navigate(["/auth"])
     console.log(this.isCollapsed)
     this.menuitems[1].disabled = !this.is_coach
     this.requestPermission();
@@ -90,8 +90,8 @@ export class AppComponent {
     return AppComponent.showMenu;
   }
 
-  goToHref(href: string) {
-    window.location.href = href
+  goToHref(href: string, query?: Object) {
+    this.router.navigate([`/${href}`], {queryParams: query})
   }
 
   mouseEnter(trigger) {

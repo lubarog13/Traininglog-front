@@ -6,15 +6,15 @@
             <div class="space"></div>
             <div *ngIf="staticChangeMenu" fxLayout="row">
             <div [hidden]="isCollapsed" *ngFor="let menuItem of menuitems">
-                <a *ngIf="menuItem.children!=null" mat-button [routerLink]="[menuItem.route]" [routerLinkActive]="[menuItem.active]" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)">
+                <a *ngIf="menuItem.children!=null" mat-button [routerLink]="[menuItem.route]" [queryParams]="menuItem.query" [routerLinkActive]="[menuItem.active]" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)">
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
-                <a *ngIf="menuItem.children==null" mat-button [routerLink]="menuItem.disabled==true? ['#']: [menuItem.route]" [routerLinkActive]="[menuItem.active]"  [disabled]="menuItem.disabled==true" style="background: #245796;">
+                <a *ngIf="menuItem.children==null" [queryParams]="menuItem.query" mat-button [routerLink]="menuItem.disabled==true? ['#']: [menuItem.route]" [routerLinkActive]="[menuItem.active]"  [disabled]="menuItem.disabled==true" style="background: #245796;">
                     <fa-icon [icon]="menuItem.iconName" class="fa fa-lg"></fa-icon> {{menuItem.displayName}}
                 </a>
                 <mat-menu #menu="matMenu" [hasBackdrop]="false">
                     <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
-                    <button mat-menu-item *ngFor="let childItem of menuItem.children" (click)="goToHref(childItem.route)">{{ childItem.displayName }}</button>
+                    <button mat-menu-item *ngFor="let childItem of menuItem.children" (click)="goToHref(childItem.route, childItem.query)">{{ childItem.displayName }}</button>
                 </div>
                     </mat-menu>
             </div>
@@ -25,7 +25,7 @@
                 <mat-menu #menu1="matMenu" [hasBackdrop]="false">
                     <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
                         <button mat-menu-item disabled="true">Здравствуйте, {{name + " " + surname}}</button>
-                    <button mat-menu-item *ngFor="let item of profileitems" (click)="goToHref(item.route)"><fa-icon [icon]="item.iconName" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">{{item.displayName}}</span></button>
+                    <button mat-menu-item *ngFor="let item of profileitems" (click)="goToHref(item.route, item.query)"><fa-icon [icon]="item.iconName" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">{{item.displayName}}</span></button>
                     <button mat-menu-item  (click)="openLogoutDialog()"><fa-icon [icon]="faSignOutAlt" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">"Выход"</span></button>
                     </div>
                 </mat-menu>

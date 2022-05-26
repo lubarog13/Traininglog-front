@@ -82,6 +82,8 @@ export class MessagesComponent implements OnInit, AfterViewInit {
 
   selectedChange() {
     console.log("nav1", this.incoming)
+    let val = this.active.value===0
+    if(val===this.incoming) return
       this.incoming = this.incoming===true? false: true
       console.log("nav", this.incoming)
       this.router.navigate(

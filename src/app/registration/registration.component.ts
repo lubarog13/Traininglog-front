@@ -7,6 +7,7 @@ import { formatDate } from '@angular/common';
 import { expand } from '../animations/app.animations';
 import { MatDialog } from '@angular/material/dialog';
 import { SubmitDialogComponent } from '../submit-dialog/submit-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -78,7 +79,7 @@ export class RegistrationComponent implements OnInit {
     }
   }  
 
-  constructor(private fb: FormBuilder, private authService: AuthService, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -166,7 +167,7 @@ export class RegistrationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      if(result==true) window.location.href = "auth"
+      if(result==true) this.router.navigate(["/auth"])
     });
   }
 

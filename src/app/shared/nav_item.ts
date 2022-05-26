@@ -7,4 +7,5 @@ export interface NavItem {
     active?: string;
     route?: string;
     children?: NavItem[];
+    query?: Object
 }

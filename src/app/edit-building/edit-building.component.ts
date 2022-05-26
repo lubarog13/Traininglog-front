@@ -58,7 +58,7 @@ export class EditBuildingComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder, private buildingService: BuildingService, private route: ActivatedRoute, @Inject('BaseURL') public BaseURL) { }
+  constructor(private fb: FormBuilder, private buildingService: BuildingService, private route: ActivatedRoute, @Inject('BaseURL') public BaseURL, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -125,11 +125,11 @@ export class EditBuildingComponent implements OnInit {
   onSubmit() {
     this.buildingService.updateBuilding(this.id, this.buildingForm.value).subscribe(res => {
       if (this.buildingForm.value['image']!=null){
-      this.buildingService.postFile(this.buildingForm.value['image']).subscribe(res => {window.location.href="/info/buildings"}, err=> {
+      this.buildingService.postFile(this.buildingForm.value['image']).subscribe(res => {this.router.navigate(["/info/buildings"])}, err=> {
         console.log(err)
       })
     } else {
-      window.location.href="/info/buildings"
+      this.router.navigate(["/info/buildings"])
     }
     }, err=> console.log(err))
   }

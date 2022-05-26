@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { expand } from '../animations/app.animations';
 import { AppComponent } from '../app.component';
 import { AuthService } from '../services/auth.service';
@@ -22,7 +23,7 @@ export class AuthorisationComponent implements OnInit {
   token: string
   hide = true
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -51,7 +52,7 @@ export class AuthorisationComponent implements OnInit {
           if (response.is_coach==true) {
             this.getCoachInfo()
           }
-          else window.location.href="schedule"
+          else this.router.navigate(["/schedule"])
         }, err => console.log(err))
       },
       err => {
@@ -68,7 +69,7 @@ export class AuthorisationComponent implements OnInit {
   getCoachInfo() {
     this.userService.getCoachForUser(Number.parseInt(localStorage.getItem("id"))).subscribe(response => {
       localStorage.setItem("coach_id", response.Coach.id.toString())
-      window.location.href="schedule"
+      this.router.navigate(["/schedule"])
     })
   }
 

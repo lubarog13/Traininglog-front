@@ -91,8 +91,10 @@ export class ClubsComponent implements OnInit, AfterViewInit {
 
   selectedChange() {
     console.log("nav1", this.myclubs)
+    let val = this.active.value===0
+    if(val===!this.myclubs) return
       this.myclubs = this.myclubs===true? false: true
-      console.log("nav", this.myclubs)
+      console.log("nav", this.active.value, this.myclubs)
       this.router.navigate(
         ['.'],
         {

@@ -37,7 +37,10 @@ export const MENUITEMS: NavItem[] = [
             },
             {
                 displayName: "Секции",
-                route: "/info/clubs?myclubs=false"
+                route: "/info/clubs",
+                query: {
+                    "myclubs": false
+                }
             },
             {
                 displayName: "О нас",
@@ -51,20 +54,32 @@ export const PROFILEITMS: NavItem[] = [
     {
         displayName: "Мои секции",
         iconName: faRunning,
-        route: "/info/clubs?myclubs=true"
+        route: "/info/clubs",
+        query: {
+            "myclubs": true
+        }
     },
     {
         displayName: "Мои сообщения",
         iconName: faEnvelope,
-        route: "/profile/messages?incoming=true",
+        route: "/profile/messages",
+        query: {
+            "incoming": true
+        },
         children: [
             {
                 displayName: "Входящие",
-                route: "/profile/messages?incoming=true"
+                route: "/profile/messages",
+                query: {
+                    "incoming": true
+                },
             },
             {
                 displayName: "Исходящие",
-                route: "/profile/messages?incoming=false"
+                route: "/profile/messages",
+                query: {
+                    "incoming": true
+                },
             }
         ]
     },

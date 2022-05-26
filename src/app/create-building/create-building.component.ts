@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BuildingService } from '../services/building.service';
 
 @Component({
@@ -56,7 +57,7 @@ export class CreateBuildingComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder, private buildingService: BuildingService) { }
+  constructor(private fb: FormBuilder, private buildingService: BuildingService, private router: Router) { }
 
   ngOnInit(): void {
     this.setCurrentLocation()
@@ -120,7 +121,7 @@ export class CreateBuildingComponent implements OnInit {
 
   onSubmit() {
     this.buildingService.createBuilding(this.buildingForm.value).subscribe(res => {
-      this.buildingService.postFile(this.buildingForm.value['image']).subscribe(res => {window.location.href="/info/buildings"}, err=> {
+      this.buildingService.postFile(this.buildingForm.value['image']).subscribe(res => {this.router.navigate(["/info/buildings"])}, err=> {
         this.errMess = err
       })
     }, 
