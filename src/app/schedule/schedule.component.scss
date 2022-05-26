@@ -14,9 +14,13 @@
     width: fit-content !important;
     margin-top: 15%;
     margin-bottom: 15%;
+    @media (min-width: 870px) {
+        margin-top: 5%;
+    }
 
     .calendar {
-    width: 50vh;
+    width: 50vw;
+    max-width: 400px;
     }
 }
 
@@ -69,6 +73,8 @@
 }
 
 .whoGoes {
+    max-height: 100px;
+    overflow: auto;
     p {
         font-size: 12px;
     }

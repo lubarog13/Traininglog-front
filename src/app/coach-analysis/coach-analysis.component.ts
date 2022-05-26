@@ -154,11 +154,11 @@ getUserAnalysis(user: User) {
     this.total = response.Cardio+response.Strength+response.For_tech+response.For_all+response.Another
     this.forTypes=response
     this.data4 = [
-      { Value: response.Cardio, Label: "Кардио " + response.Cardio / this.total * 100+ "%"},
-      { Value: response.Strength, Label: "Силовая " + response.Strength/ this.total* 100 + "%"},
-      { Value: response.For_tech, Label: "На технику " + response.For_tech/ this.total* 100 + "%"},
-      { Value: response.For_all, Label: "Общая " + response.For_all/ this.total* 100 + "%"},
-      { Value: response.Another, Label: "Другое " + response.Another/ this.total* 100 + "%"}
+      { Value: response.Cardio, Label: "Кардио " + (response.Cardio / this.total * 100).toFixed(2)+ "%"},
+      { Value: response.Strength, Label: "Силовая " + (response.Strength/ this.total* 100).toFixed(2) + "%"},
+      { Value: response.For_tech, Label: "На технику " + (response.For_tech/ this.total* 100).toFixed(2) + "%"},
+      { Value: response.For_all, Label: "Общая " + (response.For_all/ this.total* 100).toFixed(2) + "%"},
+      { Value: response.Another, Label: "Другое " + (response.Another/ this.total* 100).toFixed(2) + "%"}
     ];
   }, err => this.errMess = err)
   this.userService.getAnalysisForMonths(user.id).subscribe(response => {
