@@ -21,7 +21,7 @@ export const MENUITEMS: NavItem[] = [
     {
         displayName: "Информация",
         iconName: faInfo,
-        route: "/info",
+        route: "/aboutus",
         children: [
             {
                 displayName: "Здания",
