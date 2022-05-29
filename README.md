@@ -1,5 +1,7 @@
 # TrainingLog
 
+Project running on https://lubarog13.github.io/
+
 ![Screenshot](screen1.jpg)
 ![Screenshot](screen2.png)
 
