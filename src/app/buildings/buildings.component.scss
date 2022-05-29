@@ -66,3 +66,15 @@
     margin-bottom: 30px;
     z-index: 1000;
 }
+
+.mat-list-base {
+    width: 100%;
+}
+
+.building_card {
+    height: 80%;
+    width: 200px; 
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}

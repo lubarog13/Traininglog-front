@@ -46,6 +46,8 @@ export class AuthorisationComponent implements OnInit {
           localStorage.setItem("username", response.username)
           localStorage.setItem("first_name", response.first_name)
           localStorage.setItem("last_name", response.last_name)
+          AppComponent.first_name = response.first_name
+          AppComponent.surname = response.last_name
           localStorage.setItem("id", response.id.toString())
           localStorage.setItem("is_coach", response.is_coach? "true": "false")
           AppComponent.changeMenu(true)

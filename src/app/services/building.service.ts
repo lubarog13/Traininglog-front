@@ -41,9 +41,12 @@ export class BuildingService {
       return this.http.post(baseURL+'building/create/', building, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
-    postFile(fileToUpload: File): Observable<Object> {
+    postFile(fileToUpload: File, building_id?: number): Observable<Object> {
       const formData: FormData = new FormData();
       formData.append('image_file', fileToUpload, "1");
+      if (building_id) {
+        formData.append('building_id', building_id.toString())
+      }
       const httpOptions = {
         headers: new HttpHeaders({
           'Authorization':  'Token ' + localStorage.getItem("token"),
@@ -103,9 +106,12 @@ export class BuildingService {
       return this.http.put(baseURL+'hall/' + id +  '/update/', hall, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
     }
 
-    postHallFile(fileToUpload: File): Observable<Object> {
+    postHallFile(fileToUpload: File, hall_id?: number ): Observable<Object> {
       const formData: FormData = new FormData();
       formData.append('image_file', fileToUpload, "1");
+      if (hall_id) {
+        formData.append('hall_id', hall_id.toString())
+      }
       const httpOptions = {
         headers: new HttpHeaders({
           'Authorization':  'Token ' + localStorage.getItem("token"),

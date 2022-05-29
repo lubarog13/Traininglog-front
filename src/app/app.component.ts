@@ -30,8 +30,8 @@ export class AppComponent {
   @Input() activePane: PaneType = 'right';
   menuitems = MENUITEMS
   profileitems = PROFILEITMS
-  name: string
-  surname: string
+  static first_name: string
+  static surname: string
   title  = 'training-log'
   faBars=faBars
   faUserCircle = faUserCircle
@@ -53,8 +53,8 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.mediaObserver.asObservable().subscribe(changes => this.isCollapsed=(changes[0].mqAlias=="xs" || changes[0].mqAlias=="sm"))
-    this.name = localStorage.getItem("first_name")
-    this.surname = localStorage.getItem("last_name")
+    AppComponent.first_name = localStorage.getItem("first_name")
+    AppComponent.surname = localStorage.getItem("last_name")
     AppComponent.showMenu = localStorage.getItem("id")!=undefined
     if(!AppComponent.showMenu && !(window.location.pathname==="/auth" || window.location.pathname==="/registration" || window.location.pathname==="/reset-password")) this.router.navigate(["/auth"])
     console.log(this.isCollapsed)
@@ -118,6 +118,7 @@ export class AppComponent {
   logout() {
     this.authService.logout().subscribe(response => {
       this.clearLocalStorage()
+      AppComponent.showMenu = false
       this.goToHref("/auth")
     })
   }
@@ -190,6 +191,14 @@ export class AppComponent {
     }, err=> {
       console.log(err)
     })
+  }
+
+  get staticFirst_name() {
+    return AppComponent.first_name
+  }
+
+  get staticSurname() {
+    return AppComponent.surname
   }
 
 }

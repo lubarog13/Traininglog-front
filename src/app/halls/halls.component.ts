@@ -27,6 +27,7 @@ export class HallsComponent implements OnInit {
   center: google.maps.LatLngLiteral
   hall_id = 0
   isAdmin = false
+  time = new Date().getTime()
 
   constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
 

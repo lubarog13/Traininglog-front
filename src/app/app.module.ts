@@ -87,6 +87,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { environment } from "../environments/environment";
 import { initializeApp } from "firebase/app";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CreateCoachComponent } from './create-coach/create-coach.component';
+import { UpdateCoachComponent } from './update-coach/update-coach.component';
 initializeApp(environment.firebase);
 
 
@@ -126,7 +128,9 @@ initializeApp(environment.firebase);
     ErrorComponentComponent,
     NoPageComponent,
     LoadingComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CreateCoachComponent,
+    UpdateCoachComponent
   ],
   imports: [
     BrowserModule,

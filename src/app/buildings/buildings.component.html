@@ -7,7 +7,7 @@
             <div fxFlex="50" fxFlex.gt-sm="30" fxLayout="row" fxLayout.gt-md="column" id="buildings" class="main">
                 <mat-list *ngIf="isVertical && buildings">
                 <mat-list-item *ngFor="let building of buildings" appHighlight>
-                    <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-list-avatar (click)="click(building)">
+                    <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg?t=' + time}}" mat-list-avatar (click)="click(building)">
                     <h3 matLine class="bold" (click)="click(building)">{{building.name}}</h3>
                     <p matLine (click)="click(building)"> {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
                     <a *ngIf="isAdmin" [routerLink]='["/building/update/"]' [queryParams]="{id: building.id}"><mat-icon style="color: black;">edit</mat-icon></a>
@@ -15,11 +15,12 @@
                 </mat-list-item>
                 </mat-list>
                 <div fxLayout="row" *ngIf="!isVertical && buildings" style="max-height: 50vh;">
-                    <mat-card appMaterialElevation *ngFor="let building of buildings" style="height: 80%; margin: 20px;" (click)="click(building)">
-                        <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg'}}" mat-card-image>
+                    <mat-card appMaterialElevation *ngFor="let building of buildings" class="building_card" (click)="click(building)">
+                        <img src="{{ BaseURL + 'media/' + building.id + '_building.jpg?t=' + time}}" mat-card-image>
                         <mat-card-content>
                             <h3 >{{building.name}}</h3>
                     <p > {{ building.city + " " + building.address + " д." + building.number + building.liter}}</p>
+                    <a *ngIf="isAdmin" [routerLink]='["/building/update/"]' [queryParams]="{id: building.id}"><mat-icon style="color: black;">edit</mat-icon></a>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -34,7 +35,7 @@
                         <p><b>Дом:</b> {{selectedBuilding.number}}</p>
                         <p><b>Литера:</b> {{selectedBuilding.liter}}</p> 
                     </div>
-                <img src="{{ BaseURL + 'media/' + selectedBuilding.id + '_building.jpg'}}" fxFlex="60">
+                <img src="{{ BaseURL + 'media/' + selectedBuilding.id + '_building.jpg?t=' + time}}" fxFlex="60">
                 </div>
                 <div style="width: 100%;" align="end">
                     

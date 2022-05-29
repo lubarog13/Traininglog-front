@@ -13,6 +13,7 @@ export class CoachesComponent implements OnInit, AfterViewInit {
   @ViewChild('gridList') gridList: MatGridList
   coaches: Coach[]
   errMess: string
+  editedCoach: Coach
   gridByBreakpoint = {
     xl: 6,
     lg: 5,
@@ -21,6 +22,10 @@ export class CoachesComponent implements OnInit, AfterViewInit {
     xs: 2
   } 
   loading = false
+  isAdmin = false
+  openForm = false
+  openEditForm = false
+  time = new Date().getTime()
 
   constructor(private userService: UserService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver ) { }
 
@@ -32,7 +37,16 @@ export class CoachesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.isAdmin = localStorage.getItem("username")==="admin";
     this.loading = true
+    this.getValues()
+  }
+
+  getIsAdmin(): boolean {
+    return localStorage.getItem("username")==='admin';
+  }
+
+  getValues() {
     this.userService.getCoaches().subscribe(response=> {
       this.coaches=response
       this.loading = false

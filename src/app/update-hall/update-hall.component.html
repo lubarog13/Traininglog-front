@@ -37,7 +37,7 @@
                         <ngx-mat-file-input  formControlName="image" accept="image/*"></ngx-mat-file-input>
                         <mat-error *ngIf="formErrors.image">{{formErrors.image}}</mat-error>
                     </mat-form-field>
-                    <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" height="50px">
+                    <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg?t=' + time}}" height="50px">
                 <div class="submit-block">
                     <button type="submit" class="submit-button" mat-button [disabled]="hallForm.invalid">Сохранить</button>
                 </div>

@@ -18,6 +18,7 @@ export class BuildingsComponent implements OnInit {
   loading = false
   center: google.maps.LatLngLiteral
   isAdmin = false
+  time = new Date().getTime()
 
   constructor(private buildingService: BuildingService, @Inject('BaseURL') public BaseURL, private mediaObserver: MediaObserver, private route: ActivatedRoute) { }
 

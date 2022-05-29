@@ -156,4 +156,41 @@ export class UserService {
     };
     return this.http.put(baseURL + "fcmdevice/" +  device.id +"/update/", device, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
    }
+
+   createCoach(coach: Object): Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(baseURL + "coach/create/", coach, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   updateCoach(coach: Object, id: number): Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put(baseURL + "coach/" + id + "/update/", coach, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+   }
+
+   postCoachFile(fileToUpload: File, coach_id?: number): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('image_file', fileToUpload, "1");
+    if (coach_id) {
+      formData.append('coach_id', coach_id.toString())
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Token ' + localStorage.getItem("token"),
+        'Accept': '*/*'
+      })
+    };
+    console.log(formData.get('image_file'))
+    return this.http.post(baseURL + 'upload/coach/', formData, httpOptions).pipe(catchError(this.processHTTPMsgService.handleError))
+  }
+
 }

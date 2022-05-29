@@ -6,7 +6,7 @@
                 <form novalidate [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Название</mat-label>
-                        <input matInput formControlName="name" type="text" required placeholder="СОК Ижорец">
+                        <input matInput formControlName="name" [value]="building.name" type="text" required placeholder="СОК Ижорец">
                       <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="full-width" appearance="outline">
@@ -45,7 +45,7 @@
                         <ngx-mat-file-input formControlName="image" accept="image/*"></ngx-mat-file-input>
                       <mat-error *ngIf="formErrors.image">{{formErrors.image}}</mat-error>
                     </mat-form-field>
-                    <img class="half-width" src="{{ BaseURL + 'media/' + id + '_building.jpg'}}">
+                    <img class="half-width" src="{{ BaseURL + 'media/' + id + '_building.jpg?t=' + time}}">
                     </div>
                     <button type="submit" class="submit-button" mat-button [disabled]="buildingForm.invalid">Сохранить</button>
                 </form>

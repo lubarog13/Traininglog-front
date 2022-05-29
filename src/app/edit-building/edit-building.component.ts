@@ -25,6 +25,7 @@ export class EditBuildingComponent implements OnInit {
     'lng': '',
     'image': ''
   }
+  time = new Date().getTime()
 
   validationMessages = {
     'name': {
@@ -71,7 +72,7 @@ export class EditBuildingComponent implements OnInit {
   }
 
   createForm() {
-    console.log(this.building)
+    console.log(this.building.name)
     this.buildingForm = this.fb.group({
       name: [this.building.name, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       city: [this.building.city, [Validators.required, Validators.minLength(3), Validators.maxLength(45)]],
@@ -125,7 +126,7 @@ export class EditBuildingComponent implements OnInit {
   onSubmit() {
     this.buildingService.updateBuilding(this.id, this.buildingForm.value).subscribe(res => {
       if (this.buildingForm.value['image']!=null){
-      this.buildingService.postFile(this.buildingForm.value['image']).subscribe(res => {this.router.navigate(["/info/buildings"])}, err=> {
+      this.buildingService.postFile(this.buildingForm.value['image'], this.building.id).subscribe(res => {this.router.navigate(["/info/buildings"])}, err=> {
         console.log(err)
       })
     } else {

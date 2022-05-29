@@ -14,7 +14,7 @@
                 </form>
                 <mat-list *ngIf="searchedHalls!=undefined">
                     <mat-list-item *ngFor="let hall of searchedHalls" (click)="click(hall)">
-                        <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" mat-list-avatar>
+                        <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg?t=' + time}}" mat-list-avatar>
                         <h3 matLine>{{hall.name+", "+hall.number }}</h3>
                     </mat-list-item>
                 </mat-list>
@@ -30,7 +30,7 @@
                     </mat-expansion-panel-header>
                     <mat-list>
                         <mat-list-item *ngFor="let hall of building.value" (click)="click(hall)">
-                            <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg'}}" mat-list-avatar>
+                            <img src="{{ BaseURL + 'media/' + hall.id + '_hall.jpg?t=' + time}}" mat-list-avatar>
                             <h3 matLine>{{hall.name+", "+hall.number }}</h3>
                             <button mat-icon-button *ngIf="isAdmin" (click)="editedHall=hall; openEditForm=true; openForm=false"><mat-icon style="color: black;">edit</mat-icon></button>
                         </mat-list-item>
@@ -51,12 +51,12 @@
                     <igx-carousel #carousel>
                         <igx-slide>
                             <div class="image-container">
-                                <img src="{{ BaseURL + 'media/' + selectedHall.id + '_hall.jpg'}}">
+                                <img src="{{ BaseURL + 'media/' + selectedHall.id + '_hall.jpg?t=' + time}}">
                             </div>
                         </igx-slide>
                         <igx-slide>
                             <div class="image-container">
-                                <img src="{{ BaseURL + 'media/' + selectedHall.building.id + '_building.jpg'}}">
+                                <img src="{{ BaseURL + 'media/' + selectedHall.building.id + '_building.jpg?t=' + time}}">
                             </div>
                         </igx-slide>
                     </igx-carousel>

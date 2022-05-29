@@ -78,7 +78,7 @@ export const PROFILEITMS: NavItem[] = [
                 displayName: "Исходящие",
                 route: "/profile/messages",
                 query: {
-                    "incoming": true
+                    "incoming": false
                 },
             }
         ]

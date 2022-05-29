@@ -20,3 +20,21 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );}
 .btn-link{color:#fff!important;background-color:#007bb6!important;}
 .btn-mail{color:#fff!important;background-color:#512DA8!important;}
+
+.links {
+    justify-content: end;
+    align-items: center;
+
+.mobile_app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+        width: 130px;
+        height: 130px;
+    }
+}
+.icons {
+    width: fit-content;
+}
+}

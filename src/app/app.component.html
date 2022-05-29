@@ -24,7 +24,7 @@
             <div  *ngIf="!isCollapsed" ><fa-icon [icon]="faUserCircle" class="fa fa-2x endEl" [matMenuTriggerFor]="menu1" #menuTrigger="matMenuTrigger" (mouseenter)="mouseEnter(menuTrigger)" (mouseleave)="mouseLeave(menuTrigger)"></fa-icon></div>
                 <mat-menu #menu1="matMenu" [hasBackdrop]="false">
                     <div (mouseenter)="isMenuOpened=true" (mouseleave)="isMenuOpened=false" >
-                        <button mat-menu-item disabled="true">Здравствуйте, {{name + " " + surname}}</button>
+                        <button mat-menu-item disabled="true">Здравствуйте, {{staticFirst_name + " " + staticSurname}}</button>
                     <button mat-menu-item *ngFor="let item of profileitems" (click)="goToHref(item.route, item.query)"><fa-icon [icon]="item.iconName" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">{{item.displayName}}</span></button>
                     <button mat-menu-item  (click)="openLogoutDialog()"><fa-icon [icon]="faSignOutAlt" class="fa fa-sm"></fa-icon><span style="margin-left: 5px;">"Выход"</span></button>
                     </div>
@@ -43,17 +43,17 @@
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item *ngFor="let childItem of menuItem.children">
-            <mat-card-subtitle style="padding-left: 20px;" matLine (click)="goToHref(childItem.route)">{{childItem.displayName}}</mat-card-subtitle>
+            <mat-card-subtitle style="padding-left: 20px;" matLine (click)="goToHref(childItem.route, childItem.query)">{{childItem.displayName}}</mat-card-subtitle>
             <mat-divider style="background: rgb(245, 245, 253);"></mat-divider>
         </mat-list-item>
         </div>
         <div *ngFor="let menuItem of profileitems">
             <mat-list-item>
-                <b><p matLine (click)="goToHref(menuItem.route)">{{menuItem.displayName}}</p></b>
+                <b><p matLine (click)="goToHref(menuItem.route, menuItem.query)">{{menuItem.displayName}}</p></b>
             </mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item *ngFor="let childItem of menuItem.children">
-                <mat-card-subtitle style="padding-left: 20px;" matLine (click)="goToHref(childItem.route)">{{childItem.displayName}}</mat-card-subtitle>
+                <mat-card-subtitle style="padding-left: 20px;" matLine (click)="childItem.disabled===true? null: goToHref(childItem.route, childItem.query)">{{childItem.displayName}}</mat-card-subtitle>
                 <mat-divider style="background: rgb(245, 245, 253);"></mat-divider>
             </mat-list-item>
             </div>

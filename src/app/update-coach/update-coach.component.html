@@ -1,0 +1,35 @@
+<div fxLayout="column">
+    <mat-card style="width: 350px; height: 350px;">
+        <mat-card-header>
+            <mat-card-title style="width: 100%;">
+                Изменение тренера
+            </mat-card-title>
+            <div style="width: 30%; display: flex; justify-content: end;"><button mat-icon-button (click)="windowClosed.emit('closed')"><mat-icon>cancel</mat-icon></button></div>
+        </mat-card-header>
+        <mat-card-content>
+            <form novalidate [formGroup]="coachForm" (ngSubmit)="onSubmit()">
+                <p class="full-width">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Логин пользователя</mat-label>
+                        <input matInput formControlName="username" required readonly>
+                        <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+                    </mat-form-field>
+                </p>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Должность</mat-label>
+                        <input matInput formControlName="post">
+                        <mat-error *ngIf="formErrors.post">{{formErrors.post}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline" >
+                        <mat-label>Изображение</mat-label>
+                        <ngx-mat-file-input  formControlName="image" accept="image/*"></ngx-mat-file-input>
+                        <mat-error *ngIf="formErrors.image">{{formErrors.image}}</mat-error>
+                    </mat-form-field>
+                    <img src="{{ BaseURL + 'media/' + coach.id + '_coach.jpg?t=' + time}}" height="50px">
+                <div class="submit-block">
+                    <button type="submit" class="submit-button" mat-button [disabled]="coachForm.invalid">Сохранить</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

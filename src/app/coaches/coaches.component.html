@@ -12,10 +12,14 @@ fxLayout="column"
                 </mat-card-title>
                 <mat-card-subtitle>
                     {{coach.post}}
+                    <button mat-icon-button *ngIf="isAdmin" (click)="editedCoach=coach; openEditForm=true; openForm=false"><mat-icon style="color: black;">edit</mat-icon></button>
                 </mat-card-subtitle>
-                <img src="{{ BaseURL + 'media/' + coach.id + '_coach.jpg'}}" width="100%">
+                <img src="{{ BaseURL + 'media/' + coach.id + '_coach.jpg?t=' + time}}" width="100%">
         </mat-card>
     </mat-grid-tile>
 </mat-grid-list>
+<button *ngIf="getIsAdmin()" mat-fab id="add-button" (click)="openEditForm? openEditForm=false: openForm=!openForm"><mat-icon>add</mat-icon></button>
+<app-update-coach *ngIf="openEditForm" (windowClosed)="openEditForm=false" class="add-hall" (created)="openEditForm=false; getValues()" [coach]="editedCoach"></app-update-coach>
+<app-create-coach *ngIf="openForm" (windowClosed)="openForm=false; " class="add-hall" (created)="openForm=false; getValues()"></app-create-coach>
 <app-error-component *ngIf="errMess" [err]="errMess"></app-error-component>
 </div>

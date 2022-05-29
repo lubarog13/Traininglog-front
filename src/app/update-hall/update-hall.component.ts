@@ -15,6 +15,7 @@ export class UpdateHallComponent implements OnInit {
   @Output() windowClosed = new EventEmitter()
   @Output() created = new EventEmitter()
   @Input() hall: Hall
+  time = new Date().getTime()
 
   buildings: Building[]
 
@@ -91,7 +92,7 @@ export class UpdateHallComponent implements OnInit {
     var hall: HallForCreate = this.hallForm.value
     if (this.hallForm.value['image']!=null){
     this.buildingService.updateHall(this.hall.id, hall).subscribe(res => {
-      this.buildingService.postHallFile(this.hallForm.value['image']).subscribe(res => {
+      this.buildingService.postHallFile(this.hallForm.value['image'], this.hall.id).subscribe(res => {
         this.created.emit("created")
       }, err => console.log(err))
     }, err => console.log(err))
