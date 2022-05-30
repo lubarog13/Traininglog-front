@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error-component',
@@ -11,7 +12,7 @@ export class ErrorComponentComponent implements OnInit {
 
   code: number
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if(this.err.includes("50")) {
@@ -46,7 +47,7 @@ export class ErrorComponentComponent implements OnInit {
 
   logout() {
       this.clearLocalStorage()
-      window.location.href = "/auth"
+      this.router.navigate(["/auth"])
   }
 
 
