@@ -9,10 +9,10 @@ fxLayout="column"
         <div fxFlex class="message-container" fxLayout="column">
             <mat-grid-list #gridList rowHeight="400px">
                 <mat-grid-tile *ngFor="let message of messages">
-                    <mat-card style="width: 90%; margin-left: 5%; height: 84%" class="mat-elevation-z8">
+                    <mat-card style="width: 90%; margin-left: 5%; height: 84%" class="mat-elevation-z8" class="message_card">
                         <mat-card-header>
                             <mat-icon mat-card-avatar>email</mat-icon>
-                            <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="column" style="width: 100%;" class="message_card__title">
                             <mat-card-title>{{message.sender.username}}</mat-card-title>
                             <mat-card-subtitle>{{message.sender.last_name + " " + message.sender.first_name}}</mat-card-subtitle>
                     </div>
@@ -29,17 +29,17 @@ fxLayout="column"
                     </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>
-            
+
         </div>
         </mat-tab>
     <mat-tab label="Исходящие">
         <div fxFlex class="message-container" fxLayout="column">
             <mat-grid-list #gridTooList rowHeight="400px">
                 <mat-grid-tile *ngFor="let message of messages">
-                    <mat-card style="width: 90%; margin-left: 5%; height: 84%" class="mat-elevation-z8">
+                    <mat-card style="width: 90%; margin-left: 5%; height: 84%" class="mat-elevation-z8" class="message_card">
                         <mat-card-header>
                             <mat-icon mat-card-avatar>email</mat-icon>
-                            <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="column" style="width: 100%;" class="message_card__title">
                             <mat-card-title>{{message.recipient.username}}</mat-card-title>
                             <mat-card-subtitle>{{message.recipient.last_name + " " + message.recipient.first_name}}</mat-card-subtitle>
                     </div>
@@ -60,11 +60,11 @@ fxLayout="column"
         </div>
     </mat-tab>
 </mat-tab-group>
-<app-add-message id="add-message" *ngIf="openMessageForm || openEditForm || openReplyForm" 
+<app-add-message id="add-message" *ngIf="openMessageForm || openEditForm || openReplyForm"
 [isEdit]="openEditForm"
 [reply]="openReplyForm"
 [message]="editedMessage"
-(messageSent)="reload()" 
+(messageSent)="reload()"
 (windowClosed)="openMessageForm=false; openEditForm=false; openReplyForm = false"
 ></app-add-message>
 <button mat-fab id="add-button" (click)=" openMessageForm= openEditForm || openReplyForm ?false: !openMessageForm; openEditForm=false; openReplyForm = false"><mat-icon *ngIf="!openEditForm && !openReplyForm">add</mat-icon><mat-icon *ngIf="openEditForm || openReplyForm">edit</mat-icon></button>

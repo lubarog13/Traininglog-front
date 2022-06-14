@@ -7,7 +7,7 @@
 .message-container {
     min-height: 90vh;
     overflow: auto;
-    //background: url(https://img.myloview.ru/posters/mail-envelope-icon-seamless-pattern-background-email-message-vector-illustration-mailbox-e-mail-symbol-pattern-700-152504111.jpg); 
+    //background: url(https://img.myloview.ru/posters/mail-envelope-icon-seamless-pattern-background-email-message-vector-illustration-mailbox-e-mail-symbol-pattern-700-152504111.jpg);
     padding-bottom: 60px;
 }
 
@@ -51,4 +51,12 @@
     margin-right: 5%;
     margin-bottom: 5%;
     z-index: 1000;
+}
+
+.message_card {
+  flex-shrink: 0;
+
+  &__title {
+    margin-left: -32px;
+  }
 }

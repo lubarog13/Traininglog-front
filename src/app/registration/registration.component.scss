@@ -54,7 +54,7 @@ mat-card-content {
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1351px) {
     .imaged {
         background: center url("https://gopsusports.com/images/2021/11/1/Ball_Basket_A_21_NWU_MS_11902_71.jpg") no-repeat;
         -moz-background-size: 100%; /* Firefox 3.6+ */
@@ -69,5 +69,8 @@ mat-card-content {
 }
 .container {
     margin: 0;
-    height: 95vh;
+    height: fit-content;
+  min-width: 385px;
+  overflow-x: auto;
+  padding: 40px;
 }
